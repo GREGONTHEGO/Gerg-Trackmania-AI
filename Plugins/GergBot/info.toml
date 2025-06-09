@@ -1,4 +1,7 @@
+[meta]
 name = "GregBot"
 author = "GregoryMiller"
 version = "0.1.0"
 script = "main.as"
+[script]
+dependencies = ["MLHook", "MLFeedRaceData"]

@@ -1,7 +1,5 @@
 bool isLogging = false;
 Net::Socket@ socket = null;
-float sendTimer = 0.0;
-const float sendInterval = 1.0 / 10.0;
 
 void Main() {
     print("GregBot loaded successfully!");
@@ -26,7 +24,7 @@ void Update(float dt) {
     if (!isLogging) {
         return;
     }
-    
+
     auto app = cast<CTrackMania>(GetApp());
     auto playground = cast<CSmArenaClient>(app.CurrentPlayground);
     if (playground is null) {
@@ -34,9 +32,32 @@ void Update(float dt) {
         return;
     }
 
+    auto raceData = MLFeed::GetRaceData_V4();
+
+    // const string localName = raceData.SortedPlayers_Race[0];
+    // if (localName == "") {
+    //     print("Local player name is empty.");
+    //     return;
+    // }
+
+    auto LeadinRace = cast<MLFeed::PlayerCpInfo_V4>(raceData.SortedPlayers_Race[0]);
+    if (LeadinRace is null) {
+        print("LeadinRace is null for local player.");
+        return;
+    }
+    //auto playerInfo = raceData.GetPlayer_V4(localName);
+    // if (playerInfo is null) {
+    //     print("Player info for local player is null.");
+    //     return;
+    // }
+
+
     auto player = cast<CSmPlayer>(playground.GameTerminals[0].GUIPlayer);
     auto controlled = cast<CSmScriptPlayer>(player.ScriptAPI);
-
+    if (player is null) {
+        print("Player is not a valid script player.");
+        return;
+    }
     if (controlled is null) {
         print("Controlled player is not a valid script player.");
         return;
@@ -50,8 +71,18 @@ void Update(float dt) {
             return;
         }
     }
-
+    // PlayerState::sTMData@ TMData = PlayerState::GetRaceData();
+    // print(TMData.dEventInfo.CheckpointChange);
+    // print(PlayerState::GetRaceData().dPlayerInfo.NumberOfCheckpointsPassed);
+    // print(player.CurrentLaunchedRespawnLandmarkIndex);
+    // print(LeadinRace.cpCount);
     string msg = "Speed=" + controlled.Speed + "\n";
     msg += "Position=" + "x:" + controlled.Position.x + " y:" + controlled.Position.y + " z:" + controlled.Position.z + "\n";
+    //msg += "Orientation=" + "x:" + controlled.Orientation.x + " y:" + controlled.Orientation.y + " z:" + controlled.Orientation.z + "\n";
+    msg += "Velocity=" + "x:" + controlled.Velocity.x + " y:" + controlled.Velocity.y + " z:" + controlled.Velocity.z + "\n";
+    msg += "Checkpoint=" + LeadinRace.cpCount  + "\n";
+    //msg += "Acceleration=" + "x:" + controlled.Acceleration.x + " y:" + controlled.Acceleration.y + " z:" + controlled.Acceleration.z + "\n";
+    //msg += "Checkpoint=" + controlled.CurrentCheckpointIndex + "\n";
+
     socket.WriteRaw(msg);   
 }
