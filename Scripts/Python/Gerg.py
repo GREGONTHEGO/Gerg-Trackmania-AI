@@ -174,7 +174,7 @@ def inference(model):
             else:
                 move_action = np.random.choice([0, 1, 2], p=probs_move)
                 turn_action = np.random.choice([0, 1, 2], p=probs_turn)
-            reward = compute_reward(prev_state, state)
+            reward = compute_reward(state)
             prev_state = state.copy()
             episode_data.append({'state':state_vec[0],'move': move_action, 'turn': turn_action,'reward': reward})
 

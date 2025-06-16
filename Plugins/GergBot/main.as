@@ -26,11 +26,11 @@ void Update(float dt) {
     if (!isLogging) {
         return;
     }
-    sendTimer += dt;
-    if (sendTimer < sendInterval) {
-        return;
-    }
-    sendTimer -= sendInterval;
+    // sendTimer += dt;
+    // if (sendTimer < sendInterval) {
+    //     return;
+    // }
+    // sendTimer -= sendInterval;
 
     auto app = cast<CTrackMania>(GetApp());
     auto playground = cast<CSmArenaClient>(app.CurrentPlayground);
@@ -40,7 +40,8 @@ void Update(float dt) {
     }
 
     auto raceData = MLFeed::GetRaceData_V4();
-
+    //auto cpCount = MLFeed::HookRaceStatsEventsBase();
+    //print(raceData.CPsToFinish);
     // const string localName = raceData.SortedPlayers_Race[0];
     // if (localName == "") {
     //     print("Local player name is empty.");
@@ -84,8 +85,16 @@ void Update(float dt) {
     // print(PlayerState::GetRaceData().dPlayerInfo.NumberOfCheckpointsPassed);
     // print(player.CurrentLaunchedRespawnLandmarkIndex);
     // print(LeadinRace.cpCount);
+    // print(controlled.AccelCoef);
+    // print(controlled.DisplaySpeed);
+    // print(controlled.Distance);
+    // print(controlled.AimDirection);
+    //print(LeadinRace.CpTimes);
+    float forwardVel = Math::Dot(controlled.Velocity, controlled.AimDirection);
+    //print(forwardVel);
+    // print(controlled.Speed);
     uint64 ts = Time::Now;
-    string msg = ts + ',' + controlled.Speed + ',' + controlled.Position.x + ',' + controlled.Position.y + ',' + controlled.Position.z + ',' + controlled.Velocity.x + ',' + controlled.Velocity.y + ',' + controlled.Velocity.z + ',' + LeadinRace.cpCount + "\n";
+    string msg = ts + ',' + forwardVel + ',' + controlled.Position.x + ',' + controlled.Position.y + ',' + controlled.Position.z + ',' + LeadinRace.cpCount + "\n";
     // string msg = "TS=" + ts + "\n";
     // msg += "Speed=" + controlled.Speed + "\n";
     // msg += "Position=" + "x:" + controlled.Position.x + " y:" + controlled.Position.y + " z:" + controlled.Position.z + "\n";
