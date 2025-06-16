@@ -10,4 +10,8 @@ During this phase, I restructured my python code. I created a training function,
 
 # Stage 3: Getting the Initial Model to learn
 
-During this phase, the goal was to teach the model how to drive in a straight line. This proved to be a very difficult task, as the model will learn the best way to get the minimal loss even though that loss is meant to help it. For example, I was giving the model a large negative reward if it was slowing down and it learned to just go backwards and got stuck there. Another thing I noticed is that if I do not scale the rewards then my car will just spin in circles as the position is weighted more than the other metrics. One time, before I gave negative rewards for going sideways, the model would just start turning directly to the left or right and get stuck.
+During this phase, the goal was to teach the model how to drive in a straight line. This proved to be a very difficult task, as the model will learn the best way to get the minimal loss even though that loss is meant to help it. For example, I was giving the model a large negative reward if it was slowing down and it learned to just go backwards and got stuck there. Another thing I noticed is that if I do not scale the rewards then my car will just spin in circles as the position is weighted more than the other metrics. One time, before I gave negative rewards for going sideways, the model would just start turning directly to the left or right and get stuck. After all of the issues that I created, I realized that just giving it rewards for going fast and giving it an overall bigger reward for if the whole run does better that it started going further and further. This is shown in the video that will be linked above.
+
+# Stage 4: Adding A Convolutional Neural Network
+
+
