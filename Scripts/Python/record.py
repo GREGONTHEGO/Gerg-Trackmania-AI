@@ -1,18 +1,15 @@
 from pynput.keyboard import Key, Listener, Controller
 import time
-import os
 import socket
 from threading import Thread
-import csv
 import threading
-import tensorflow as tf
 import numpy as np
-import mss
 import pickle
 import dxcam, cv2
 from collections import deque
+import os, math
 
-k = 15
+k = 10
 frame_buffer = deque(maxlen=k)
 
 region = (640, 300, 1920, 1200)
@@ -65,12 +62,38 @@ connection_event = threading.Event()
 latest_state = {'ts':0,'speed': 0.0, 'x': 0.0, 'y': 0.0, 'z': 0.0, 'cp': 0}
 episode = 0
 
-def compute_reward(prev_state, current_state, alpha=1.0, gamma=5.0):
-    speed = current_state['speed'] * 100
-    cp_diff = (current_state['cp'] - prev_state['cp']) * 5
+def heading_reward(current_state, prev_state, cp_positions, k_heading=1.0):
+    dx = current_state['x'] - prev_state['x']
+    dz = current_state['z'] - prev_state['z']
+    if dx==0 and dz==0:
+        return 0.0
+    actual_heading = math.atan2(dz, dx)
+
+    next_cp = int(current_state['cp']) + 1
+    if next_cp in cp_positions:
+        x_cp, z_cp = cp_positions[next_cp]['x'], cp_positions[next_cp]['z']
+        desired_heading = math.atan2(z_cp - current_state['z'], x_cp - current_state['z'])
+    else:
+        desired_heading = actual_heading
+
+    err = (actual_heading - desired_heading + math.pi) % (2*math.pi) - math.pi
+    return - k_heading * abs(err)
+
+def compute_reward(prev_state, current_state, move, alpha=1.0, gamma=1.0):
+    speed = current_state['speed']
+    prev_speed = prev_state['speed']
+    cp_diff = (current_state['cp'] - prev_state['cp'])
     cp_reward = gamma * max(cp_diff, 0)
 
-    return alpha * speed + cp_reward
+    reward = alpha * max(0.0,speed) + cp_reward
+    if not move == 2 and abs(current_state['x'] - prev_state['x']) < 0.1 and abs(current_state['z'] - prev_state['z']) < 0.1:
+        return -5.0
+    # if speed < 0.0:
+    #     return -2.0
+    delta_spd = speed - prev_speed
+    if (delta_spd) > 5.0 and speed > 0.0:
+        reward -= 10.0 * (delta_spd - 5.0)
+    return reward
 
 
 def read_game_state():
@@ -83,14 +106,12 @@ def read_game_state():
         conn, addr = s.accept()
         connection_event.set()
         print(f"connection from {addr}")
-        prev_time = 0
         while not end_event.is_set():
             try:
                 data = conn.recv(1024).decode('utf-8')
                 if not data:
                     break
                 parts = data.split('\n')
-                #print(parts)
                 if parts[-1] == '':
                     last_line = parts[-2]
                 else:
@@ -98,7 +119,6 @@ def read_game_state():
                 fields = last_line.split(',')
                 if len(fields) == 6 and all(fields):
                     ts, forwardVel, x, y, z, cp = fields
-                    #print(fields)
                     with state_lock:
                         latest_state['ts'] = int(ts)
                         latest_state['speed'] = float(forwardVel)
@@ -111,99 +131,66 @@ def read_game_state():
                 print("Error reading data:", e)
                 break
         conn.close()
-def genModel():
-    inp_image = tf.keras.Input(shape=(100, 200, 3*k))
-    x = tf.keras.layers.Conv2D(32, (3, 3))(inp_image)
-    x = tf.keras.layers.BatchNormalization()(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.MaxPooling2D((2, 2))(x)
-    x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(x)
-    x = tf.keras.layers.BatchNormalization()(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.MaxPooling2D((2, 2))(x)
-    img_feat = tf.keras.layers.GlobalAveragePooling2D()(x)
-
-    #normalizer = tf.keras.layers.Normalization(axis=-1)
-    inp_telemetry = tf.keras.Input(shape=(5,))
-    telem_feat = tf.keras.layers.Dense(64, activation='relu')(inp_telemetry)
-    merge = tf.keras.layers.Concatenate()([img_feat, telem_feat])
-    #x = normalizer(inp_telemetry)
-    x = tf.keras.layers.Dense(1024)(merge)
-    x = tf.keras.layers.Dropout(0.3)(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dense(1024)(x)
-    x = tf.keras.layers.Dropout(0.3)(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    move = tf.keras.layers.Dense(3, name='move')(x) # 0 = forward, 1 = backward, 2 = nothing
-    lat = tf.keras.layers.Dense(3, name='turn')(x) # 0 = left, 1 = right, 2 = nothing
-    model = tf.keras.Model(inputs=[inp_image, inp_telemetry], outputs=[move, lat])
-    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001))
-    return model
-
-def scale_state(state):
-    state['speed'] = (state['speed']) / 100.0
-    state['x'] = (state['x']) / 1000.0
-    state['y'] = (state['y']) / 100.0
-    state['z'] = (state['z']) / 1000.0
-    state['cp'] = int(state['cp'])/ 5.0
-    return state
 
 def inference():
     global episode
     episode = 0
-
+    CP_POSITIONS_FILE = 'cp_positions.pkl'
+    if os.path.exists(CP_POSITIONS_FILE):
+        with open(CP_POSITIONS_FILE, 'rb') as f:
+            cp_positions = pickle.load(f)
+    else:
+        cp_positions = {}
     start_time = time.time()
     episode_data = []
     with state_lock:
-        prev_state = scale_state(latest_state)
+        prev_state = latest_state
     cp_time = time.time()
     cp_num = 0
-    while (time.time() - start_time) <20 and (time.time() - cp_time) < 60:
-        # if time.time() - start_time < 2:
-        #     cp_time = time.time() + 2
-        #     time.sleep(2)
-        
+    while (time.time() - start_time) <15 and (time.time() - cp_time) < 60:
         if latest_state['ts'] < prev_state['ts']:
             continue
         with state_lock:
-            state = scale_state(latest_state).copy()
+            state = latest_state.copy()
             image = get_screenshot()
-        if state['cp'] == 5:
-            break
         if state['cp'] > cp_num:
+            if state['cp'] in cp_positions:
+                cur_time = time.time() - start_time
+                if cp_positions[state['cp']]['time'] > cur_time:
+                    cp_positions[state['cp']] = {'time': cur_time, 'x': state['x'], 'z': state['z']}
+            else:
+                cur_time = time.time() - start_time
+                cp_positions[state['cp']] = {'time': cur_time, 'x': state['x'], 'z': state['z']}
             cp_num = state['cp']
-            cp_time = time.time()
         state_vec = np.array([[state['speed'], state['x'], state['y'], state['z'], state['cp']]])
-        #print(state_vec)
         frame_buffer.append(image)
         stacked = np.stack([f[0] for f in frame_buffer], axis=0)
+        stacked = np.expand_dims(stacked, 1)
         stacked = np.expand_dims(stacked, 0)
         move = action_state['move']
         turn = action_state['turn']
-        reward = compute_reward(prev_state, state)
+        hr = heading_reward(state, prev_state, cp_positions)
+        print('err ',hr)
+        reward = compute_reward(prev_state, state, move)
+        print('reward ',reward, 'state ', state)
+        reward += hr
+        if move != 2:
+            reward += 0.2
         prev_state = state.copy()
         episode_data.append({'state':state_vec[0], 'image': stacked,'move': move, 'turn': turn,'reward': reward})
-        time.sleep(1.0/20.0)
+        time.sleep(1.0/60.0)
     with open(f'{episode}turn.pkl', 'wb') as f:
         pickle.dump(episode_data, f)
 
     
 
 if __name__ == "__main__":
-    # model = genModel()
     read = Thread(target=read_game_state)
     read.start()
     connection_event.clear()
     connection_event.wait()
-    dummy = np.zeros((1, 5), dtype=np.float32)
     image = get_screenshot()
     frame_buffer.extend([image] * k)
-    print(len(frame_buffer))
-    print(f[0].shape for f in frame_buffer)
-    stacked = np.stack([f[0] for f in frame_buffer], axis=0)
-    stacked = np.expand_dims(stacked, 0)
-    print(stacked.shape)
-    # model.predict([stacked ,dummy])   
     shutdown_event.clear()
     inf = Thread(target=inference)
     inf.start()
