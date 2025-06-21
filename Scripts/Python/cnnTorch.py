@@ -72,25 +72,27 @@ def capture_loop():
 class Conv2DAgent(nn.Module):
     def __init__(self):
         super(Conv2DAgent, self).__init__()
-        self.conv2d_1 = nn.Conv2d(1, 32, kernel_size=(5,5), padding=2)
-        self.bn1 = nn.BatchNorm2d(32)
+        self.conv2d_1 = nn.Conv2d(1, 64, kernel_size=(5,5), padding=2)
+        self.bn1 = nn.BatchNorm2d(64)
 
-        self.conv2d_2 = nn.Conv2d(32, 64, kernel_size=(3,3), padding=1)
-        self.bn2 = nn.BatchNorm2d(64)
+        self.conv2d_2 = nn.Conv2d(64, 128, kernel_size=(3,3), padding=1)
+        self.bn2 = nn.BatchNorm2d(128)
 
-        self.conv2d_3 = nn.Conv2d(64, 128, kernel_size=(3,3), stride=2, padding=1)
-        self.bn3 = nn.BatchNorm2d(128)
+        self.conv2d_3 = nn.Conv2d(128, 256, kernel_size=(3,3), stride=2, padding=1)
+        self.bn3 = nn.BatchNorm2d(256)
 
-        self.conv2d_4 = nn.Conv2d(128, 256, kernel_size=(3,3), stride=2, padding=1)
-        self.bn4 = nn.BatchNorm2d(256)
+        self.conv2d_4 = nn.Conv2d(256, 512, kernel_size=(3,3), stride=2, padding=1)
+        self.bn4 = nn.BatchNorm2d(512)
 
         self.pool = nn.AdaptiveAvgPool2d((1,1))
 
-        self.fc1 = nn.Linear(256,256)
-        self.lstm = nn.LSTM(256, 256, batch_first=True)
+        self.fc1 = nn.Linear(512,256)
+        # self.lstm = nn.LSTM(256, 256, batch_first=True)
         self.telem_norm =nn.LayerNorm(5)
         self.telemetry_mlp = nn.Sequential(
-            nn.Linear(5, 64),
+            nn.Linear(5, 128),
+            nn.ReLU(),
+            nn.Linear(128, 64),
             nn.ReLU(),
             nn.Linear(64, 64),
             nn.ReLU()
@@ -98,7 +100,13 @@ class Conv2DAgent(nn.Module):
 
         self.move = nn.Linear(256 + 64,3)
         self.turn = nn.Linear(256 + 64,3)
-        self.critic = nn.Linear(256 + 64, 1)
+        self.critic = nn.Sequential( 
+            nn.Linear(256 + 64, 256),
+            nn.ReLU(),
+            nn.Linear(256, 64),
+            nn.ReLU(),
+            nn.Linear(64,1)
+            )
         # self.init_weights()
 
     def forward(self, x, telem):
@@ -112,8 +120,9 @@ class Conv2DAgent(nn.Module):
         x = x.view(B * T, -1)
         x = f.relu(self.fc1(x))
         x = x.view(B, T, -1)
-        _, (h_n, _) = self.lstm(x)
-        h_last = h_n[-1]
+        # _, (h_n, _) = self.lstm(x)
+        # h_last = h_n[-1]
+        h_last = x.mean(dim=1)
         telem = self.telem_norm(telem)
         t_feat = self.telemetry_mlp(telem)
         joint = torch.cat([h_last, t_feat], dim=1)
@@ -126,7 +135,7 @@ class Conv2DAgent(nn.Module):
 
     
 
-def train_step(model, optimizer, images, tel, move, turn, returns):
+def train_step(model, optimizer, images, tel, move, turn, rewards):
     model.train()
     images = images.to(device)
     move = move.to(device)
@@ -134,11 +143,14 @@ def train_step(model, optimizer, images, tel, move, turn, returns):
     tel = tel.to(device)
     optimizer.zero_grad()
     move_logits, turn_logits, value = model(images, tel)
-    adv = compute_advantage(returns, value)
+    adv, returns = compute_advantage(rewards, value)
     # ret_mean = returns.mean()
     # ret_std = returns.std()
     # returns = (returns - ret_mean) / (ret_std + 1e-8)
     returns = returns.to(device)
+    # print(f"Return mean: {returns.mean():.4f}, std: {returns.std():.4f}")
+    # print(f"Value mean: {value.mean().item():.4f}, std: {value.std().item():.4f}")
+    # print("value sample:", value[:5].cpu().detach().numpy())
     adv = adv.to(device)
     # move_loss = f.cross_entropy(move_logits, move, reduction='none')
     # turn_loss = f.cross_entropy(turn_logits, turn, reduction='none')
@@ -150,7 +162,7 @@ def train_step(model, optimizer, images, tel, move, turn, returns):
     actor_loss_turn = -logp_turn.gather(1, turn.unsqueeze(1)).squeeze(1) * adv
     actor_loss = (actor_loss_move + actor_loss_turn).mean()
 
-    critic_loss = f.mse_loss(value, returns)
+    critic_loss = f.smooth_l1_loss(value, returns)
 
     entropy_move = -(logp_move * f.softmax(move_logits, dim=-1)).sum(dim=1).mean()
     entropy_turn = -(logp_turn * f.softmax(turn_logits, dim=-1)).sum(dim=1).mean()
@@ -168,6 +180,7 @@ class TrackmaniaDataset(Dataset):
         self.move = np.stack([state['move'] for state in states], axis=0).astype(np.int64)
         self.turn = np.stack([state['turn'] for state in states], axis=0).astype(np.int64)
         self.rewards = np.array([state['reward'] for state in states], dtype=np.float32)
+        # print('reward range: ', np.min(self.rewards), np.max(self.rewards))
         
     
     def __len__(self):
@@ -217,7 +230,7 @@ def proximity_reward(current_state, prev_state, cp_positions, k_prox=5.0):
     return k_prox * delta
 
 
-def compute_reward(prev_state, current_state, move, alpha=0.1):
+def compute_reward(prev_state, current_state, move, alpha=0.5):
     speed = current_state['speed']
     prev_speed = prev_state['speed']
     # cp_diff = (current_state['cp'] - prev_state['cp'])
@@ -238,20 +251,21 @@ def compute_reward(prev_state, current_state, move, alpha=0.1):
     return reward
 
 def compute_advantage(rewards, values, gamma=0.99):
-    advantages = np.zeros_like(rewards, dtype=np.float32)
+    returns = np.zeros_like(rewards, dtype=np.float32)
     running_add = 0.0
     for t in reversed(range(len(rewards))):
         running_add = running_add * gamma + rewards[t]
-        advantages[t] = running_add
-    advantages = torch.tensor(advantages).to(device)
-    advantages = advantages - values
-    adv_mean = advantages.mean()
-    adv_std = advantages.std()
-    advantages = (advantages - adv_mean) / (adv_std + 1e-8)
-    return advantages
+        returns[t] = running_add
+    returns = torch.tensor(returns).to(device)
+    advantages = returns - values.detach()
+    # adv_mean = advantages.mean()
+    # adv_std = advantages.std()
+    # advantages = (advantages - adv_mean) / (adv_std + 1e-8)
+    # print(f'adv mean: {min(advantages):.4f}, std: {max(advantages):.4f}')
+    return advantages, returns
 
 def train(model, optimizer, cp_positions, init=False):
-    BATCH_SIZE = 16
+    BATCH_SIZE = 8
     def train_batch(dataset):
         model.train()
         loaders = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True, drop_last=True, num_workers=0)
@@ -273,14 +287,21 @@ def train(model, optimizer, cp_positions, init=False):
                 dataset = TrackmaniaDataset(statesInEpoch)
                 train_batch(dataset)
     else:
-        for ep in range(episode):
+        for ep in range(1):
             #print(ep)
             with open(f'{ep}statesInEpoch.pkl', 'rb') as f:
                 statesInEpoch = pickle.load(f)
+            if not statesInEpoch:
+                print(f'warning: Episode {ep} has no data, skipping')
+                continue
+            if len(statesInEpoch) == 0:
+                print('no data')
+                continue
             dataset = TrackmaniaDataset(statesInEpoch)
             train_batch(dataset)
         
     # model.save('model_weights.keras', save_format='keras')
+    torch.save(model.state_dict(), 'model_cp.pt')
     return model
 
 def read_game_state():
@@ -320,10 +341,14 @@ def read_game_state():
                 break
         conn.close()
 
+def softmax_with_temperature(logits, temperature=1.0):
+    scaled_logits = logits / temperature
+    return torch.softmax(scaled_logits, dim=0)
+
 def inference(model, cp_positions):
     global episode
     episode = 0
-    for i in range(1):
+    for i in range(2):
         keyboard.press(Key.delete)
         keyboard.release(Key.delete)
         keyboard.press(Key.enter)
@@ -335,7 +360,8 @@ def inference(model, cp_positions):
             prev_state = latest_state.copy()
         cp_time = time.time()
         cp_num = 0
-        while (time.time() - start_time) < 30 and (time.time() - cp_time) < 10:
+        stuck_count = 0
+        while (time.time() - start_time) < 240 and (time.time() - cp_time) < 40 and stuck_count < 60:
             if time.time() - start_time < 2:
                 cp_time = time.time() + 2
                 time.sleep(2)
@@ -359,20 +385,26 @@ def inference(model, cp_positions):
             state_vec = np.array([[state['speed'], state['x'], state['y'], state['z'], state['cp']]])
             stacked = np.expand_dims(stacked, 1)
             stacked = np.expand_dims(stacked, 0)
-
+            if abs(state['x'] - prev_state['x']) < 0.03 and abs(state['z'] - prev_state['z']) < 0.03:
+                stuck_count += 1
+            else:
+                stuck_count = 0
             with torch.no_grad():
                 move_log, turn_log, _ = model(torch.from_numpy(stacked).to(device), torch.tensor(state_vec, dtype=torch.float32).to(device))
-                probs_move = torch.softmax(move_log[0], dim=0).cpu().numpy()
-                probs_turn = torch.softmax(turn_log[0], dim=0).cpu().numpy()
+                # probs_move = torch.softmax(move_log[0], dim=0).cpu().numpy()
+                # probs_turn = torch.softmax(turn_log[0], dim=0).cpu().numpy()
+                probs_move = softmax_with_temperature(move_log[0], temperature=0.5).cpu().numpy()
+                probs_turn = softmax_with_temperature(turn_log[0], temperature=0.5).cpu().numpy()
             # epsilon = 0.05
             # rand = np.random.choice([0,1], p=[epsilon, 1-epsilon])
 
             # if rand == 1:
-            #     move_action = np.argmax(probs_move)
-            #     turn_action = np.argmax(probs_turn)
-            # else:
-            move_action = np.random.choice([0, 1, 2], p=probs_move)
-            turn_action = np.random.choice([0, 1, 2], p=probs_turn)
+            if i == 1:
+                move_action = np.argmax(probs_move)
+                turn_action = np.argmax(probs_turn)
+            else:
+                move_action = np.random.choice([0, 1, 2], p=probs_move)
+                turn_action = np.random.choice([0, 1, 2], p=probs_turn)
 
             hr = heading_reward(state, prev_state, cp_positions)
             # print('err ',hr)
@@ -382,6 +414,7 @@ def inference(model, cp_positions):
             # print('reward ',reward, 'state ', state)
             reward += hr
             reward += dr
+            # reward /= 10.0
             # if move_action != 2:
             #     reward += 0.2
             # print('reward ',reward)
@@ -407,8 +440,9 @@ def inference(model, cp_positions):
             # dur = (time.perf_counter() - start) * 1000
             # print(f'[TIMING] Inference took {dur:.1f} ms')
             time.sleep(1.0/60.0)
-        with open(f'{episode}statesInEpoch.pkl', 'wb') as f:
-            pickle.dump(episode_data, f)
+        if i == 0:
+            with open(f'{episode}statesInEpoch.pkl', 'wb') as f:
+                pickle.dump(episode_data, f)
 
         episode += 1
         keyboard.release('w')
@@ -429,7 +463,8 @@ def main():
     else:
         cp_positions = {}
     model = Conv2DAgent().to(device)
-    optimizer = optim.Adam(model.parameters(), lr=0.0001)
+    model.load_state_dict(torch.load('best_so_far.pt'))
+    optimizer = optim.Adam([{'params':model.move.parameters()},{'params':model.turn.parameters()}, {'params':model.critic.parameters(), 'lr': 5e-4}], lr=0.0001)
     read = Thread(target=read_game_state)
     read.start()
     connection_event.clear()
