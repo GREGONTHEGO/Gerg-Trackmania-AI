@@ -194,7 +194,7 @@ def train_step(model, optimizer, images, tel, move, turn, rewards):
     entropy_move = -(logp_move * f.softmax(move_logits, dim=-1)).sum(dim=1).mean()
     entropy_turn = -(logp_turn * f.softmax(turn_logits, dim=-1)).sum(dim=1).mean()
     entropy = 0.01 * (entropy_move + entropy_turn)
-    print('actor ', actor_loss, ' critic ', critic_loss)
+    # print('actor ', actor_loss, ' critic ', critic_loss)
     loss = actor_loss + 0.5 * critic_loss - entropy
     loss.backward()
     optimizer.step()
@@ -394,166 +394,202 @@ def read_game_state():
 
 
 
-
 def softmax_with_temperature(logits, temperature=1.0):
     scaled_logits = logits / temperature
     return torch.softmax(scaled_logits, dim=0)
 
 
 
+def run_episode(model, action_stats, greedy=False):
+    keyboard.press(Key.delete)
+    keyboard.release(Key.delete)
+    keyboard.press(Key.enter)
+    keyboard.release(Key.enter)
+    keyboard.press(Key.enter)
+    keyboard.release(Key.enter)
+    #print(i)
+    start_time = time.time()
+    episode_data = []
+    transitions_since_last_cp = []
+    with state_lock:
+        prev_state = latest_state.copy()
+    cp_time = time.time()
+    # last_cp_time = time.time()
+    cp_num = 0
+    stuck_count = 0
+    end_count = 0
+    # cur_cp = -1
+    # cur_reward = 0.0
+    while (time.time() - start_time) < 240 and (time.time() - cp_time) < 15 and stuck_count < 60 and end_count < 15:
+        if time.time() - start_time < 2:
+            cp_time = time.time() + 2
+            time.sleep(2)
+        # start = time.perf_counter()
+        with state_lock:
+            state = latest_state.copy()
+            stacked = np.stack([f[0] for f in frame_buffer], axis=0)
+        if state['ts'] == prev_state['ts']:
+            time.sleep(1.0/60.0)
+            stuck_count += 1
+            continue
+        state_vec = np.array([[state['speed'], state['x'], state['y'], state['z'], state['cp']]])
+        stacked = np.expand_dims(stacked, 1)
+        stacked = np.expand_dims(stacked, 0)
+        if abs(state['x'] - prev_state['x']) < 0.03 and abs(state['z'] - prev_state['z']) < 0.03:
+            stuck_count += 1
+        else:
+            stuck_count = 0
+        with torch.no_grad():
+            move_log, turn_log, _ = model(torch.from_numpy(stacked).to(device), torch.tensor(state_vec, dtype=torch.float32).to(device))
+            # probs_move = torch.softmax(move_log[0], dim=0).cpu().numpy()
+            # probs_turn = torch.softmax(turn_log[0], dim=0).cpu().numpy()
+            probs_move = softmax_with_temperature(move_log[0]).cpu().numpy() #, temperature=0.3
+            probs_turn = softmax_with_temperature(turn_log[0]).cpu().numpy() #, temperature=0.3
+        # epsilon = 0.05
+        # rand = np.random.choice([0,1], p=[epsilon, 1-epsilon])
+
+        # if rand == 1:
+        # if i == 1:
+        #     move_action = np.argmax(probs_move)
+        #     turn_action = np.argmax(probs_turn)
+        # else:
+        move_action = np.random.choice([0, 1, 2], p=probs_move)
+        turn_action = np.random.choice([0, 1, 2], p=probs_turn)
+
+        # hr = heading_reward(state, prev_state, cp_positions)
+        # # print('err ',hr)
+        # dr = proximity_reward(state, prev_state, cp_positions)
+        # # print('prox ', dr)
+        reward = compute_reward(prev_state, state, move_action, cp_time)
+        if stuck_count > 30:
+            reward -= 5.0
+        # print('reward ',reward, 'state ', state)
+        # reward += hr
+        # reward += dr
+        # reward /= 10.0
+        # if move_action != 2:
+        #     reward += 0.2
+        # print('reward ',reward)
+        key = (move_action, turn_action)
+        action_stats[key]['count'] += 1
+        action_stats[key]['reward'] += reward
+        prev_state = state.copy()
+        transition = {
+            'state': state_vec[0],
+            'image': stacked,
+            'move': move_action,
+            'turn': turn_action,
+            'reward': reward,
+            'cp': state['cp']
+        }
+        transitions_since_last_cp.append(transition)
+        # episode_data.append({'state':state_vec[0], 'image': stacked,'move': move_action, 'turn': turn_action,'reward': reward})
+        if state['cp'] > cp_num:
+            cp_reward = min(100.0 / len(transitions_since_last_cp), 5.0)
+            # cp_contrib = [i for i, t in enumerate(transitions_since_last_cp) if t['cp'] == cp_num]
+            for t in transitions_since_last_cp:
+                t['reward'] += cp_reward
+            episode_data.extend(transitions_since_last_cp)
+            transitions_since_last_cp = []
+            cp_num = state['cp']
+            cp_time = time.time()
+            
+            # if state['cp'] in cp_positions:
+            #     cur_time = time.time() - start_time
+            #     if cp_positions[state['cp']]['time'] > cur_time:
+            #         cp_positions[state['cp']] = {'time': cur_time, 'x': state['x'], 'z': state['z']}
+            # else:
+            #     cur_time = time.time() - start_time
+            #     cp_positions[state['cp']] = {'time': cur_time, 'x': state['x'], 'z': state['z']}
+            # cp_num = state['cp']
+            # cp_time = time.time()
+        if move_action == 0:
+            keyboard.press('w')
+        else:
+            keyboard.release('w')
+        if move_action == 1:
+            keyboard.press('s')
+        else:
+            keyboard.release('s')
+        if turn_action == 0:
+            keyboard.press('a')
+        else:
+            keyboard.release('a')
+        if turn_action == 1:
+            keyboard.press('d')
+        else:
+            keyboard.release('d')
+        # dur = (time.perf_counter() - start) * 1000
+        # print(f'[TIMING] Inference took {dur:.1f} ms')
+        time.sleep(1.0/60.0)
+    if transitions_since_last_cp:
+        episode_data.extend(transitions_since_last_cp)
+    # episode += 1
+    if stuck_count >= 60:
+        episode_data = []
+
+    keyboard.release('w')
+    keyboard.release('a')
+    keyboard.release('s')
+    keyboard.release('d')
+    keyboard.press(Key.delete)
+    keyboard.release(Key.delete)
+    keyboard.press(Key.enter)
+    keyboard.release(Key.enter)
+
+    total_reward = sum(t['reward'] for t in episode_data)/ len(episode_data) if episode_data else 1.0
+    return episode_data, cp_num, total_reward
+
+def update_best_episode(episode_data, cp_num, cur_reward):
+    global best_episode_data, best_cp, best_reward
+    if cp_num > best_cp or (cp_num == best_cp and cur_reward > best_reward):
+        best_episode_data = episode_data.copy()
+        best_cp = cp_num
+        best_reward = cur_reward
+        print(f"New best episode: CP {best_cp}, Reward {best_reward:.2f}")
+    
+    # with open(f'{episode}statesInEpoch.pkl', 'wb') as f:
+    #     pickle.dump(best_episode_data, f)
+
 def inference(model,action_stats): # cp_positions, 
+    collected_data = []
+    for i in range(5):
+        data, cp, reward = run_episode(model, action_stats, greedy=False)
+        if not data:
+            print(f"Episode {i} ended in wall, skipping")
+            continue
+        collected_data.extend(data)
+        update_best_episode(data, cp, reward)
+        print(f"Episode {i} ended with CP {cp}, Reward {reward:.2f}")
+
+    if best_episode_data is not None:
+        collected_data.extend(best_episode_data)
+
+    if collected_data:
+        with open(f'{episode}statesInEpoch.pkl', 'wb') as f:
+            pickle.dump(collected_data, f)
+        print(f"Episode {episode} data saved with {len(collected_data)} transitions.")
     # global episode # add thing to stop when the time stamp is the same for too long
     # smaller learning rate and smaller critic learning rate bigger temperature
     # episode = 0
-    global best_episode_data, best_cp, best_reward
-    for i in range(5):
-        keyboard.press(Key.delete)
-        keyboard.release(Key.delete)
-        keyboard.press(Key.enter)
-        keyboard.release(Key.enter)
-        keyboard.press(Key.enter)
-        keyboard.release(Key.enter)
-        #print(i)
-        start_time = time.time()
-        episode_data = []
-        with state_lock:
-            prev_state = latest_state.copy()
-        cp_time = time.time()
-        transitions_since_last_cp = []
-        # last_cp_time = time.time()
-        cp_num = 0
-        stuck_count = 0
-        cur_cp = -1
-        cur_reward = 0.0
-        stuck = False
-        while (time.time() - start_time) < 240 and (time.time() - cp_time) < 15 and stuck_count < 60:
-            if time.time() - start_time < 2:
-                cp_time = time.time() + 2
-                time.sleep(2)
-            # start = time.perf_counter()
-            with state_lock:
-                state = latest_state.copy()
-                stacked = np.stack([f[0] for f in frame_buffer], axis=0)
-            if state['ts'] == prev_state['ts']:
-                time.sleep(1.0/60.0)
-                stuck_count += 1
-                continue
-            state_vec = np.array([[state['speed'], state['x'], state['y'], state['z'], state['cp']]])
-            stacked = np.expand_dims(stacked, 1)
-            stacked = np.expand_dims(stacked, 0)
-            if abs(state['x'] - prev_state['x']) < 0.03 and abs(state['z'] - prev_state['z']) < 0.03:
-                stuck_count += 1
-            else:
-                stuck_count = 0
-            with torch.no_grad():
-                move_log, turn_log, _ = model(torch.from_numpy(stacked).to(device), torch.tensor(state_vec, dtype=torch.float32).to(device))
-                # probs_move = torch.softmax(move_log[0], dim=0).cpu().numpy()
-                # probs_turn = torch.softmax(turn_log[0], dim=0).cpu().numpy()
-                probs_move = softmax_with_temperature(move_log[0]).cpu().numpy() #, temperature=0.3
-                probs_turn = softmax_with_temperature(turn_log[0]).cpu().numpy() #, temperature=0.3
-            # epsilon = 0.05
-            # rand = np.random.choice([0,1], p=[epsilon, 1-epsilon])
-
-            # if rand == 1:
-            # if i == 1:
-            #     move_action = np.argmax(probs_move)
-            #     turn_action = np.argmax(probs_turn)
-            # else:
-            move_action = np.random.choice([0, 1, 2], p=probs_move)
-            turn_action = np.random.choice([0, 1, 2], p=probs_turn)
-
-            # hr = heading_reward(state, prev_state, cp_positions)
-            # # print('err ',hr)
-            # dr = proximity_reward(state, prev_state, cp_positions)
-            # # print('prox ', dr)
-            reward = compute_reward(prev_state, state, move_action, cp_time)
-            if stuck_count > 30:
-                reward -= 5.0
-            # print('reward ',reward, 'state ', state)
-            # reward += hr
-            # reward += dr
-            # reward /= 10.0
-            # if move_action != 2:
-            #     reward += 0.2
-            # print('reward ',reward)
-            key = (move_action, turn_action)
-            action_stats[key]['count'] += 1
-            action_stats[key]['reward'] += reward
-            prev_state = state.copy()
-            transition = {
-                'state': state_vec[0],
-                'image': stacked,
-                'move': move_action,
-                'turn': turn_action,
-                'reward': reward,
-                'cp': state['cp']
-            }
-            transitions_since_last_cp.append(transition)
-            # episode_data.append({'state':state_vec[0], 'image': stacked,'move': move_action, 'turn': turn_action,'reward': reward})
-            if state['cp'] > cp_num:
-                cp_reward = min(100.0 / len(transitions_since_last_cp), 5.0)
-                # cp_contrib = [i for i, t in enumerate(transitions_since_last_cp) if t['cp'] == cp_num]
-                for t in transitions_since_last_cp:
-                    t['reward'] += cp_reward
-                episode_data.extend(transitions_since_last_cp)
-                transitions_since_last_cp = []
-                cp_num = state['cp']
-                cp_time = time.time()
-                
-                # if state['cp'] in cp_positions:
-                #     cur_time = time.time() - start_time
-                #     if cp_positions[state['cp']]['time'] > cur_time:
-                #         cp_positions[state['cp']] = {'time': cur_time, 'x': state['x'], 'z': state['z']}
-                # else:
-                #     cur_time = time.time() - start_time
-                #     cp_positions[state['cp']] = {'time': cur_time, 'x': state['x'], 'z': state['z']}
-                # cp_num = state['cp']
-                # cp_time = time.time()
-            if move_action == 0:
-                keyboard.press('w')
-            else:
-                keyboard.release('w')
-            if move_action == 1:
-                keyboard.press('s')
-            else:
-                keyboard.release('s')
-            if turn_action == 0:
-                keyboard.press('a')
-            else:
-                keyboard.release('a')
-            if turn_action == 1:
-                keyboard.press('d')
-            else:
-                keyboard.release('d')
-            # dur = (time.perf_counter() - start) * 1000
-            # print(f'[TIMING] Inference took {dur:.1f} ms')
-            time.sleep(1.0/60.0)
-        if transitions_since_last_cp:
-            episode_data.extend(transitions_since_last_cp)
-        # episode += 1
-        keyboard.release('w')
-        keyboard.release('a')
-        keyboard.release('s')
-        keyboard.release('d')
-        keyboard.press(Key.delete)
-        keyboard.release(Key.delete)
-        keyboard.press(Key.enter)
-        keyboard.release(Key.enter)
-        if cp_num > cur_cp or (cp_num == cur_cp and sum(t['reward'] for t in episode_data) > cur_reward):
-            cur_cp = cp_num
-            cur_reward = sum(t['reward'] for t in episode_data) / len(episode_data)
-            if best_episode_data is None:
-                best_episode_data = episode_data.copy()
-                best_cp = cur_cp
-                best_reward = cur_reward
-            elif best_cp < cur_cp or (best_cp == cur_cp and best_reward < cur_reward):
-                best_episode_data = episode_data.copy()
-                best_cp = cur_cp
-                best_reward = cur_reward
-            print(f"New best episode: CP {best_cp}, Reward {best_reward:.2f}")
+    # global best_episode_data, best_cp, best_reward
+    # for i in range(5):
+        
+    #     if cp_num > cur_cp or (cp_num == cur_cp and sum(t['reward'] for t in episode_data) > cur_reward):
+    #         cur_cp = cp_num
+    #         cur_reward = sum(t['reward'] for t in episode_data) / len(episode_data)
+    #         if best_episode_data is None:
+    #             best_episode_data = episode_data.copy()
+    #             best_cp = cur_cp
+    #             best_reward = cur_reward
+    #         elif best_cp < cur_cp or (best_cp == cur_cp and best_reward < cur_reward):
+    #             best_episode_data = episode_data.copy()
+    #             best_cp = cur_cp
+    #             best_reward = cur_reward
+    #         print(f"New best episode: CP {best_cp}, Reward {best_reward:.2f}")
     
-    with open(f'{episode}statesInEpoch.pkl', 'wb') as f:
-        pickle.dump(best_episode_data, f)
+    # with open(f'{episode}statesInEpoch.pkl', 'wb') as f:
+    #     pickle.dump(best_episode_data, f)
 
         
 def main():
