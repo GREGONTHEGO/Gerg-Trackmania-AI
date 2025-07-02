@@ -8,16 +8,15 @@ import threading
 import numpy as np
 import pickle
 import dxcam, cv2
-from collections import deque
+from collections import deque, defaultdict
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as f
 from torch.utils.data import Dataset, DataLoader
 
-BUFFER_SIZE = 10
-CAPTURE_FPS = 6
-.0
+BUFFER_SIZE = 5
+CAPTURE_FPS = 60.0
 frame_buffer = deque(maxlen=BUFFER_SIZE)
 
 region = (640, 300, 1920, 1200)
@@ -46,11 +45,18 @@ device = torch.device("cuda" if torch.cuda.is_available() else 'cpu')
 # if torch.cuda.is_available():
 #     print("GPU name:", torch.cuda.get_device_name(0))
 print(device)
+best_episode_data = None
+best_cp = -1
+best_reward = -float('inf')
+
+
 
 def init_camera():
     global camera
     camera = dxcam.create(output_idx=0, output_color="GRAY", region=region, max_buffer_len=10)
     camera.start(target_fps=60)
+
+
 
 def get_screenshot():
     screenshot = camera.get_latest_frame()
@@ -61,12 +67,14 @@ def get_screenshot():
     return img
 
 
+
 def capture_loop():
     interval = 1.0/CAPTURE_FPS
     while not stop_capture.is_set():
         img = get_screenshot()
         frame_buffer.append(img)
         time.sleep(interval)
+
 
 
 class Conv2DAgent(nn.Module):
@@ -109,6 +117,8 @@ class Conv2DAgent(nn.Module):
             )
         # self.init_weights()
 
+
+
     def forward(self, x, telem):
         B, T, C, H, W = x.shape
         x = x.view(B * T, C, H, W)
@@ -131,7 +141,24 @@ class Conv2DAgent(nn.Module):
         critic = self.critic(joint).squeeze(-1)
         return move_logits, turn_logits, critic
     
-    # def init_weights(self):
+
+
+    def init_weights(self):
+        def init(m):
+            if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
+                nn.init.kaiming_normal_(m.weight, nonlinearity='relu')
+                if m.bias is not None:
+                    nn.init.constant_(m.bias, 0)
+            elif isinstance(m, nn.BatchNorm2d):
+                nn.init.constant_(m.weight, 1)
+                nn.init.constant_(m.bias, 0)
+        self.apply(init)
+        nn.init.constant_(self.move.weight, 0)
+        nn.init.constant_(self.move.bias, 0)
+        nn.init.constant_(self.turn.weight, 0)
+        nn.init.constant_(self.turn.bias, 0)
+        nn.init.kaiming_normal_(self.critic[0].weight)
+        nn.init.constant_(self.critic[0].bias, 0) 
 
     
 
@@ -173,6 +200,8 @@ def train_step(model, optimizer, images, tel, move, turn, rewards):
     optimizer.step()
     return loss.item()
 
+
+
 class TrackmaniaDataset(Dataset):
     def __init__(self, states):
         self.images = np.concatenate([state['image'] for state in states], axis=0)
@@ -195,42 +224,43 @@ class TrackmaniaDataset(Dataset):
             self.rewards[idx]
         )
     
-def heading_reward(current_state, prev_state, cp_positions, k_heading=1.0):
-    dx = current_state['x'] - prev_state['x']
-    dz = current_state['z'] - prev_state['z']
-    if dx==0 and dz==0:
-        return 0.0
-    actual_heading = math.atan2(dz, dx)
+# def heading_reward(current_state, prev_state, cp_positions, k_heading=1.0):
+#     dx = current_state['x'] - prev_state['x']
+#     dz = current_state['z'] - prev_state['z']
+#     if dx==0 and dz==0:
+#         return 0.0
+#     actual_heading = math.atan2(dz, dx)
 
-    next_cp = int(current_state['cp']) + 1
-    if next_cp in cp_positions:
-        x_cp, z_cp = cp_positions[next_cp]['x'], cp_positions[next_cp]['z']
-        desired_heading = math.atan2(z_cp - current_state['z'], x_cp - current_state['x'])
-    else:
-        desired_heading = actual_heading
+#     next_cp = int(current_state['cp']) + 1
+#     if next_cp in cp_positions:
+#         x_cp, z_cp = cp_positions[next_cp]['x'], cp_positions[next_cp]['z']
+#         desired_heading = math.atan2(z_cp - current_state['z'], x_cp - current_state['x'])
+#     else:
+#         desired_heading = actual_heading
 
-    err = (actual_heading - desired_heading + math.pi) % (2*math.pi) - math.pi
-    return  k_heading * (1.0 - abs(err)) / math.pi
+#     err = (actual_heading - desired_heading + math.pi) % (2*math.pi) - math.pi
+#     return  k_heading * (1.0 - abs(err)) / math.pi
 
 
-def proximity_reward(current_state, prev_state, cp_positions, k_prox=5.0):
-    next_cp = int(current_state['cp']) + 1
-    if next_cp not in cp_positions:
-        return 0.0
+# def proximity_reward(current_state, prev_state, cp_positions, k_prox=5.0):
+#     next_cp = int(current_state['cp']) + 1
+#     if next_cp not in cp_positions:
+#         return 0.0
     
-    cp_x = cp_positions[next_cp]['x']
-    cp_z = cp_positions[next_cp]['z']
-    def dist(x, z): return math.sqrt((x - cp_x)**2 + (z - cp_z)**2)
+#     cp_x = cp_positions[next_cp]['x']
+#     cp_z = cp_positions[next_cp]['z']
+#     def dist(x, z): return math.sqrt((x - cp_x)**2 + (z - cp_z)**2)
 
-    prev_dist = dist(prev_state['x'], prev_state['z'])
-    cur_dist = dist(current_state['x'], current_state['z'])
+#     prev_dist = dist(prev_state['x'], prev_state['z'])
+#     cur_dist = dist(current_state['x'], current_state['z'])
 
-    delta = prev_dist - cur_dist
+#     delta = prev_dist - cur_dist
 
-    return k_prox * delta
+#     return k_prox * delta
 
 
-def compute_reward(prev_state, current_state, move, alpha=0.5):
+
+def compute_reward(prev_state, current_state, move, tim, alpha=1.0):
     speed = current_state['speed']
     prev_speed = prev_state['speed']
     # cp_diff = (current_state['cp'] - prev_state['cp'])
@@ -242,6 +272,16 @@ def compute_reward(prev_state, current_state, move, alpha=0.5):
     if move == 1 and speed < 0.0:
         reward -= 5.0
 
+    if prev_state['cp'] == 0.0 and speed > 5.0:
+        reward += 5.0
+
+    if current_state['cp'] == prev_state['cp'] and speed < 1.0:
+        reward -= 2.0
+
+    # if current_state['cp'] > prev_state['cp']:
+    #     cp_time_delta = time.time() - tim
+    #     reward += 100.0 / cp_time_delta
+
     delta_spd = speed - prev_speed
     if (delta_spd) < -5.0 and speed > 0.0:
         reward -= 10.0 * abs(delta_spd)
@@ -249,6 +289,9 @@ def compute_reward(prev_state, current_state, move, alpha=0.5):
     # if move == 0:
     #     reward += 0.1
     return reward
+
+
+
 
 def compute_advantage(rewards, values, gamma=0.99):
     returns = np.zeros_like(rewards, dtype=np.float32)
@@ -258,11 +301,16 @@ def compute_advantage(rewards, values, gamma=0.99):
         returns[t] = running_add
     returns = torch.tensor(returns).to(device)
     advantages = returns - values.detach()
-    # adv_mean = advantages.mean()
-    # adv_std = advantages.std()
-    # advantages = (advantages - adv_mean) / (adv_std + 1e-8)
+    adv_mean = advantages.mean()
+    adv_std = advantages.std()
+    advantages = (advantages - adv_mean) / (adv_std + 1e-8)
+    returns = (returns - returns.mean()) / (returns.std() + 1e-8)
+    advantages = torch.clamp(advantages, -10.0, 10.0)
     # print(f'adv mean: {min(advantages):.4f}, std: {max(advantages):.4f}')
     return advantages, returns
+
+
+
 
 def train(model, optimizer, cp_positions, init=False):
     BATCH_SIZE = 8
@@ -304,6 +352,9 @@ def train(model, optimizer, cp_positions, init=False):
     torch.save(model.state_dict(), 'model_cp.pt')
     return model
 
+
+
+
 def read_game_state():
     global latest_state
     with socket.socket() as s:
@@ -341,16 +392,25 @@ def read_game_state():
                 break
         conn.close()
 
+
+
+
 def softmax_with_temperature(logits, temperature=1.0):
     scaled_logits = logits / temperature
     return torch.softmax(scaled_logits, dim=0)
 
-def inference(model, cp_positions):
-    global episode
-    episode = 0
-    for i in range(2):
+
+
+def inference(model,action_stats): # cp_positions, 
+    # global episode # add thing to stop when the time stamp is the same for too long
+    # smaller learning rate and smaller critic learning rate bigger temperature
+    # episode = 0
+    global best_episode_data, best_cp, best_reward
+    for i in range(5):
         keyboard.press(Key.delete)
         keyboard.release(Key.delete)
+        keyboard.press(Key.enter)
+        keyboard.release(Key.enter)
         keyboard.press(Key.enter)
         keyboard.release(Key.enter)
         #print(i)
@@ -359,9 +419,14 @@ def inference(model, cp_positions):
         with state_lock:
             prev_state = latest_state.copy()
         cp_time = time.time()
+        transitions_since_last_cp = []
+        # last_cp_time = time.time()
         cp_num = 0
         stuck_count = 0
-        while (time.time() - start_time) < 240 and (time.time() - cp_time) < 40 and stuck_count < 60:
+        cur_cp = -1
+        cur_reward = 0.0
+        stuck = False
+        while (time.time() - start_time) < 240 and (time.time() - cp_time) < 15 and stuck_count < 60:
             if time.time() - start_time < 2:
                 cp_time = time.time() + 2
                 time.sleep(2)
@@ -371,17 +436,8 @@ def inference(model, cp_positions):
                 stacked = np.stack([f[0] for f in frame_buffer], axis=0)
             if state['ts'] == prev_state['ts']:
                 time.sleep(1.0/60.0)
+                stuck_count += 1
                 continue
-            if state['cp'] > cp_num:
-                if state['cp'] in cp_positions:
-                    cur_time = time.time() - start_time
-                    if cp_positions[state['cp']]['time'] > cur_time:
-                        cp_positions[state['cp']] = {'time': cur_time, 'x': state['x'], 'z': state['z']}
-                else:
-                    cur_time = time.time() - start_time
-                    cp_positions[state['cp']] = {'time': cur_time, 'x': state['x'], 'z': state['z']}
-                cp_num = state['cp']
-                cp_time = time.time()
             state_vec = np.array([[state['speed'], state['x'], state['y'], state['z'], state['cp']]])
             stacked = np.expand_dims(stacked, 1)
             stacked = np.expand_dims(stacked, 0)
@@ -393,34 +449,66 @@ def inference(model, cp_positions):
                 move_log, turn_log, _ = model(torch.from_numpy(stacked).to(device), torch.tensor(state_vec, dtype=torch.float32).to(device))
                 # probs_move = torch.softmax(move_log[0], dim=0).cpu().numpy()
                 # probs_turn = torch.softmax(turn_log[0], dim=0).cpu().numpy()
-                probs_move = softmax_with_temperature(move_log[0], temperature=0.5).cpu().numpy()
-                probs_turn = softmax_with_temperature(turn_log[0], temperature=0.5).cpu().numpy()
+                probs_move = softmax_with_temperature(move_log[0]).cpu().numpy() #, temperature=0.3
+                probs_turn = softmax_with_temperature(turn_log[0]).cpu().numpy() #, temperature=0.3
             # epsilon = 0.05
             # rand = np.random.choice([0,1], p=[epsilon, 1-epsilon])
 
             # if rand == 1:
-            if i == 1:
-                move_action = np.argmax(probs_move)
-                turn_action = np.argmax(probs_turn)
-            else:
-                move_action = np.random.choice([0, 1, 2], p=probs_move)
-                turn_action = np.random.choice([0, 1, 2], p=probs_turn)
+            # if i == 1:
+            #     move_action = np.argmax(probs_move)
+            #     turn_action = np.argmax(probs_turn)
+            # else:
+            move_action = np.random.choice([0, 1, 2], p=probs_move)
+            turn_action = np.random.choice([0, 1, 2], p=probs_turn)
 
-            hr = heading_reward(state, prev_state, cp_positions)
-            # print('err ',hr)
-            dr = proximity_reward(state, prev_state, cp_positions)
-            # print('prox ', dr)
-            reward = compute_reward(prev_state, state, move_action)
+            # hr = heading_reward(state, prev_state, cp_positions)
+            # # print('err ',hr)
+            # dr = proximity_reward(state, prev_state, cp_positions)
+            # # print('prox ', dr)
+            reward = compute_reward(prev_state, state, move_action, cp_time)
+            if stuck_count > 30:
+                reward -= 5.0
             # print('reward ',reward, 'state ', state)
-            reward += hr
-            reward += dr
+            # reward += hr
+            # reward += dr
             # reward /= 10.0
             # if move_action != 2:
             #     reward += 0.2
             # print('reward ',reward)
+            key = (move_action, turn_action)
+            action_stats[key]['count'] += 1
+            action_stats[key]['reward'] += reward
             prev_state = state.copy()
-            episode_data.append({'state':state_vec[0], 'image': stacked,'move': move_action, 'turn': turn_action,'reward': reward})
-            
+            transition = {
+                'state': state_vec[0],
+                'image': stacked,
+                'move': move_action,
+                'turn': turn_action,
+                'reward': reward,
+                'cp': state['cp']
+            }
+            transitions_since_last_cp.append(transition)
+            # episode_data.append({'state':state_vec[0], 'image': stacked,'move': move_action, 'turn': turn_action,'reward': reward})
+            if state['cp'] > cp_num:
+                cp_reward = min(100.0 / len(transitions_since_last_cp), 5.0)
+                # cp_contrib = [i for i, t in enumerate(transitions_since_last_cp) if t['cp'] == cp_num]
+                for t in transitions_since_last_cp:
+                    t['reward'] += cp_reward
+                episode_data.extend(transitions_since_last_cp)
+                transitions_since_last_cp = []
+                cp_num = state['cp']
+                cp_time = time.time()
+                
+                # if state['cp'] in cp_positions:
+                #     cur_time = time.time() - start_time
+                #     if cp_positions[state['cp']]['time'] > cur_time:
+                #         cp_positions[state['cp']] = {'time': cur_time, 'x': state['x'], 'z': state['z']}
+                # else:
+                #     cur_time = time.time() - start_time
+                #     cp_positions[state['cp']] = {'time': cur_time, 'x': state['x'], 'z': state['z']}
+                # cp_num = state['cp']
+                # cp_time = time.time()
             if move_action == 0:
                 keyboard.press('w')
             else:
@@ -440,11 +528,9 @@ def inference(model, cp_positions):
             # dur = (time.perf_counter() - start) * 1000
             # print(f'[TIMING] Inference took {dur:.1f} ms')
             time.sleep(1.0/60.0)
-        if i == 0:
-            with open(f'{episode}statesInEpoch.pkl', 'wb') as f:
-                pickle.dump(episode_data, f)
-
-        episode += 1
+        if transitions_since_last_cp:
+            episode_data.extend(transitions_since_last_cp)
+        # episode += 1
         keyboard.release('w')
         keyboard.release('a')
         keyboard.release('s')
@@ -453,7 +539,23 @@ def inference(model, cp_positions):
         keyboard.release(Key.delete)
         keyboard.press(Key.enter)
         keyboard.release(Key.enter)
+        if cp_num > cur_cp or (cp_num == cur_cp and sum(t['reward'] for t in episode_data) > cur_reward):
+            cur_cp = cp_num
+            cur_reward = sum(t['reward'] for t in episode_data) / len(episode_data)
+            if best_episode_data is None:
+                best_episode_data = episode_data.copy()
+                best_cp = cur_cp
+                best_reward = cur_reward
+            elif best_cp < cur_cp or (best_cp == cur_cp and best_reward < cur_reward):
+                best_episode_data = episode_data.copy()
+                best_cp = cur_cp
+                best_reward = cur_reward
+            print(f"New best episode: CP {best_cp}, Reward {best_reward:.2f}")
     
+    with open(f'{episode}statesInEpoch.pkl', 'wb') as f:
+        pickle.dump(best_episode_data, f)
+
+        
 def main():
     init_camera()
     CP_POSITIONS_FILE = 'cp_positions.pkl'
@@ -463,8 +565,9 @@ def main():
     else:
         cp_positions = {}
     model = Conv2DAgent().to(device)
-    model.load_state_dict(torch.load('best_so_far.pt'))
-    optimizer = optim.Adam([{'params':model.move.parameters()},{'params':model.turn.parameters()}, {'params':model.critic.parameters(), 'lr': 5e-4}], lr=0.0001)
+    model.init_weights()
+    #model.load_state_dict(torch.load('best_so_far.pt'))
+    optimizer = optim.Adam([{'params':model.move.parameters()},{'params':model.turn.parameters()}, {'params':model.critic.parameters(), 'lr': 1e-5}], lr=1e-4)
     read = Thread(target=read_game_state)
     read.start()
     connection_event.clear()
@@ -476,10 +579,13 @@ def main():
     # model = train(model, optimizer, cp_positions, True).to(device)
     for i in range(1000):
         print(i)
+        action_stats = defaultdict(lambda: {'count': 0, 'reward': 0.0})
         shutdown_event.set()
-        inf = Thread(target=inference, args=(model,cp_positions))
+        inf = Thread(target=inference, args=(model, action_stats)) #  cp_positions, 
         inf.start()
         inf.join()
+        for (move, turn), stats in action_stats.items():
+            print(f"Action ({move}, {turn}): Count = {stats['count']}, Total Reward = {stats['reward']/stats['count']:.2f}")
         shutdown_event.clear()
         model = train(model, optimizer, cp_positions).to(device)
     end_event.set()
