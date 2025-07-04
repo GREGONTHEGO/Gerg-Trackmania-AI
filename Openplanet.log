@@ -1,477 +1,126 @@
-[        Platform] [  LOG] [22:57:46]  Openplanet for Trackmania Next x64
-[        Platform] [ TRAC] [22:57:46]  (c) Melissa Geels 2016 - 2024
-[        Platform] [ TRAC] [22:57:46]  https://openplanet.dev/
-[        Platform] [  LOG] [22:57:46]  Openplanet starting on 2025-06-30
-[        Platform] [  LOG] [22:57:46]  Engine: 2024-12-12 08:15:35
-[        Platform] [  LOG] [22:57:46]  Openplanet: 1.27.5 (next, Public, 2024-12-21)
-[        Platform] [ TRAC] [22:57:46]  Identifier: 0x00000000675AF007
-[        Platform] [ TRAC] [22:57:46]  Process ID: 19408
-[        Platform] [  LOG] [22:57:46]  Setting up hook callbacks...
-[        Platform] [  LOG] [22:57:47]  Semi entry initialization...
-[        Platform] [  LOG] [22:57:47]  Update branch: default
-[        Platform] [  LOG] [22:57:47]  Requesting app config with timeout 5000...
-[        Platform] [  LOG] [22:57:48]  Finding game window..
-[        Platform] [ TRAC] [22:57:48]  Window handle: 004f0f02 ("Trackmania")
-[        Platform] [  LOG] [22:57:48]  Initializing meta...
-[        Platform] [  LOG] [22:57:48]  Did not find update to install.
-[     WebServices] [  LOG] [22:57:59]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[        Platform] [  LOG] [22:58:00]  Loop entry initialization...
-[        Platform] [  LOG] [22:58:00]  Hooking WndProc...
-[        Platform] [ TRAC] [22:58:00]  Initializing sockets...
-[        Platform] [ TRAC] [22:58:00]  Adding user library path...
-[        Platform] [  LOG] [22:58:00]  Initializing audio...
-[           Audio] [  LOG] [22:58:00]  Setting playback device to "Speakers (Realtek High Definition Audio)"
-[        Platform] [  LOG] [22:58:00]  Initializing scripting...
-[    ScriptEngine] [  LOG] [22:58:00]  Registered 2630 classes
-[        Platform] [ TRAC] [22:58:01]  Writing type definitions to file: "C:\Users\panda/OpenplanetNext/Openplanet.h"
-[        Platform] [  LOG] [22:58:01]  Writing json to file: "C:\Users\panda/OpenplanetNext/OpenplanetNext.json"
-[        Platform] [  LOG] [22:58:01]  Dumping Openplanet documentation to C:\Users\panda/OpenplanetNext/OpenplanetCore.json
-[        Platform] [  LOG] [22:58:01]  Initializing overlay...
-[         Overlay] [  LOG] [22:58:01]  Loading user style: C:\Program Files\Epic Games\TrackmaniaNext\Openplanet/DefaultStyle.toml
-[        Platform] [  LOG] [22:58:01]  Beginning script engine...
-[    ScriptEngine] [  LOG] [22:58:01]  Adding plugins...
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'Camera' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'EditorDeveloper' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'VehicleState' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded zipped plugin 'Dashboard' (version 1.9.7)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'NadeoServices' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded zipped plugin 'TMRL_SaveGhost' (version 0.2)
-[    ScriptEngine] [ TRAC] [22:58:01]  MLHook.op/:/Logging.as (29, 1) : INFO : Compiling void RenderLogsWindow()
-[    ScriptEngine] [ WARN] [22:58:01]  MLHook.op/:/Logging.as (38, 40) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded zipped plugin 'MLHook' (version 0.5.2)
-[    ScriptEngine] [ TRAC] [22:58:01]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (279, 9) : INFO : Compiling int PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [22:58:01]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (280, 44) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [22:58:01]  MLFeedRaceData.op/:/Main.as (363, 9) : INFO : Compiling int _PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [22:58:01]  MLFeedRaceData.op/:/Main.as (364, 44) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded zipped plugin 'MLFeedRaceData' (version 0.6.2)
-[    ScriptEngine] [ERROR] [22:58:01]  Invalid file hash for "info.toml"
-[    ScriptEngine] [ERROR] [22:58:01]  Plugin is not suitable for the current signature mode.
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'InfiniteEmbedSize' (version 1.0)
-[    ScriptEngine] [ WARN] [22:58:01]  Couldn't find optional plugin dependency "PlayerState" while loading plugin "CheckpointCounter"
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded zipped plugin 'CheckpointCounter' (version 3.1.0)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'UsefulInformation' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'Stats' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'ClassicMenu' (version 1.1)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'Controls' (version 1.0)
-[    ScriptEngine] [ WARN] [22:58:01]  Couldn't find optional plugin dependency "BetterChat" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ WARN] [22:58:01]  Couldn't find optional plugin dependency "ItemExchange" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded zipped plugin 'ManiaExchange' (version 1.3.2)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded zipped plugin 'TMRL_GrabData' (version 0.3)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'PluginManager' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'BigDecor' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded plugin 'Discord' (version 1.0)
-[    ScriptEngine] [  LOG] [22:58:01]  Adding legacy plugins...
-[    ScriptEngine] [ TRAC] [22:58:01]  Loaded legacy plugin 'Plugin_MapAudioFix' (version 1.0)
-[    ScriptEngine] [  LOG] [22:58:01]  Plugins added!
-[        Platform] [  LOG] [22:58:01]  Initialized!
-[   ScriptRuntime] [  LOG] [22:58:01] [CheckpointCounter]  CheckpointCounter lib is not using PlayerState for checkpoint data
-[   ScriptRuntime] [  LOG] [22:58:01] [TMRL_GrabData]  170: Created server socket
-[   ScriptRuntime] [  LOG] [22:58:01] [TMRL_GrabData]  170: Server socket ready
-[   ScriptRuntime] [ TRAC] [22:58:01] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [22:58:01] [Discord]  Initializing Discord...
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Pair
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Clear
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_IsReqActive
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_SliceInfo
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_OrigMapIx
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_UidsResp
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerCP
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerLeft
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceTimes
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerInfo
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_COTDQualiInfo
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_LapsNb
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_Warmup
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceProgression
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_PlayerStatus
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_TeamsFeed_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: TMGame_Record_NewRecord
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData
-[   ScriptRuntime] [ TRAC] [22:58:01] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData_Removed
-[   ScriptRuntime] [ TRAC] [22:58:02] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [22:58:02] [ManiaExchange]  [INFO] 67 tags loaded
-[   ScriptRuntime] [  LOG] [22:58:03] [ManiaExchange]  [INFO] 12 vehicles loaded
-[   ScriptRuntime] [  LOG] [22:58:03] [Discord]  Discord is ready: gregonthego (ID 591029649195270149)
-[   ScriptRuntime] [  LOG] [22:58:03] [ManiaExchange]  [INFO] 33 map sorting orders loaded
-[   ScriptRuntime] [  LOG] [22:58:04] [ManiaExchange]  [INFO] 15 mappack sorting orders loaded
-[   ScriptRuntime] [  LOG] [22:58:05] [ManiaExchange]  [INFO] 13 map types loaded
-[   ScriptRuntime] [  LOG] [22:58:05] [ManiaExchange]  [INFO] 18 seasons loaded
-[   ScriptRuntime] [  LOG] [22:58:05] [ManiaExchange]  [INFO] 0 maps loaded from Play Later list.
-[   ScriptRuntime] [ TRAC] [22:58:05] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [22:58:06] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[   ScriptRuntime] [  LOG] [22:58:06] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[    ScriptEngine] [  LOG] [22:58:07]  Stopping script engine
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'Plugin_MapAudioFix'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'Discord'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'BigDecor'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'PluginManager'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'TMRL_GrabData'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'ManiaExchange'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'Controls'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'ClassicMenu'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'Stats'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'UsefulInformation'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'CheckpointCounter'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'InfiniteEmbedSize'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'MLFeedRaceData'
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  _Unload, unloading hooks and removing injected ML
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  UnregisteredMLHook objects (6) for types: MLHook_Event_ListUids_SliceInfo, MLHook_Event_ListUids_Pair, MLHook_Event_ListUids_Clear, MLHook_Event_ListUids_OrigMapIx, MLHook_Event_ListUids_IsReqActive, MLHook_Event_ListUids_UidsResp
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  UnregisteredMLHook objects (9) for types: MLHook_Event_RaceStats_PlayerCP, MLHook_Event_RaceStats_PlayerLeft, MLHook_Event_RaceStats_PlayerRaceTimes, MLHook_Event_RaceStats_PlayerInfo, MLHook_Event_RaceStats_MatchKeyPair, MLHook_Event_RaceStats_COTDQualiInfo, MLHook_Event_RaceStats_LapsNb, MLHook_Event_RaceStats_Warmup, MLHook_Event_RaceStats_PlayerRaceProgression
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_MLFeedKOs_PlayerStatus, MLHook_Event_MLFeedKOs_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: MLHook_Event_TeamsFeed_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: TMGame_Record_NewRecord
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_GhostData, MLHook_Event_GhostData_Removed
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'MLHook'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'TMRL_SaveGhost'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'NadeoServices'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'Dashboard'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'VehicleState'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'EditorDeveloper'
-[    ScriptEngine] [ TRAC] [22:58:07]  Unloading plugin 'Camera'
-[    ScriptEngine] [  LOG] [22:58:07]  Releasing script context
-[    ScriptEngine] [  LOG] [22:58:07]  Adding plugins...
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'Camera' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'EditorDeveloper' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'VehicleState' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded zipped plugin 'Dashboard' (version 1.9.7)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'NadeoServices' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded zipped plugin 'TMRL_SaveGhost' (version 0.2)
-[    ScriptEngine] [ TRAC] [22:58:07]  MLHook.op/:/Logging.as (29, 1) : INFO : Compiling void RenderLogsWindow()
-[    ScriptEngine] [ WARN] [22:58:07]  MLHook.op/:/Logging.as (38, 40) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded zipped plugin 'MLHook' (version 0.5.2)
-[    ScriptEngine] [ TRAC] [22:58:07]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (279, 9) : INFO : Compiling int PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [22:58:07]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (280, 44) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [22:58:07]  MLFeedRaceData.op/:/Main.as (363, 9) : INFO : Compiling int _PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [22:58:07]  MLFeedRaceData.op/:/Main.as (364, 44) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded zipped plugin 'MLFeedRaceData' (version 0.6.2)
-[    ScriptEngine] [ WARN] [22:58:07]  Ignoring exported dependency "MLHook" from "MLFeedRaceData" because it is already a dependency of "GergBot"
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'GergBot' (version 0.1.0)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'InfiniteEmbedSize' (version 1.0)
-[    ScriptEngine] [ WARN] [22:58:07]  Couldn't find optional plugin dependency "PlayerState" while loading plugin "CheckpointCounter"
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded zipped plugin 'CheckpointCounter' (version 3.1.0)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'UsefulInformation' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'Stats' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'ClassicMenu' (version 1.1)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'Controls' (version 1.0)
-[    ScriptEngine] [ WARN] [22:58:07]  Couldn't find optional plugin dependency "BetterChat" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ WARN] [22:58:07]  Couldn't find optional plugin dependency "ItemExchange" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded zipped plugin 'ManiaExchange' (version 1.3.2)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded zipped plugin 'TMRL_GrabData' (version 0.3)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'PluginManager' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'BigDecor' (version 1.0)
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded plugin 'Discord' (version 1.0)
-[    ScriptEngine] [  LOG] [22:58:07]  Adding legacy plugins...
-[    ScriptEngine] [ TRAC] [22:58:07]  Loaded legacy plugin 'Plugin_MapAudioFix' (version 1.0)
-[    ScriptEngine] [  LOG] [22:58:07]  Plugins added!
-[   ScriptRuntime] [  LOG] [22:58:07] [GergBot]  GregBot loaded successfully!
-[   ScriptRuntime] [  LOG] [22:58:07] [CheckpointCounter]  CheckpointCounter lib is not using PlayerState for checkpoint data
-[   ScriptRuntime] [  LOG] [22:58:07] [TMRL_GrabData]  6196: Created server socket
-[   ScriptRuntime] [  LOG] [22:58:07] [TMRL_GrabData]  6196: Server socket ready
-[   ScriptRuntime] [ TRAC] [22:58:07] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [22:58:07] [Discord]  Initializing Discord...
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Pair
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Clear
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_IsReqActive
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_SliceInfo
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_OrigMapIx
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_UidsResp
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerCP
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerLeft
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceTimes
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerInfo
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_COTDQualiInfo
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_LapsNb
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_Warmup
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceProgression
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_PlayerStatus
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_TeamsFeed_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: TMGame_Record_NewRecord
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData
-[   ScriptRuntime] [ TRAC] [22:58:07] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData_Removed
-[   ScriptRuntime] [ TRAC] [22:58:08] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [22:58:08] [ManiaExchange]  [INFO] 67 tags loaded
-[   ScriptRuntime] [  LOG] [22:58:09] [ManiaExchange]  [INFO] 12 vehicles loaded
-[   ScriptRuntime] [  LOG] [22:58:09] [Discord]  Discord is ready: gregonthego (ID 591029649195270149)
-[   ScriptRuntime] [  LOG] [22:58:10] [ManiaExchange]  [INFO] 33 map sorting orders loaded
-[   ScriptRuntime] [  LOG] [22:58:11] [ManiaExchange]  [INFO] 15 mappack sorting orders loaded
-[   ScriptRuntime] [  LOG] [22:58:11] [ManiaExchange]  [INFO] 13 map types loaded
-[   ScriptRuntime] [ TRAC] [22:58:12] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_PlayMap_Local
-[   ScriptRuntime] [  LOG] [22:58:12] [ManiaExchange]  [INFO] 18 seasons loaded
-[   ScriptRuntime] [  LOG] [22:58:12] [ManiaExchange]  [INFO] 0 maps loaded from Play Later list.
-[   ScriptRuntime] [ TRAC] [22:58:12] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [22:58:13] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[   ScriptRuntime] [  LOG] [22:58:13] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [22:58:14] [MLHook]  MLHook preparing 8 outbound messages to ML
-[   ScriptRuntime] [ TRAC] [22:58:15] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_PlayMap_Local to 
-[   ScriptRuntime] [ TRAC] [22:58:16] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_PlayMap_Local
-[   ScriptRuntime] [ TRAC] [22:58:17] [MLHook]  MLHook preparing 8 outbound messages to ML
-[   ScriptRuntime] [  LOG] [22:58:27] [GergBot]  Started sending car state.
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Script exception: Null pointer access
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]    C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as (line 64, column 5)
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]      #0  void Update(float dt) (C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as line 64)
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Last script exception repeated 1 times
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Last script exception repeated 2 times
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Last script exception repeated 3 times
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Last script exception repeated 4 times
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Last script exception repeated 5 times
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Last script exception repeated 6 times
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Last script exception repeated 7 times
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Last script exception repeated 8 times
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Last script exception repeated 9 times
-[   ScriptRuntime] [ERROR] [23:03:14] [GergBot]  Last script exception repeated 10 times
-[   ScriptRuntime] [  LOG] [23:05:34] [GergBot]  Stopped sending car state.
-[     WebServices] [  LOG] [23:27:59]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [23:28:08] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [23:28:08] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [23:28:13] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [23:53:45] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [23:53:45] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [23:58:00]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [23:58:08] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [23:58:09] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [23:58:14] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [00:28:00]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [00:28:09] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [00:28:10] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [00:28:14] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [00:49:21] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [00:49:21] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [00:58:01]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [00:58:10] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [00:58:10] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [00:58:15] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [01:28:01]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [01:28:10] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [01:28:11] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [01:28:15] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [01:45:20] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [01:45:20] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [01:58:02]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [01:58:11] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [01:58:11] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [01:58:16] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [02:28:02]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [02:28:11] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [02:28:12] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [02:28:16] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [02:41:11] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [02:41:12] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [02:58:03]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [02:58:12] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [02:58:12] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [02:58:16] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [03:28:03]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [03:28:12] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [03:28:13] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [03:28:17] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [03:37:00] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [03:37:01] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [03:58:04]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [03:58:13] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [03:58:13] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [03:58:17] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [04:28:04]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [04:28:13] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [04:28:13] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [04:28:18] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [04:32:24] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [04:32:24] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [04:58:05]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [04:58:13] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [04:58:14] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [04:58:18] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [05:27:28] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [05:27:28] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [05:28:05]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [05:28:14] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [05:28:14] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [05:28:19] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [05:58:05]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [05:58:14] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [05:58:15] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [05:58:19] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [06:22:56] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [06:22:56] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [06:28:06]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [06:28:15] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [06:28:15] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [06:28:20] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [06:58:06]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [06:58:15] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [06:58:16] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [06:58:20] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [07:18:38] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [07:18:39] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [07:28:07]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [07:28:16] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [07:28:16] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [07:28:21] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [07:58:07]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [07:58:16] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [07:58:17] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [07:58:21] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [08:13:45] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [08:13:45] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [08:28:08]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [08:28:17] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [08:28:17] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [08:28:22] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [08:58:08]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [08:58:17] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [08:58:18] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [08:58:22] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [09:09:02] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [09:09:02] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [09:28:09]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [09:28:18] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [09:28:18] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [09:28:23] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [09:58:09]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [09:58:18] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [09:58:19] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [09:58:23] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [10:04:54] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [10:04:55] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [10:28:09]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [10:28:19] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [10:28:19] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [10:28:23] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [10:58:10]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [10:58:19] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [10:58:20] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [10:58:24] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [11:00:45] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [11:00:46] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [11:28:10]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [11:28:20] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [11:28:21] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [11:28:24] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [11:55:56] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [11:55:57] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [11:58:11]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [11:58:21] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [11:58:21] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [11:58:25] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [  LOG] [12:02:32] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [12:02:35] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [12:02:39] [GergBot]  Started sending car state.
-[     WebServices] [  LOG] [12:28:11]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [12:28:21] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [12:28:22] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [12:28:25] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [  LOG] [12:39:46] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [12:39:50] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [12:50:51] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [12:51:26] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [12:51:37] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [12:51:47] [GergBot]  Started sending car state.
-[   ScriptRuntime] [ TRAC] [12:51:51] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [12:51:51] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [12:58:15]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [12:58:22] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [12:58:23] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [12:58:26] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [13:28:15]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [13:28:23] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [13:28:23] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [13:28:26] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [13:47:19] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [13:47:20] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [13:58:15]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [13:58:23] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [13:58:24] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [13:58:26] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [14:28:16]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [14:28:24] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [14:28:24] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [14:28:27] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [14:43:16] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [14:43:16] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [14:58:16]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [14:58:24] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [14:58:25] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [14:58:27] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [15:28:16]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [15:28:25] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [15:28:26] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [15:28:28] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [15:38:44] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [15:38:44] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [15:58:17]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [15:58:26] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [15:58:26] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [15:58:28] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [16:28:17]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [16:28:26] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [16:28:27] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [16:28:29] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [  LOG] [16:30:33] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [16:30:36] [GergBot]  Started sending car state.
-[   ScriptRuntime] [ TRAC] [16:34:44] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [16:34:45] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[   ScriptRuntime] [  LOG] [16:45:39] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [16:45:41] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [16:56:03] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [16:56:26] [GergBot]  Started sending car state.
-[     WebServices] [  LOG] [16:58:18]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [16:58:27] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [16:58:27] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [16:58:29] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [17:28:18]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [17:28:27] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [17:28:28] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [17:28:30] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [17:30:04] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [17:30:05] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [17:58:19]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [17:58:28] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [17:58:28] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [17:58:30] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [  LOG] [17:59:50] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:59:53] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:01:58] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:02:02] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:07:17] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:07:19] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:08:08] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:08:11] [GergBot]  Started sending car state.
-[   ScriptRuntime] [ TRAC] [18:25:56] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [18:25:56] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [18:28:19]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [18:28:28] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [18:28:29] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [18:28:30] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [18:58:20]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [18:58:29] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [18:58:29] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [18:58:31] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [19:21:24] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [19:21:25] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [19:28:20]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [19:28:29] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [19:28:30] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [19:28:31] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [19:58:21]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [19:58:30] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [19:58:30] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [19:58:32] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [20:16:51] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [20:16:51] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [20:28:21]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [20:28:30] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [20:28:31] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [20:28:32] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [20:58:21]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [20:58:31] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [20:58:31] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [20:58:33] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [21:12:28] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [21:12:29] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [21:28:22]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [21:28:31] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [21:28:32] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [21:28:33] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
+[        Platform] [  LOG] [10:47:57]  Openplanet for Trackmania Next x64
+[        Platform] [ TRAC] [10:47:57]  (c) Melissa Geels 2016 - 2024
+[        Platform] [ TRAC] [10:47:57]  https://openplanet.dev/
+[        Platform] [  LOG] [10:47:57]  Openplanet starting on 2025-07-04
+[        Platform] [  LOG] [10:47:57]  Engine: 2025-07-04 07:15:08
+[        Platform] [  LOG] [10:47:57]  Openplanet: 1.27.12 (next, Public, 2025-07-01)
+[        Platform] [ TRAC] [10:47:57]  Identifier: 0x000000006867C5CC
+[        Platform] [ TRAC] [10:47:57]  Process ID: 2408
+[        Platform] [  LOG] [10:47:57]  Setting up hook callbacks...
+[        Platform] [  LOG] [10:47:59]  Semi entry initialization...
+[        Platform] [  LOG] [10:47:59]  Update branch: default
+[        Platform] [  LOG] [10:47:59]  Requesting app config with timeout 5000...
+[        Platform] [  LOG] [10:47:59]  Finding game window..
+[        Platform] [ TRAC] [10:47:59]  Window handle: 007605be ("Trackmania")
+[        Platform] [  LOG] [10:47:59]  Attempting automatic detection of game version data for game version 0x000000006867C5CC
+[        Platform] [  LOG] [10:47:59]  Autodetecting game version data:
+[        Platform] [  LOG] [10:47:59]  Did not find update to install.
+[        Platform] [  LOG] [10:48:02]  Initializing meta...
+[     WebServices] [  LOG] [10:48:08]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
+[        Platform] [  LOG] [10:48:09]  Loop entry initialization...
+[        Platform] [  LOG] [10:48:09]  Hooking WndProc...
+[        Platform] [ TRAC] [10:48:09]  Initializing sockets...
+[        Platform] [ TRAC] [10:48:09]  Adding user library path...
+[        Platform] [  LOG] [10:48:09]  Initializing audio...
+[           Audio] [  LOG] [10:48:09]  Setting playback device to "Speakers (Realtek High Definition Audio)"
+[        Platform] [  LOG] [10:48:09]  Initializing scripting...
+[    ScriptEngine] [  LOG] [10:48:09]  Registered 2647 classes
+[        Platform] [ TRAC] [10:48:10]  Writing type definitions to file: "C:\Users\panda/OpenplanetNext/Openplanet.h"
+[        Platform] [  LOG] [10:48:10]  Writing json to file: "C:\Users\panda/OpenplanetNext/OpenplanetNext.json"
+[        Platform] [  LOG] [10:48:10]  Dumping Openplanet documentation to C:\Users\panda/OpenplanetNext/OpenplanetCore.json
+[        Platform] [  LOG] [10:48:10]  Initializing overlay...
+[         Overlay] [  LOG] [10:48:10]  Loading user style: C:\Program Files\Epic Games\TrackmaniaNext\Openplanet/DefaultStyle.toml
+[        Platform] [  LOG] [10:48:10]  Beginning script engine...
+[    ScriptEngine] [  LOG] [10:48:10]  Adding plugins...
+[    ScriptEngine] [ TRAC] [10:48:10]  Loaded plugin 'Camera' (version 1.0)
+[    ScriptEngine] [ TRAC] [10:48:10]  Loaded plugin 'EditorDeveloper' (version 1.0)
+[    ScriptEngine] [ TRAC] [10:48:10]  Loaded plugin 'VehicleState' (version 1.0)
+[    ScriptEngine] [ TRAC] [10:48:10]  Loaded zipped plugin 'Dashboard' (version 1.9.7)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded plugin 'NadeoServices' (version 1.0)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded zipped plugin 'TMRL_SaveGhost' (version 0.2)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded plugin 'Finetuner' (version 1.0)
+[    ScriptEngine] [ TRAC] [10:48:11]  MLHook.op/:/Logging.as (29, 1) : INFO : Compiling void RenderLogsWindow()
+[    ScriptEngine] [ WARN] [10:48:11]  MLHook.op/:/Logging.as (38, 40) : WARN : Signed/Unsigned mismatch
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded zipped plugin 'MLHook' (version 0.5.2)
+[    ScriptEngine] [ TRAC] [10:48:11]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (279, 9) : INFO : Compiling int PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
+[    ScriptEngine] [ WARN] [10:48:11]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (280, 44) : WARN : Signed/Unsigned mismatch
+[    ScriptEngine] [ TRAC] [10:48:11]  MLFeedRaceData.op/:/Main.as (363, 9) : INFO : Compiling int _PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
+[    ScriptEngine] [ WARN] [10:48:11]  MLFeedRaceData.op/:/Main.as (364, 44) : WARN : Signed/Unsigned mismatch
+[   ScriptRuntime] [ERROR] [10:48:11] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [10:48:11] [MLFeedRaceData]  DEPRECATED: Do not use Meta::PluginCoroutine@! Use awaitable@ instead.
+[   ScriptRuntime] [ERROR] [10:48:11] [MLFeedRaceData]      #0  void Internal::ReportPluginCoroutineDeprecation() (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 26)
+[   ScriptRuntime] [ERROR] [10:48:11] [MLFeedRaceData]      #1  Meta::PluginCoroutine::PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 76)
+[   ScriptRuntime] [ERROR] [10:48:11] [MLFeedRaceData]      #2  Meta::PluginCoroutine@ PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 0)
+[   ScriptRuntime] [ERROR] [10:48:11] [MLFeedRaceData]      #3  void _unnamed_function_() (MLFeedRaceData.op/:/ListUids/ListUids_MLHook.as line 1)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded zipped plugin 'MLFeedRaceData' (version 0.6.2)
+[    ScriptEngine] [ERROR] [10:48:11]  Invalid file hash for "info.toml"
+[    ScriptEngine] [ERROR] [10:48:11]  Plugin is not suitable for the current signature mode.
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded plugin 'InfiniteEmbedSize' (version 1.0)
+[    ScriptEngine] [ WARN] [10:48:11]  Couldn't find optional plugin dependency "PlayerState" while loading plugin "CheckpointCounter"
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded zipped plugin 'CheckpointCounter' (version 3.1.0)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded plugin 'UsefulInformation' (version 1.0)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded plugin 'Stats' (version 1.0)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded plugin 'ClassicMenu' (version 1.1)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded plugin 'Controls' (version 1.0)
+[    ScriptEngine] [ WARN] [10:48:11]  Couldn't find optional plugin dependency "BetterChat" while loading plugin "ManiaExchange"
+[    ScriptEngine] [ WARN] [10:48:11]  Couldn't find optional plugin dependency "ItemExchange" while loading plugin "ManiaExchange"
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded zipped plugin 'ManiaExchange' (version 1.3.2)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded zipped plugin 'TMRL_GrabData' (version 0.3)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded plugin 'PluginManager' (version 1.0)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded plugin 'BigDecor' (version 1.0)
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded plugin 'Discord' (version 1.0)
+[    ScriptEngine] [  LOG] [10:48:11]  Adding legacy plugins...
+[    ScriptEngine] [ TRAC] [10:48:11]  Loaded legacy plugin 'Plugin_MapAudioFix' (version 1.0)
+[    ScriptEngine] [  LOG] [10:48:11]  Plugins added!
+[        Platform] [  LOG] [10:48:11]  Initialized!
+[   ScriptRuntime] [ERROR] [10:48:11] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [10:48:11] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [10:48:11] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [10:48:11] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [10:48:11] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [  LOG] [10:48:11] [CheckpointCounter]  CheckpointCounter lib is not using PlayerState for checkpoint data
+[   ScriptRuntime] [ERROR] [10:48:11] [ManiaExchange]  DEPRECATED: Do not use Meta::PluginCoroutine@! Use awaitable@ instead.
+[   ScriptRuntime] [ERROR] [10:48:11] [ManiaExchange]      #0  void Internal::ReportPluginCoroutineDeprecation() (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 26)
+[   ScriptRuntime] [ERROR] [10:48:11] [ManiaExchange]      #1  Meta::PluginCoroutine::PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 76)
+[   ScriptRuntime] [ERROR] [10:48:11] [ManiaExchange]      #2  Meta::PluginCoroutine@ PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 0)
+[   ScriptRuntime] [ERROR] [10:48:11] [ManiaExchange]      #3  void Main() (ManiaExchange.op/:/src/Main.as line 242)
+[   ScriptRuntime] [  LOG] [10:48:11] [TMRL_GrabData]  175: Created server socket
+[   ScriptRuntime] [  LOG] [10:48:11] [TMRL_GrabData]  175: Server socket ready
+[   ScriptRuntime] [ TRAC] [10:48:11] [PluginManager]  Checking for plugin updates..
+[   ScriptRuntime] [  LOG] [10:48:11] [Discord]  Initializing Discord...
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Pair
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Clear
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_IsReqActive
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_SliceInfo
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_OrigMapIx
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_UidsResp
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerCP
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerLeft
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceTimes
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerInfo
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_COTDQualiInfo
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_LapsNb
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_Warmup
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceProgression
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_PlayerStatus
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_TeamsFeed_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: TMGame_Record_NewRecord
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData
+[   ScriptRuntime] [ TRAC] [10:48:11] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData_Removed
+[   ScriptRuntime] [ WARN] [10:48:12] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
+[   ScriptRuntime] [ WARN] [10:48:12] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
+[   ScriptRuntime] [  LOG] [10:48:12] [ManiaExchange]  [INFO] 67 tags loaded
+[   ScriptRuntime] [  LOG] [10:48:12] [Discord]  Discord is ready: gregonthego (ID 591029649195270149)
+[   ScriptRuntime] [  LOG] [10:48:14] [ManiaExchange]  [INFO] 12 vehicles loaded
+[   ScriptRuntime] [  LOG] [10:48:14] [ManiaExchange]  [INFO] 33 map sorting orders loaded
+[   ScriptRuntime] [  LOG] [10:48:15] [ManiaExchange]  [INFO] 15 mappack sorting orders loaded
+[   ScriptRuntime] [  LOG] [10:48:15] [ManiaExchange]  [INFO] 13 map types loaded
+[   ScriptRuntime] [  LOG] [10:48:16] [ManiaExchange]  [INFO] 18 seasons loaded
+[   ScriptRuntime] [  LOG] [10:48:16] [ManiaExchange]  [INFO] 0 maps loaded from Play Later list.
+[   ScriptRuntime] [ TRAC] [10:48:16] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
+[   ScriptRuntime] [ TRAC] [10:48:16] [NadeoServices]  Got token for audience "NadeoLiveServices"
+[   ScriptRuntime] [  LOG] [10:48:16] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
+[   ScriptRuntime] [ TRAC] [10:49:46] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_PlayMap_Local
+[   ScriptRuntime] [ TRAC] [10:49:48] [MLHook]  MLHook preparing 8 outbound messages to ML

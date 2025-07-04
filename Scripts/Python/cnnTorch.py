@@ -313,7 +313,7 @@ def compute_advantage(rewards, values, gamma=0.99):
 
 
 def train(model, optimizer, cp_positions, init=False):
-    BATCH_SIZE = 8
+    BATCH_SIZE = 12
     def train_batch(dataset):
         model.train()
         loaders = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True, drop_last=True, num_workers=0)
@@ -420,7 +420,7 @@ def run_episode(model, action_stats, greedy=False):
     end_count = 0
     # cur_cp = -1
     # cur_reward = 0.0
-    while (time.time() - start_time) < 240 and (time.time() - cp_time) < 15 and stuck_count < 60 and end_count < 15:
+    while (time.time() - start_time) < 240 and (time.time() - cp_time) < 30 and stuck_count < 60 and end_count < 15:
         if time.time() - start_time < 2:
             cp_time = time.time() + 2
             time.sleep(2)
@@ -430,8 +430,10 @@ def run_episode(model, action_stats, greedy=False):
             stacked = np.stack([f[0] for f in frame_buffer], axis=0)
         if state['ts'] == prev_state['ts']:
             time.sleep(1.0/60.0)
-            stuck_count += 1
+            end_count += 1
             continue
+        else:
+            end_count = 0
         state_vec = np.array([[state['speed'], state['x'], state['y'], state['z'], state['cp']]])
         stacked = np.expand_dims(stacked, 1)
         stacked = np.expand_dims(stacked, 0)
@@ -525,9 +527,12 @@ def run_episode(model, action_stats, greedy=False):
     if transitions_since_last_cp:
         episode_data.extend(transitions_since_last_cp)
     # episode += 1
-    if stuck_count >= 60:
+    if stuck_count >= 60 and cp_num == 0:
         episode_data = []
 
+    if end_count >= 15:
+        for reward in episode_data:
+            reward['reward'] += 1000.0 / len(episode_data) if episode_data else 1.0
     keyboard.release('w')
     keyboard.release('a')
     keyboard.release('s')
@@ -603,7 +608,7 @@ def main():
     model = Conv2DAgent().to(device)
     model.init_weights()
     #model.load_state_dict(torch.load('best_so_far.pt'))
-    optimizer = optim.Adam([{'params':model.move.parameters()},{'params':model.turn.parameters()}, {'params':model.critic.parameters(), 'lr': 1e-5}], lr=1e-4)
+    optimizer = optim.Adam([{'params':model.move.parameters()},{'params':model.turn.parameters()}, {'params':model.critic.parameters(), 'lr': 5e-6}], lr=5e-5)
     read = Thread(target=read_game_state)
     read.start()
     connection_event.clear()

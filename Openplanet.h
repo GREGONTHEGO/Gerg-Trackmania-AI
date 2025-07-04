@@ -1,5 +1,5 @@
-// Maniaplanet engine classes documentation for 2024-12-12 08:15:35
-// Generated with Openplanet 1.27.5 (next, Public, 2024-12-21)
+// Maniaplanet engine classes documentation for 2025-07-04 07:15:08
+// Generated with Openplanet 1.27.12 (next, Public, 2025-07-01)
 // https://openplanet.dev/
 
 using namespace MwFoundations;
@@ -211,7 +211,6 @@ struct CGameManiaTitle : public CGameNod {
   CPlugFileImg* MenuSkyGradFid;
   CPlugFont* FallbackFontFid;
   CPlugFont* Hud3dFontFid;
-  CGameModulePlaygroundHudModel* HudDefaultModuleFid;
   CPlugFileText* SoloModeFid;
   CPlugFileZip* SoloDataPackFid;
   CGameCtnCampaign* SoloCampaignFid;
@@ -2054,7 +2053,6 @@ struct CGameControlCamera : public CMwNod {
 struct CGameControlCameraFree : public CGameControlCamera {
   CGameControlCameraFree();
 
-  float m_Fov;
   vec3 m_FreeVal_Loc_Translation;
   float m_Pitch;
   float m_Yaw;
@@ -2068,9 +2066,6 @@ struct CGameControlCameraFree : public CGameControlCamera {
   float m_FarZ;
   float m_FreeVal_Lens_DofFocusZ;
   float m_FreeVal_Lens_DofLensSize;
-  bool m_ClampPitch;
-  float m_ClampPitchMin;
-  float m_ClampPitchMax;
   float m_Acceleration;
   float m_StartMoveSpeed;
   uint m_MoveSpeedCoef;
@@ -2081,7 +2076,6 @@ struct CGameControlCameraFree : public CGameControlCamera {
   bool m_UseForcedRoll;
   float m_ForcedRoll;
   bool m_DisableMouseZ;
-  bool m_DebugUseOculus;
 };
 
 struct CGameControlCameraOrbital3d : public CGameControlCameraTarget {
@@ -4094,6 +4088,7 @@ struct CGameManiaPlanetScriptAPI : public CMwNod {
   const bool Authentication_GetTokenResponseReceived; // Maniascript
   const uint Authentication_ErrorCode; // Maniascript
   const string Authentication_Token; // Maniascript
+  CWebServicesTaskResult_String* Authentication_GetToken_v2(MwId UserId, string Service); // Maniascript
   const MwFastBuffer<CWebServicesTaskResult*> MasterServer_MSTaskResults; // Maniascript
   void MasterServer_ReleaseMSTaskResult(MwId TaskId); // Maniascript
   CGameMasterServerUserInfo* const MasterServer_MainMSUser; // Maniascript
@@ -4154,6 +4149,7 @@ struct CGameManiaPlanetScriptAPI : public CMwNod {
   bool Network_EnableVehicleSkinLocators; // Maniascript
   CGameManiaPlanetScriptAPI::EPlayerInfoDisplayType Interface_PlayerInfoDisplayType; // Maniascript
   int Interface_PlayerInfoDisplaySize; // Range: 1 - 5 // Maniascript
+  bool Interface_PlayerInfoHidden; // Maniascript
   const bool SkipIntroAndEpilepsyWarning; // Maniascript
   bool SystemSettings_SkipIntro; // Maniascript
   const bool SystemSettings_SkipIntro_ReadOnly; // Maniascript
@@ -7156,7 +7152,6 @@ struct CGameEditorPacks : public CMwNod {
   void Title_ClearMod();
   const wstring Title_FallbackFontFileName;
   const wstring Title_Hud3dFontFileName;
-  const wstring Title_HudDefaultModuleScriptName;
   const wstring TitleMenu_ReplayName;
   void TitleMenu_ChooseReplayName();
   void TitleMenu_ClearReplayName();
@@ -7808,6 +7803,7 @@ struct CGameManiaplanetPlugin : public CGameManiaApp {
   bool ToolBarBrowserVisible; // Maniascript
   bool ToolBarSoundVisible; // Maniascript
   bool ToolBarSettingsVisible; // Maniascript
+  int PluginZOrder; // Maniascript
   float MusicVolume; // Range: 0 - 1 // Maniascript
   void HackSetCurMenuControlVisible(string ControlId, bool Visible); // Maniascript
   bool HackIsCurMenuControlVisible(string ControlId); // Maniascript
@@ -9067,7 +9063,8 @@ struct CGameMenuSceneScriptManager : public CMwNod {
   void CameraSetLocation0(MwId SceneId, vec3 Position, float AngleDeg); // Maniascript
   void CameraSetLocation1(MwId SceneId, vec3 Position, float AngleDeg, float FovY_Deg); // Maniascript
   void CameraSetFromItem(MwId SceneId, MwId ItemId); // Maniascript
-  void LightDir0Set(MwId SceneId, vec3 sRGB, float Intensity); // Maniascript
+  void LightDir0Set0(MwId SceneId, vec3 sRGB, float Intensity); // Maniascript
+  void LightDir0Set1(MwId SceneId, vec3 sRGB, float Intensity, float AltitudeDeg, float AzimutDeg); // Maniascript
   MwId ItemCreate0(MwId SceneId, wstring ModelName, wstring SkinNameOrUrl); // Maniascript
   MwId ItemCreate1(MwId SceneId, wstring ModelName, wstring SkinName, string SkinUrl); // Maniascript
   MwId ItemCreate(MwId SceneId, wstring ModelName, wstring SkinName, string SkinUrl, string SkinOptions); // Maniascript
@@ -9085,6 +9082,7 @@ struct CGameMenuSceneScriptManager : public CMwNod {
   void PlaneReflectRefresh(); // Maniascript
   void SetBackgroundQuads(MwId SceneId, CGameManialinkQuad* Quad0, CGameManialinkQuad* Quad1, CGameManialinkQuad* Quad2, CGameManialinkQuad* Quad3); // Maniascript
   void CubeMapSetImage2ds(MwId SceneId, wstring RelName0, wstring RelName1, wstring RelName2, wstring RelName3); // Maniascript
+  void CubeMapSetFromEquirect(MwId SceneId, CGameManialinkQuad* Quad); // Maniascript
   void ColorGradingSetImage2ds(MwId SceneId, wstring RelName0, wstring RelName1, wstring RelName2, wstring RelName3); // Maniascript
   void MoodLightDir0Set(MwId SceneId, uint iMood, vec3 sRGB, float Intensity, float AltitudeDeg, float AzimutDeg); // Maniascript
   void PodiumTweakShadingSet(MwId SceneId, float BaseColor, float CubeReflect, float PlaneReflect); // Maniascript
@@ -9390,6 +9388,18 @@ struct CGameUserManagerScript : public CMwNod {
   CWebServicesTaskResult* UbisoftClub_Launch(MwId UserId, CGameUserManagerScript::EUbisoftClubFlow UbisoftClubFlow, string RewardId); // Maniascript
   CWebServicesTaskResult* UbisoftClub_LaunchAndCompleteActions(MwId UserId, CGameUserManagerScript::EUbisoftClubFlow UbisoftClubFlow, string RewardId, MwFastBuffer<wstring>& ActionIdList); // Maniascript
   CWebServicesTaskResult* Uplay_OpenOverlay(MwId UserId, CGameUserManagerScript::EUplayOverlaySection OverlaySection); // Maniascript
+};
+
+struct CGameDataFileTask_Map_NadeoServices_AddFavorite : public CWebServicesTaskSequence {
+};
+
+struct CGameDataFileTask_Map_NadeoServices_RemoveFavorite : public CWebServicesTaskSequence {
+};
+
+struct CGameDataFileTask_Map_NadeoServices_GetFavoriteList : public CWebServicesTaskSequence {
+};
+
+struct CGameDataFileTask_Map_NadeoServices_GetFavoriteListByUid : public CWebServicesTaskSequence {
 };
 
 // Description: ""
@@ -10043,7 +10053,6 @@ struct CGamePackCreator_TitleInfoScript : public CMwNod {
   const bool Solo_HasCampaign; // Maniascript
   wstring FallbackFontFileName; // Maniascript
   wstring Hud3dFontFileName; // Maniascript
-  wstring HudDefaultModuleScriptName; // Maniascript
   wstring MusicFolder; // Maniascript
   wstring Editor_MusicFileName; // Maniascript
 };
@@ -10846,6 +10855,10 @@ struct CGameDataFileManagerScript : public CMwNod {
   int Map_NadeoServices_GetVote(MwId UserId, string MapUid); // Maniascript
   CWebServicesTaskResult_NadeoServicesMapScript* Map_NadeoServices_Register(MwId UserId, string MapUid); // Maniascript
   void Map_NadeoServices_Vote(MwId UserId, string MapUid, int Vote); // Maniascript
+  CWebServicesTaskResult* Map_NadeoServices_AddFavorite(MwId UserId, string MapUid); // Maniascript
+  CWebServicesTaskResult_NadeoServicesMapListScript* Map_NadeoServices_GetFavoriteList(MwId UserId, MwFastBuffer<wstring>& MapTypeList, bool SortByDateElseByName, bool SortOrderAsc, bool OnlyPlayable, bool OnlyMine); // Maniascript
+  CWebServicesTaskResult_NadeoServicesMapListScript* Map_NadeoServices_GetFavoriteListByUid(MwId UserId, MwFastBuffer<wstring>& MapUidList); // Maniascript
+  CWebServicesTaskResult* Map_NadeoServices_RemoveFavorite(MwId UserId, string MapUid); // Maniascript
   CWebServicesTaskResult_NadeoServicesSkinScript* Skin_NadeoServices_Get(MwId UserId, string SkinId); // Maniascript
   CWebServicesTaskResult_NadeoServicesSkinScript* Skin_NadeoServices_GetFromChecksum(MwId UserId, string SkinChecksum); // Maniascript
   CWebServicesTaskResult_NadeoServicesSkinListScript* Skin_NadeoServices_GetList(MwId UserId, MwFastBuffer<wstring>& SkinIdList); // Maniascript
@@ -18944,6 +18957,7 @@ struct CSystemConfig : public CMwNod {
   bool InputsFreezeUnusedAxes;
   bool InputsEnableRumble;
   bool InputsEnableJoysticks;
+  bool InputsDisableFreeCamPadControl;
   CSystemConfig::EAdvertising Advertising_Enabled;
   float Advertising_TunningCoef;
   bool Advertising_DisabledByUser;
@@ -20215,6 +20229,9 @@ struct CNetFormRpcCall : public CNetNod {
 struct CNetUPnP : public CMwNod {
 };
 
+struct CWebServicesTaskWait : public CWebServicesTaskSequence {
+};
+
 struct CNetMasterServerRequest : public CMwNod {
 };
 
@@ -20433,6 +20450,15 @@ struct CNetUbiServicesTask_CreateSession : public CNetUbiServicesTask {
 struct CNetUbiServicesTask_DeleteSession : public CNetUbiServicesTask {
 };
 
+struct CNetUbiServicesTask_Party_GetMaxMemberLimit : public CNetUbiServicesTask {
+};
+
+struct CNetUbiServicesTask_Party_SetMaxMemberLimit : public CNetUbiServicesTask {
+};
+
+struct CWebServicesTask_Party_SetMaxMemberLimit : public CWebServicesTaskSequence {
+};
+
 struct CWebServicesTask_Empty : public CWebServicesTaskVoid {
 };
 
@@ -20573,6 +20599,9 @@ struct CNetUbiServicesTask_GetUnsentEvents : public CNetUbiServicesTask {
 };
 
 struct CNetUbiServicesTask_RefreshSession : public CNetUbiServicesTask {
+};
+
+struct CNetNadeoServicesTask_GetAllPrestigeList : public CNetNadeoServicesRequestTask {
 };
 
 struct CWebServicesTaskResult_NSAccountSkinFavorite : public CWebServicesTaskResult {
@@ -21622,6 +21651,30 @@ struct CWebServicesTask_Permission_GetPlayerInteractionStatusList : public CWebS
 
 struct CWebServicesTaskResult_Integer : public CWebServicesTaskResult {
   const int Value; // Maniascript
+};
+
+struct CWebServicesTask_RetrieveUserPrestigeLevelList : public CWebServicesTaskSequence {
+};
+
+struct CWebServicesTask_RetrievePrestigeInfoList : public CWebServicesTaskSequence {
+};
+
+struct CNetNadeoServicesTask_GetAccountMapFavoriteList : public CNetNadeoServicesRequestTask {
+};
+
+struct CWebServicesTaskResult_NSAccountMapFavoriteList : public CWebServicesTaskResult {
+};
+
+struct CNetNadeoServicesTask_GetAccountMapFavoriteListByMapUid : public CNetNadeoServicesRequestTask {
+};
+
+struct CNetNadeoServicesTask_AddAccountMapFavorite : public CNetNadeoServicesRequestTask {
+};
+
+struct CWebServicesTaskResult_NSAccountMapFavorite : public CWebServicesTaskResult {
+};
+
+struct CNetNadeoServicesTask_RemoveAccountMapFavorite : public CNetNadeoServicesRequestTask {
 };
 
 } // namespace Net
@@ -25996,6 +26049,7 @@ struct CNotification_PrestigeEarned : public CNotification_Prestige {
   const string SkinOptions; // Maniascript
   const uint StatCurrentValue; // Maniascript
   const uint StatValueForNextLevel; // Maniascript
+  const uint StatValueForCurrentLevel; // Maniascript
   const uint TimeStamp; // Maniascript
   const uint Year; // Maniascript
 };
@@ -26702,6 +26756,7 @@ struct CPrestige : public CMwNod {
   const string SkinOptions; // Maniascript
   const uint StatCurrentValue; // Maniascript
   const uint StatValueForNextLevel; // Maniascript
+  const uint StatValueForCurrentLevel; // Maniascript
   const uint TimeStamp; // Maniascript
   const uint Year; // Maniascript
 };
