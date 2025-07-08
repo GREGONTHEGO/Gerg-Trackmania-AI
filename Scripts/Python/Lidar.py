@@ -14,12 +14,13 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as f
 from torch.utils.data import Dataset, DataLoader
+from numba import njit
 
 BUFFER_SIZE = 5
 CAPTURE_FPS = 60.0
 frame_buffer = deque(maxlen=BUFFER_SIZE)
 
-region = (640, 300, 1920, 1200)
+region = (0, 100, 2560, 1400)
 # print(dxcam.device_info())
 camera = None
 
@@ -37,13 +38,6 @@ latest_state = {'ts':0,'speed': 0.0, 'x': 0.0, 'y': 0.0, 'z': 0.0, 'cp': 0.0}
 episode = 0
 
 device = torch.device("cuda" if torch.cuda.is_available() else 'cpu')
-# print("torch version:", torch.__version__)
-# print("CUDA support compiled:", torch.version.cuda)
-# print("cuDNN version:", torch.backends.cudnn.version())
-# print("CUDA available:", torch.cuda.is_available())
-# print("GPU count:", torch.cuda.device_count())
-# if torch.cuda.is_available():
-#     print("GPU name:", torch.cuda.get_device_name(0))
 print(device)
 best_episode_data = None
 best_cp = -1
@@ -53,82 +47,169 @@ best_reward = -float('inf')
 
 def init_camera():
     global camera
-    camera = dxcam.create(output_idx=0, output_color="GRAY", region=region, max_buffer_len=10)
+    camera = dxcam.create(output_idx=0, output_color="BGR", region=region, max_buffer_len=10)
     camera.start(target_fps=60)
+
+
+def black_and_white_filter(image):
+    if len(image.shape) == 2 or image.shape[2] == 1:
+        mask = image < 50
+        result = np.full_like(image, 255)
+        result[mask] = 0
+        return result
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    black = gray < 50
+    white = gray > 240
+    result = np.full_like(image, 255)
+    black_mask = np.repeat(black[:, :, np.newaxis], 3, axis=2)
+    white_mask = np.repeat(white[:, :, np.newaxis], 3, axis=2)
+    result[black_mask] = 0
+    result[white_mask] = 255
+    return result
 
 
 
 def get_screenshot():
+    global camera
     screenshot = camera.get_latest_frame()
-    img = screenshot[:, :, :1]  
-    img = cv2.resize(img, (200, 100))
-    img = img.astype(np.float32) / 255.0
-    img = np.expand_dims(img, axis=0)
+    if screenshot is None:
+        print("[WARNING] No frame captured, retrying...")
+        try:
+            camera.stop()
+        except:
+            pass
+        time.sleep(0.1)
+        init_camera()
+        screenshot = camera.get_latest_frame()
+        if screenshot is None:
+            raise RuntimeError("Failed to reinitialize camera.")
+    img = black_and_white_filter(screenshot)
     return img
 
 
+# @njit
+def pixel_to_distance(y, image_height=1600, vertical_fov=130, camera_tilt_degree=33, camera_height=1.5):
+    pixel_from_bottom = abs(y)
+    if pixel_from_bottom < 1:
+        pixel_from_bottom = 0
+    vertical_ratio = pixel_from_bottom / image_height
+    beta_degree = vertical_fov * vertical_ratio
+    total_angle = min(camera_tilt_degree + beta_degree, 89.7)
+    total_angle_rad = math.radians(total_angle)
+    # print(f"theta: {angle}, Pixel from bottom: {pixel_from_bottom}, Vertical ratio: {vertical_ratio:.4f}, Beta degree: {beta_degree:.2f}, Total angle: {total_angle:.2f}°")
+    distance = math.tan(total_angle_rad) * camera_height
+    return distance
+
+# @njit
+def lateral_offset(x, forward_distance, image_width=2560, horizontal_fov=70):
+    if x == 0:
+        x = 1
+    horizontal_ratio = x / image_width
+    alpha_degree = horizontal_fov * horizontal_ratio
+    alpha_rad = math.radians(alpha_degree)
+    lateral_offset = forward_distance * math.tan(alpha_rad)
+    # if x < 1260:
+    #     return 5.0
+    # print(f"dx: {x}, Forward distance: {forward_distance:.2f} m, Horizontal ratio: {horizontal_ratio:.4f}, Alpha degree: {alpha_degree:.2f}°, Lateral offset: {lateral_offset:.2f} m")
+    return lateral_offset
+
+
+# @njit
+def compute_dist(edges, origin, sin_angles, cos_angles, max_distance, W, H):
+    num_rays = len(sin_angles)
+    result = np.zeros((num_rays), dtype=np.float32)
+    # print(f"Origin: {origin}, Image Size: {W}x{H}, Number of Rays: {num_rays}, Max Distance: {max_distance}")
+    for i in range(num_rays):
+        # for d in range(1, max_distance):
+        ray_mask = np.zeros((H, W), dtype=np.uint8)
+        dx = (max_distance * sin_angles[i])
+        dy = (max_distance * cos_angles[i])
+        x = int(origin[0] + dx)
+        y = int(origin[1] - dy)
+        cv2.line(ray_mask, origin, (x, y), (255, 255, 255), 1)
+        hit_mask = cv2.bitwise_and(edges, ray_mask)
+        hit_points = cv2.findNonZero(hit_mask)
+        if hit_points is not None:
+            origin_np = np.array(origin, dtype=np.int32)
+            distances = np.linalg.norm(hit_points[:, 0].astype(np.float32) - origin_np, axis=1)
+            closest_index = np.argmin(distances)
+            hit = tuple(hit_points[closest_index][0])
+            # print(hit)
+            dx_hit = hit[0] - origin[0]
+            dy_hit = hit[1] - origin[1]
+            # actual_x = int(origin[0] + dx_hit)
+            # actual_y = int(origin[1] - dy_hit)
+            fwd = pixel_to_distance(dy_hit, H)
+            lat = lateral_offset(dx_hit, fwd, W)
+            total = float(math.hypot(fwd, lat))
+            result[i] = total
+            # cv2.line(overlay, origin, hit, (0, 255, 0), 3)
+            # cv2.putText(overlay, f"{total:.2f} m", (int(hit[0] * 2 / 3),int(hit[1] * 2 / 3)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
+        else:
+            fwd = pixel_to_distance(dy, H)
+            lat = lateral_offset(dx, fwd, W)
+            total = float(math.hypot(fwd, lat))
+            result[i] = total
+            # cv2.line(overlay, origin, (x, y), (0, 255, 0), 3)
+            # cv2.putText(overlay, f"{total:.2f} m", (int(x * 2 / 3), int(y * 2 / 3)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
+
+
+    return result
+
+def lidar_numbers(image, num_rays=19, max_distance=1270):
+    edges = cv2.Canny(image, 50, 150)
+    H, W = edges.shape
+    origin = (W // 2, H - 100)
+    angles = np.linspace(-math.radians(90), math.radians(90), num_rays)
+    sin_angles = np.sin(angles)
+    cos_angles = np.cos(angles)
+
+    dist = compute_dist(edges, origin, sin_angles, cos_angles, max_distance, W, H)
+    return dist
 
 def capture_loop():
     interval = 1.0/CAPTURE_FPS
     while not stop_capture.is_set():
         img = get_screenshot()
-        frame_buffer.append(img)
+        frame_buffer.append(lidar_numbers(img))
         time.sleep(interval)
 
 
 
-class Conv2DAgent(nn.Module):
+class LSTMAgent(nn.Module):
     def __init__(self):
-        super(Conv2DAgent, self).__init__()
-        self.conv2d_1 = nn.Conv2d(1, 64, kernel_size=(5,5), padding=2)
-        self.bn1 = nn.BatchNorm2d(64)
-
-        self.conv2d_2 = nn.Conv2d(64, 128, kernel_size=(3,3), padding=1)
-        self.bn2 = nn.BatchNorm2d(128)
-
-        self.conv2d_3 = nn.Conv2d(128, 256, kernel_size=(3,3), stride=2, padding=1)
-        self.bn3 = nn.BatchNorm2d(256)
-
-        self.conv2d_4 = nn.Conv2d(256, 512, kernel_size=(3,3), stride=2, padding=1)
-        self.bn4 = nn.BatchNorm2d(512)
-
-        self.pool = nn.AdaptiveAvgPool2d((1,1))
-
-        self.fc1 = nn.Linear(512,256)
+        super(LSTMAgent, self).__init__()
+        self.lstm = nn.LSTM(input_size=19, hidden_size=512, num_layers=2, batch_first=True)
+        
+        self.fc1 = nn.Linear(512,512)
         self.telem_norm =nn.LayerNorm(5)
         self.telemetry_mlp = nn.Sequential(
-            nn.Linear(5, 128),
+            nn.Linear(5, 256),
             nn.ReLU(),
-            nn.Linear(128, 64),
+            nn.Linear(256, 256),
             nn.ReLU(),
-            nn.Linear(64, 64),
+            nn.Linear(256, 128),
             nn.ReLU()
         )
 
-        self.move = nn.Linear(256 + 64,3)
-        self.turn = nn.Linear(256 + 64,3)
+        self.move = nn.Linear(512 + 128,3)
+        self.turn = nn.Linear(512 + 128,3)
         self.critic = nn.Sequential( 
-            nn.Linear(256 + 64, 256),
+            nn.Linear(512 + 128, 256),
             nn.ReLU(),
-            nn.Linear(256, 64),
+            nn.Linear(256, 128),
             nn.ReLU(),
-            nn.Linear(64,1)
+            nn.Linear(128,1)
             )
 
 
 
     def forward(self, x, telem):
-        B, T, C, H, W = x.shape
-        x = x.view(B * T, C, H, W)
-        x = f.relu(self.bn1(self.conv2d_1(x)))
-        x = f.relu(self.bn2(self.conv2d_2(x)))
-        x = f.relu(self.bn3(self.conv2d_3(x)))
-        x = f.relu(self.bn4(self.conv2d_4(x)))
-        x = self.pool(x)
-        x = x.view(B * T, -1)
-        x = f.relu(self.fc1(x))
-        x = x.view(B, T, -1)
-        h_last = x.mean(dim=1)
+        # print(x.shape, telem.shape)
+        B, T, D = x.shape
+        lstm_out , _ = self.lstm(x)
+        x = lstm_out[:, -1, :]  # Take the last output of the LSTM
+        h_last = f.relu(self.fc1(x))
         telem = self.telem_norm(telem)
         t_feat = self.telemetry_mlp(telem)
         joint = torch.cat([h_last, t_feat], dim=1)
@@ -160,7 +241,7 @@ class Conv2DAgent(nn.Module):
 
 def train_step(model, optimizer, images, tel, move, turn, rewards):
     model.train()
-    images = images.to(device)
+    images = images.float().to(device)
     move = move.to(device)
     turn = turn.to(device)
     tel = tel.to(device)
@@ -211,28 +292,64 @@ class TrackmaniaDataset(Dataset):
 
 
 
-def compute_reward(prev_state, current_state, move, tim, alpha=1.0):
+def compute_reward(prev_state, current_state, move, tim, alpha=0.1):
+    # print(prev_state, current_state, move)
     speed = current_state['speed']
     prev_speed = prev_state['speed']
-
-    reward = alpha * max(0.0, speed)
+    reward = 0.0
+    # reward = -0.1
+    if speed > 1.0:
+        reward += alpha * speed
+    # print("speed ", reward)
     if move == 2 and abs(current_state['x'] - prev_state['x']) < 0.1 and abs(current_state['z'] - prev_state['z']) < 0.1:
-        reward -= 5.0
-    if move == 1 and speed < 0.0:
-        reward -= 5.0
+        reward -= 3.0
+    # print("still reward", reward)
+    if move == 1 and speed < 5.0:
+        reward = -10.0
+    # print("reverse reward", reward)
+    # if speed - prev_speed > 0.0 and speed > 0.0:
+    #     reward += 10.0    # if prev_state['cp'] == 0.0 and speed > 5.0:
+    # #     reward += 5.0
 
-    if prev_state['cp'] == 0.0 and speed > 5.0:
-        reward += 5.0
-
-    if current_state['cp'] == prev_state['cp'] and speed < 1.0:
-        reward -= 2.0
-
+    if current_state['cp'] == prev_state['cp'] and speed < 3.0:
+        reward -= 1.0
+    # print("same cp reward", reward)
     delta_spd = speed - prev_speed
-    if (delta_spd) < -5.0 and speed > 0.0:
-        reward -= 10.0 * abs(delta_spd)
+    if delta_spd > 0.05 and speed > 1.0:
+        reward += 2.0 * abs(delta_spd)
+    # print("delta speed reward", reward)
+    if (delta_spd) < -0.05 and speed > 0.0:
+        reward -= 3.0 * abs(delta_spd)
+    # print("negative delta speed reward", reward)
     return reward
 
 
+def lidar_clearance_bonus():# update this to know left from right
+    center_idk = 9
+    bonus = 0.0
+    for i in range(len(frame_buffer)):
+        ray_distances = frame_buffer[i]
+        forward_distance = ray_distances[center_idk]
+        forward_left = np.mean(ray_distances[center_idk - 4: center_idk - 1])
+        forward_right = np.mean(ray_distances[center_idk + 1: center_idk + 4])
+        side_left = np.mean(ray_distances[:3])
+        side_right = np.mean(ray_distances[-3:])
+        forward_distance = min(forward_distance, forward_left, forward_right)
+        side_mean = min(side_left, side_right)
+        # side_mean = min(np.mean(ray_distances[:3]), np.mean(ray_distances[-3:])) 
+        # print(f"Forward distance: {forward_distance:.2f}, Side mean: {side_mean:.2f}")
+        # print(f"Forward distance: {forward_distance:.2f}, Side mean: {side_mean:.2f}")
+
+        if forward_distance < 2.5:
+            bonus -= 1.0
+        else:
+            bonus += 1.0
+        if side_mean < 2.0:
+            bonus -= 0.5
+        else:
+            bonus += 0.5
+    return bonus
+        
 
 
 def compute_advantage(rewards, values, gamma=0.99):
@@ -243,18 +360,22 @@ def compute_advantage(rewards, values, gamma=0.99):
         returns[t] = running_add
     returns = torch.tensor(returns).to(device)
     advantages = returns - values.detach()
-    adv_mean = advantages.mean()
-    adv_std = advantages.std()
-    advantages = (advantages - adv_mean) / (adv_std + 1e-8)
-    returns = (returns - returns.mean()) / (returns.std() + 1e-8)
-    advantages = torch.clamp(advantages, -10.0, 10.0)
+    # adv_mean = advantages.mean()
+    # adv_std = advantages.std()
+    # advantages = (advantages - adv_mean) / (adv_std + 1e-8)
+    # returns = (returns - returns.mean()) / (returns.std() + 1e-8)
+    # advantages = torch.clamp(advantages, -10.0, 10.0)
+    print(min(advantages), max(advantages), min(returns), max(returns))
+    advantages = advantages / 5.0
     return advantages, returns
 
+# make the bonus just the negative if neg
+# make the speed bonus a linear number that is roughly based on speed
+# make the distances normalized for the lidar
 
 
-
-def train(model, optimizer, cp_positions, init=False):
-    BATCH_SIZE = 12
+def train(model, optimizer):
+    BATCH_SIZE = 128
     def train_batch(dataset):
         model.train()
         loaders = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True, drop_last=True, num_workers=0)
@@ -275,7 +396,7 @@ def train(model, optimizer, cp_positions, init=False):
         dataset = TrackmaniaDataset(statesInEpoch)
         train_batch(dataset)
         
-    torch.save(model.state_dict(), 'model_cp.pt')
+    torch.save(model.state_dict(), 'test.pt')
     return model
 
 
@@ -342,13 +463,14 @@ def run_episode(model, action_stats, greedy=False):
     cp_num = 0
     stuck_count = 0
     end_count = 0
-    while (time.time() - start_time) < 240 and (time.time() - cp_time) < 30 and stuck_count < 60 and end_count < 15:
+    while (time.time() - start_time) < 240 and (time.time() - cp_time) < 25 and stuck_count < 60 and end_count < 15:
         if time.time() - start_time < 2:
             cp_time = time.time() + 2
             time.sleep(2)
         with state_lock:
             state = latest_state.copy()
-            stacked = np.stack([f[0] for f in frame_buffer], axis=0)
+            # print(frame_buffer)
+            stacked = np.stack([f for f in frame_buffer], axis=0)
         if state['ts'] == prev_state['ts']:
             time.sleep(1.0/60.0)
             end_count += 1
@@ -356,14 +478,20 @@ def run_episode(model, action_stats, greedy=False):
         else:
             end_count = 0
         state_vec = np.array([[state['speed'], state['x'], state['y'], state['z'], state['cp']]])
-        stacked = np.expand_dims(stacked, 1)
+        # print(stacked[0].shape, stacked.shape)
+        # stacked = np.expand_dims(stacked, 1)
         stacked = np.expand_dims(stacked, 0)
+        # print(stacked.shape)
         if abs(state['x'] - prev_state['x']) < 0.03 and abs(state['z'] - prev_state['z']) < 0.03:
             stuck_count += 1
         else:
             stuck_count = 0
+        # print("frame_buffer[0] shape:", np.array(frame_buffer[0]).shape)
+        # print("stacked shape:", stacked.shape)
+        # print("stacked dtype:", stacked.dtype)
+
         with torch.no_grad():
-            move_log, turn_log, _ = model(torch.from_numpy(stacked).to(device), torch.tensor(state_vec, dtype=torch.float32).to(device))
+            move_log, turn_log, _ = model(torch.from_numpy(stacked).float().to(device), torch.tensor(state_vec, dtype=torch.float32).to(device))
 
             probs_move = softmax_with_temperature(move_log[0]).cpu().numpy()
             probs_turn = softmax_with_temperature(turn_log[0]).cpu().numpy()
@@ -372,9 +500,11 @@ def run_episode(model, action_stats, greedy=False):
         turn_action = np.random.choice([0, 1, 2], p=probs_turn)
 
         reward = compute_reward(prev_state, state, move_action, cp_time)
-        if stuck_count > 30:
-            reward -= 5.0
-
+        # if stuck_count > 30:
+        #     reward -= 5.0
+        # print(reward)
+        reward += lidar_clearance_bonus()
+        # print('lidar bonus', reward)
         key = (move_action, turn_action)
         action_stats[key]['count'] += 1
         action_stats[key]['reward'] += reward
@@ -390,8 +520,13 @@ def run_episode(model, action_stats, greedy=False):
         transitions_since_last_cp.append(transition)
         if state['cp'] > cp_num:
             cp_reward = min(100.0 / len(transitions_since_last_cp), 5.0)
+            total_weight = sum(max(0.1, t['state'][0]) for t in transitions_since_last_cp)
+            avg_reward = np.mean([t['reward'] for t in transitions_since_last_cp])
             for t in transitions_since_last_cp:
-                t['reward'] += cp_reward
+                weight = max(0.1, t['state'][0]) / total_weight
+                direction = np.sign(t['reward'] - avg_reward)
+                scale = 1.0 + direction * 0.5
+                t['reward'] += weight * cp_reward * scale
             episode_data.extend(transitions_since_last_cp)
             transitions_since_last_cp = []
             cp_num = state['cp']
@@ -475,17 +610,18 @@ def main():
             cp_positions = pickle.load(f)
     else:
         cp_positions = {}
-    model = Conv2DAgent().to(device)
+    model = LSTMAgent().to(device)
     model.init_weights()
-    optimizer = optim.Adam([{'params':model.move.parameters()},{'params':model.turn.parameters()}, {'params':model.critic.parameters(), 'lr': 5e-6}], lr=5e-5)
+    optimizer = optim.Adam([{'params':model.move.parameters()},{'params':model.turn.parameters()}, {'params':model.critic.parameters(), 'lr': 5e-5}], lr=5e-4)
     read = Thread(target=read_game_state)
     read.start()
-    connection_event.clear()
-    connection_event.wait()
     for _ in range(BUFFER_SIZE):
-        frame_buffer.append(get_screenshot())
+        frame_buffer.append(lidar_numbers(get_screenshot()))
     cap_thread = Thread(target=capture_loop)
     cap_thread.start()
+    connection_event.clear()
+    connection_event.wait()
+    
     for i in range(1000):
         print(i)
         action_stats = defaultdict(lambda: {'count': 0, 'reward': 0.0})
@@ -496,7 +632,7 @@ def main():
         for (move, turn), stats in action_stats.items():
             print(f"Action ({move}, {turn}): Count = {stats['count']}, Total Reward = {stats['reward']/stats['count']:.2f}")
         shutdown_event.clear()
-        model = train(model, optimizer, cp_positions).to(device)
+        model = train(model, optimizer).to(device)
     end_event.set()
     stop_capture.set()
     cap_thread.join()

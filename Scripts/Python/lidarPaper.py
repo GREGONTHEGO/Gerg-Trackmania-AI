@@ -3,6 +3,7 @@ import numpy as np
 import math
 from scipy.interpolate import interp1d
 from scipy.optimize import curve_fit
+from numba import njit
 
 # dy = np.array([-351, -297, -181]) # -380, -374, -367,
 # distances = np.array([48, 10, 5]) # 1216, 192, 96, 
@@ -32,7 +33,7 @@ def pixel_to_distance(y, angle, image_height=1600, vertical_fov=130, camera_tilt
     beta_degree = vertical_fov * vertical_ratio
     total_angle = min(camera_tilt_degree + beta_degree, 89.7)
     total_angle_rad = math.radians(total_angle)
-    print(f"theta: {angle}, Pixel from bottom: {pixel_from_bottom}, Vertical ratio: {vertical_ratio:.4f}, Beta degree: {beta_degree:.2f}, Total angle: {total_angle:.2f}°")
+    # print(f"theta: {angle}, Pixel from bottom: {pixel_from_bottom}, Vertical ratio: {vertical_ratio:.4f}, Beta degree: {beta_degree:.2f}, Total angle: {total_angle:.2f}°")
     distance = math.tan(total_angle_rad) * camera_height
     return distance
 
@@ -45,7 +46,7 @@ def lateral_offset(x, forward_distance, image_width=2560, horizontal_fov=70):
     lateral_offset = forward_distance * math.tan(alpha_rad)
     # if x < 1260:
     #     return 5.0
-    print(f"dx: {x}, Forward distance: {forward_distance:.2f} m, Horizontal ratio: {horizontal_ratio:.4f}, Alpha degree: {alpha_degree:.2f}°, Lateral offset: {lateral_offset:.2f} m")
+    # print(f"dx: {x}, Forward distance: {forward_distance:.2f} m, Horizontal ratio: {horizontal_ratio:.4f}, Alpha degree: {alpha_degree:.2f}°, Lateral offset: {lateral_offset:.2f} m")
     return lateral_offset
 
 # def distance_from_dy(dy):
@@ -94,47 +95,47 @@ def simulate_lidar_overlay(image, num_rays = 19, max_distance = 1270):
     overlay = masked_gray
     origin = (W // 2, H - 100)
     angles = np.linspace(-math.radians(90), math.radians(90), num_rays)
+    sin_angles = np.sin(angles)
+    cos_angles = np.cos(angles)
+    num_rays = len(sin_angles)
+    result = np.zeros((num_rays), dtype=np.float32)
     # print(f"Origin: {origin}, Image Size: {W}x{H}, Number of Rays: {num_rays}, Max Distance: {max_distance}")
-    for theta in angles:
-        for d in range(1, max_distance):
-            dx = (d * math.sin(theta))
-            dy = (d * math.cos(theta))
-            x = int(origin[0] + dx)
-            y = int(origin[1] - dy)
-            x_part = int(origin[0] + dx*2/3)
-            y_part = int(origin[1] - dy*2/3)
-            if 0 <= x < W and 0 <= y < H:
-                if edges[y, x] > 0:
-                    cv2.line(overlay, origin, (x, y), (0, 255, 0), 3)
-                    # print(f"Ray at angle {math.degrees(theta):.2f}° hit at distance {d} pixels, coordinates ({x - origin[0]}, {y - origin[1]})")
-                    forward_distance = pixel_to_distance(dy, theta, H)
-                    lateral_distance = lateral_offset(dx, forward_distance, W)
-                    total = math.hypot(forward_distance, lateral_distance)
-                    # total = estimate_total_distance(origin, (x, y))
-                    # print(f"dx: {dx}, dy: {dy}")
-                    # print(f"Ray at angle {math.degrees(theta):.2f} hit at distance {total:.2f} meters")
-                    cv2.putText(overlay, f"{total:.2f} m", (x_part, y_part), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
-                    break
-            else:
-                break
+    for i in range(num_rays):
+        # for d in range(1, max_distance):
+        ray_mask = np.zeros((H, W), dtype=np.uint8)
+        dx = (max_distance * sin_angles[i])
+        dy = (max_distance * cos_angles[i])
+        x = int(origin[0] + dx)
+        y = int(origin[1] - dy)
+        cv2.line(ray_mask, origin, (x, y), (255, 255, 255), 1)
+        hit_mask = cv2.bitwise_and(edges, ray_mask)
+        hit_points = cv2.findNonZero(hit_mask)
+        if hit_points is not None:
+            origin_np = np.array(origin, dtype=np.int32)
+            distances = np.linalg.norm(hit_points[:, 0].astype(np.float32) - origin_np, axis=1)
+            closest_index = np.argmin(distances)
+            hit = tuple(hit_points[closest_index][0])
+            # print(hit)
+            dx_hit = hit[0] - origin[0]
+            dy_hit = hit[1] - origin[1]
+            # actual_x = int(origin[0] + dx_hit)
+            # actual_y = int(origin[1] - dy_hit)
+            fwd = pixel_to_distance(dy_hit, H)
+            lat = lateral_offset(dx_hit, fwd, W)
+            total = float(math.hypot(fwd, lat))
+            result[i] = total
+            cv2.line(overlay, origin, hit, (0, 255, 0), 3)
+            cv2.putText(overlay, f"{total:.2f} m", (int(hit[0] * 2 / 3),int(hit[1] * 2 / 3)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
         else:
-            dx = (d * math.sin(theta))
-            dy = (d * math.cos(theta))
-            end_x = int(origin[0] + dx)
-            end_y = int(origin[1] - dy)
-            x_part = int(origin[0] + dx*2/3)
-            y_part = int(origin[1] - dy*2/3)
-            if 0 <= end_x < W and 0 <= end_y < H:
-                cv2.line(overlay, origin, (end_x, end_y), (0, 0, 255), 3)
-                # print(f"Ray at angle {math.degrees(theta):.2f}° hit at distance {d} pixels, coordinates ({end_x}, {end_y})")
-                # total = estimate_total_distance(origin, (x, y))
-                forward_distance = pixel_to_distance(dy, theta, H)
-                lateral_distance = lateral_offset(dx, forward_distance, W)
-                total = math.hypot(forward_distance, lateral_distance)
-                cv2.putText(overlay, f"{total:.2f} m", (x_part, y_part), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
-                # print(f"Ray at angle {math.degrees(theta):.2f} hit at distance {total:.2f} meters")
+            fwd = pixel_to_distance(dy, H)
+            lat = lateral_offset(dx, fwd, W)
+            total = float(math.hypot(fwd, lat))
+            result[i] = total
+            cv2.line(overlay, origin, (x, y), (0, 255, 0), 3)
+            cv2.putText(overlay, f"{total:.2f} m", (int(x * 2 / 3), int(y * 2 / 3)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
 
     return overlay
+
 
 camera = dxcam.create(output_idx=0, output_color="BGR", region=(0, 100, 2560, 1400))
 camera.start(target_fps=60)
