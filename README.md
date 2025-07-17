@@ -3,7 +3,8 @@
 This repository contains a series of experiments and architectures designed to control a car in Trackmania using reinforcement learning and computer vision. The models utilized game telemetry and either pictures of the game or lidar of walls. This information was used to teach the model driving behaviors through chasing better rewards.
 
 ## Overview of the main model files
-For more information about the files check the comments left in the files or my gerg-thoughts.md which is a small write up of the challenges that I have faced upto this point.
+For more information about the files check the comments left in the files or my 
+gerg-thoughts.md which is a small write up of the challenges that I have faced upto this point. Also, gerg-thoughts has some videos of things that I did along the way in it.
 
 1. **lidar-gauss.py**
 The most recent addition to the series of tests. This uses three outputs to determine all movements. Uses LIDAR simulation and a gaussian policy head. The main changes in this file compared to the lidar.py is that this one has a larger model and a slightly different reward structure.
