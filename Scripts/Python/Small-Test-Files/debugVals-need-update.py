@@ -14,8 +14,7 @@ import matplotlib.pyplot as plt
 
 
 BUFFER_SIZE = 10
-CAPTURE_FPS = 6
-.0
+CAPTURE_FPS = 60.0
 frame_buffer = deque(maxlen=BUFFER_SIZE)
 
 region = (640, 300, 1920, 1200)
