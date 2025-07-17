@@ -14,7 +14,12 @@ shutdown_event = threading.Event()
 end_event = threading.Event()
 connection_event = threading.Event()
 
+# Global variable to keep track of the latest game state received from the socket
+# Tracks speed, position, velocity, and current cp
+# later remove velocity as it is wrapped in speed
 latest_state = {'ts':0,'speed': 0.0, 'x': 0.0, 'y': 0.0, 'z': 0.0, 'vx': 0.0, 'vy': 0.0, 'vz': 0.0, 'cp': 0}
+
+# Global variable to keep track of the current episode number
 episode = 0
 
 # Computes the reward for the current state just based on speed
@@ -23,9 +28,11 @@ def compute_reward(current_state, alpha=3.0):
 
     return alpha * speed
 
+
 def policy_loss(logits, actions, rewards):
     logp = actions * tf.math.log(logits + 1e-10) + (1 - actions) * tf.math.log(1 - logits + 1e-10)
     return -tf.reduce_mean(tf.reduce_sum(logp, axis=1) * rewards)
+
 
 def compute_advantage(rewards, gamma=0.99):
     advantages = np.zeros_like(rewards, dtype=np.float32)
@@ -37,6 +44,7 @@ def compute_advantage(rewards, gamma=0.99):
     return advantages
 
 
+# Loads episode data and trains a model using gradient descent and advantage weighting.
 def train(model):
     for ep in range(episode):
         print(ep)
@@ -77,6 +85,7 @@ def train(model):
     model.save('model_weights.keras', save_format='keras')
     return model
 
+# Socket listener that updates shared global game state with telemetry.
 def read_game_state():
     global latest_state
     with socket.socket() as s:
@@ -122,6 +131,8 @@ def read_game_state():
                 print("Error reading data:", e)
                 break
         conn.close()
+
+# Builds a dense neural network using telemetry input only.
 def genModel():
     inp_telemetry = tf.keras.Input(shape=(8,))
     x = tf.keras.layers.Dense(1024, activation='relu')(inp_telemetry)
@@ -132,6 +143,7 @@ def genModel():
     model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001))
     return model
 
+# Normalizes state values into ranges expected by the model.
 def scale_state(state):
     state['speed'] = (state['speed']) / 100.0
     state['x'] = (state['x']) / 1000.0
@@ -143,6 +155,7 @@ def scale_state(state):
     state['cp'] = int(state['cp'])/ 20.0
     return state
 
+# Runs 5 game episodes using inference mode of the trained model.
 def inference(model):
     global episode
     episode = 0
@@ -151,29 +164,36 @@ def inference(model):
         start_time = time.time()
         episode_data = []
         prev_state = scale_state(latest_state)
-        print(prev_state)
         cp_time = time.time()
         cp_num = 0
+
         while (time.time() - start_time) < 50 and (time.time() - cp_time) < 10:
+
             if time.time() - start_time < 2:
                 cp_time = time.time() + 2
                 time.sleep(2)
+
             if latest_state['ts'] < prev_state['ts']:
                 continue
+
             state = scale_state(latest_state).copy()
+
             if state['cp'] > cp_num:
                 cp_num = state['cp']
                 cp_time = time.time()
+
             state_vec = np.array([[state['speed'], state['x'], state['y'], state['z'], state['vx'], state['vy'], state['vz'], state['cp']]])
             move, turn = model(state_vec)
             probs_move = tf.nn.softmax(move)[0].numpy()
             probs_turn = tf.nn.softmax(turn)[0].numpy()
+
             if i == 1:
                 move_action = np.argmax(probs_move)
                 turn_action = np.argmax(probs_turn)
             else:
                 move_action = np.random.choice([0, 1, 2], p=probs_move)
                 turn_action = np.random.choice([0, 1, 2], p=probs_turn)
+
             reward = compute_reward(state)
             prev_state = state.copy()
             episode_data.append({'state':state_vec[0],'move': move_action, 'turn': turn_action,'reward': reward})
@@ -194,10 +214,12 @@ def inference(model):
                 keyboard.press('d')
             else:
                 keyboard.release('d')
+
             time.sleep(1.0/60.0)
 
         with open(f'{episode}statesInEpoch.pkl', 'wb') as f:
             pickle.dump(episode_data, f)
+
         episode += 1
         keyboard.release('w')
         keyboard.release('a')

@@ -12,9 +12,6 @@ import pickle
 import dxcam, cv2
 from collections import deque
 
-import torch
-print(torch.cuda.is_available())   # True = GPU working
-print(torch.cuda.get_device_name(0))  # Should print "NVIDIA GeForce RTX 3080"
 
 k = 15
 frame_buffer = deque(maxlen=k)
@@ -25,6 +22,27 @@ camera = dxcam.create(output_idx=0, output_color="GRAY", region=region)
 camera.start()
 state_lock = threading.Lock()
 
+HOST = '127.0.0.1'
+PORT = 5055
+keyboard = Controller()
+
+# used to put the read function to sleep
+shutdown_event = threading.Event()
+
+# used to stop reading from the game state thread
+end_event = threading.Event()
+
+# set to allow for the other threads to begin working once a connection to the game has occurred
+connection_event = threading.Event()
+
+
+
+# telemetry data used in the model and for the rewards
+# speed, position and current cp
+latest_state = {'ts':0,'speed': 0.0, 'x': 0.0, 'y': 0.0, 'z': 0.0, 'cp': 0.0}
+episode = 0
+
+# captures screen and as a grayscale and resizes it to be a smaller image to be used in a CNN
 def get_screenshot():
     screenshot = camera.get_latest_frame()
     img = screenshot[:, :, :1]  
@@ -33,16 +51,7 @@ def get_screenshot():
     img = np.expand_dims(img, axis=0)
     return img
 
-HOST = '127.0.0.1'
-PORT = 5055
-keyboard = Controller()
-shutdown_event = threading.Event()
-end_event = threading.Event()
-connection_event = threading.Event()
-
-latest_state = {'ts':0,'speed': 0.0, 'x': 0.0, 'y': 0.0, 'z': 0.0, 'cp': 0}
-episode = 0
-
+# Computes reward based on vehicle speed and checkpoint progress.
 def compute_reward(prev_state, current_state, alpha=1.0, gamma=5.0):
     speed = current_state['speed'] * 100
     cp_diff = (current_state['cp'] - prev_state['cp']) * 5
@@ -50,10 +59,12 @@ def compute_reward(prev_state, current_state, alpha=1.0, gamma=5.0):
 
     return alpha * speed + cp_reward
 
+# Computes the policy gradient loss from predicted logits and taken actions.
 def policy_loss(logits, actions, rewards):
     logp = actions * tf.math.log(logits + 1e-10) + (1 - actions) * tf.math.log(1 - logits + 1e-10)
     return -tf.reduce_mean(tf.reduce_sum(logp, axis=1) * rewards)
 
+# Calculates discounted returns to use as advantages for training.
 def compute_advantage(rewards, gamma=0.99):
     advantages = np.zeros_like(rewards, dtype=np.float32)
     running_add = 0.0
@@ -62,6 +73,7 @@ def compute_advantage(rewards, gamma=0.99):
         advantages[t] = running_add
     return advantages
 
+# Loads past episodes and trains the model in batches.
 def train(model, init=False):
     BATCH_SIZE = 16
     def train_batch(images, states, move_act, turn_act, rewards):
@@ -91,7 +103,8 @@ def train(model, init=False):
             model.optimizer.apply_gradients(zip(gradients, model.trainable_variables))
         print(f"Episode {0}, Loss: {loss.numpy()}")
 
-
+    # uses past recordings to boost the initial learning a bit though never did what I hoped it would
+    # it has been removed in more recent times
     if init:
         for ep in range(1):
             for i in ['curve.pkl' , 'turn.pkl', 'long.pkl']: #,'straight.pkl'
@@ -118,6 +131,7 @@ def train(model, init=False):
     model.save('model_weights.keras', save_format='keras')
     return model
 
+# Listens to socket input and updates latest telemetry state with screenshots.
 def read_game_state():
     global latest_state
     with socket.socket() as s:
@@ -154,6 +168,10 @@ def read_game_state():
                 print("Error reading data:", e)
                 break
         conn.close()
+
+# Constructs the Keras CNN model using ConvLSTM layers.
+# switched from tensorflow to pytorch after spending countless hours 
+# trying to get tensorflow to load everything onto my GPU
 def genModel():
     inp_image = tf.keras.Input(shape=(15, 100, 200, 1))
     x = tf.keras.layers.ConvLSTM2D(32, (5, 5), padding='same')(inp_image)
@@ -185,6 +203,7 @@ def genModel():
     model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001))
     return model
 
+# Normalizes telemetry data for model input.
 def scale_state(state):
     state['speed'] = (state['speed']) / 100.0
     state['x'] = (state['x']) / 1000.0
@@ -193,6 +212,7 @@ def scale_state(state):
     state['cp'] = int(state['cp'])/ 5.0
     return state
 
+# Runs game simulation using the trained model and logs results.
 def inference(model):
     global episode
     episode = 0
@@ -202,13 +222,17 @@ def inference(model):
         keyboard.press(Key.enter)
         keyboard.release(Key.enter)
         print(i)
+
         start_time = time.time()
         episode_data = []
+
         with state_lock:
             prev_state = scale_state(latest_state)
             frame_buffer.extend([latest_state['pic']] * k)
+        
         cp_time = time.time()
         cp_num = 0
+
         while (time.time() - start_time) < 35 and (time.time() - cp_time) < 5:
             if time.time() - start_time < 2:
                 cp_time = time.time() + 2
@@ -216,13 +240,14 @@ def inference(model):
             
             if latest_state['ts'] < prev_state['ts']:
                 continue
-            # start = time.perf_counter()
+
             with state_lock:
                 state = scale_state(latest_state).copy()
-            #print(state)
+
             if state['cp'] > cp_num:
                 cp_num = state['cp']
                 cp_time = time.time()
+
             state_vec = np.array([[state['speed'], state['x'], state['y'], state['z'], state['cp']]])
             image = state['pic']
             frame_buffer.append(image)
@@ -233,15 +258,18 @@ def inference(model):
             probs_turn = tf.nn.softmax(turn)[0].numpy()
             epsilon = 0.05
             rand = np.random.choice([0,1], p=[epsilon, 1-epsilon])
+
             if rand == 1:
                 move_action = np.argmax(probs_move)
                 turn_action = np.argmax(probs_turn)
             else:
                 move_action = np.random.choice([0, 1, 2], p=probs_move)
                 turn_action = np.random.choice([0, 1, 2], p=probs_turn)
+
             reward = compute_reward(prev_state, state)
             if move_action != 2:
                 reward += 0.02
+
             prev_state = state.copy()
             episode_data.append({'state':state_vec[0], 'image': stacked,'move': move_action, 'turn': turn_action,'reward': reward})
             
@@ -261,8 +289,10 @@ def inference(model):
                 keyboard.press('d')
             else:
                 keyboard.release('d')
+
         with open(f'{episode}statesInEpoch.pkl', 'wb') as f:
             pickle.dump(episode_data, f)
+
         episode += 1
         keyboard.release('w')
         keyboard.release('a')
@@ -280,24 +310,20 @@ if __name__ == "__main__":
     read.start()
     connection_event.clear()
     connection_event.wait()
-    # dummy = np.zeros((1, 5), dtype=np.float32)
     image = get_screenshot()
-    print(image.shape)
     frame_buffer.extend([image] * k)
-    print(len(frame_buffer))
-    print(f[0].shape for f in frame_buffer)
     stacked = np.stack([f[0] for f in frame_buffer], axis=0)
     stacked = np.expand_dims(stacked, 0)
-    print(stacked.shape)
-    model.predict(stacked)
+    model.predict(stacked) # initializes weights
     model = train(model, True)
-    # model = tf.keras.models.load_model('base.keras')
+
     for _ in range(1000):
         shutdown_event.clear()
         inf = Thread(target=inference, args=(model,))
         inf.start()
         inf.join()
         model = train(model)
+
     end_event.set()
     camera.stop()
     read.join()
