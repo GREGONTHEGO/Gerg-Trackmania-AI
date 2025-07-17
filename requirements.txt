@@ -1,0 +1,7 @@
+dxcam
+mss
+numpy
+opencv-python
+pynput
+tensorflow
+torch
