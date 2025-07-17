@@ -14,7 +14,6 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as f
 from torch.utils.data import Dataset, DataLoader
-from numba import njit
 
 BUFFER_SIZE = 5
 CAPTURE_FPS = 60.0
@@ -340,7 +339,7 @@ def lidar_clearance_bonus():# update this to know left from right
         # print(f"Forward distance: {forward_distance:.2f}, Side mean: {side_mean:.2f}")
         # print(f"Forward distance: {forward_distance:.2f}, Side mean: {side_mean:.2f}")
 
-        if forward_distance < 2.5:
+        if forward_distance < 5.0:
             bonus -= 1.0
         else:
             bonus += 1.0
@@ -470,7 +469,7 @@ def run_episode(model, action_stats, greedy=False):
         with state_lock:
             state = latest_state.copy()
             # print(frame_buffer)
-            stacked = np.stack([f for f in frame_buffer], axis=0)
+            stacked = np.stack([np.log2(1 + f) for f in frame_buffer], axis=0)
         if state['ts'] == prev_state['ts']:
             time.sleep(1.0/60.0)
             end_count += 1
@@ -503,7 +502,11 @@ def run_episode(model, action_stats, greedy=False):
         # if stuck_count > 30:
         #     reward -= 5.0
         # print(reward)
-        reward += lidar_clearance_bonus()
+        bonus = lidar_clearance_bonus()
+        if bonus < 0.0:
+            reward = bonus
+        else:
+            reward += bonus
         # print('lidar bonus', reward)
         key = (move_action, turn_action)
         action_stats[key]['count'] += 1

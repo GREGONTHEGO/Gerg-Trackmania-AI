@@ -123,14 +123,14 @@ def simulate_lidar_overlay(image, num_rays = 19, max_distance = 1270):
             fwd = pixel_to_distance(dy_hit, H)
             lat = lateral_offset(dx_hit, fwd, W)
             total = float(math.hypot(fwd, lat))
-            result[i] = total
+            result[i] = np.log(total)
             cv2.line(overlay, origin, hit, (0, 255, 0), 3)
             cv2.putText(overlay, f"{total:.2f} m", (int(hit[0] * 2 / 3),int(hit[1] * 2 / 3)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
         else:
             fwd = pixel_to_distance(dy, H)
             lat = lateral_offset(dx, fwd, W)
             total = float(math.hypot(fwd, lat))
-            result[i] = total
+            result[i] = np.log1p(total)
             cv2.line(overlay, origin, (x, y), (0, 255, 0), 3)
             cv2.putText(overlay, f"{total:.2f} m", (int(x * 2 / 3), int(y * 2 / 3)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
 

@@ -1,1607 +1,187 @@
-[        Platform] [  LOG] [23:09:10]  Openplanet for Trackmania Next x64
-[        Platform] [ TRAC] [23:09:10]  (c) Melissa Geels 2016 - 2024
-[        Platform] [ TRAC] [23:09:10]  https://openplanet.dev/
-[        Platform] [  LOG] [23:09:10]  Openplanet starting on 2025-07-07
-[        Platform] [  LOG] [23:09:10]  Engine: 2025-07-04 07:15:08
-[        Platform] [  LOG] [23:09:10]  Openplanet: 1.27.12 (next, Public, 2025-07-01)
-[        Platform] [ TRAC] [23:09:10]  Identifier: 0x000000006867C5CC
-[        Platform] [ TRAC] [23:09:10]  Process ID: 27484
-[        Platform] [  LOG] [23:09:10]  Setting up hook callbacks...
-[        Platform] [  LOG] [23:09:11]  Semi entry initialization...
-[        Platform] [  LOG] [23:09:11]  Update branch: default
-[        Platform] [  LOG] [23:09:11]  Requesting app config with timeout 5000...
-[        Platform] [  LOG] [23:09:12]  Finding game window..
-[        Platform] [ TRAC] [23:09:12]  Window handle: 00750970 ("Trackmania")
-[        Platform] [  LOG] [23:09:12]  Attempting automatic detection of game version data for game version 0x000000006867C5CC
-[        Platform] [  LOG] [23:09:12]  Autodetecting game version data:
-[        Platform] [  LOG] [23:09:12]  Did not find update to install.
-[        Platform] [  LOG] [23:09:14]  Initializing meta...
-[     WebServices] [  LOG] [23:09:20]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[        Platform] [  LOG] [23:09:20]  Loop entry initialization...
-[        Platform] [  LOG] [23:09:20]  Hooking WndProc...
-[        Platform] [ TRAC] [23:09:20]  Initializing sockets...
-[        Platform] [ TRAC] [23:09:20]  Adding user library path...
-[        Platform] [  LOG] [23:09:20]  Initializing audio...
-[           Audio] [  LOG] [23:09:20]  Setting playback device to "Speakers (Realtek High Definition Audio)"
-[        Platform] [  LOG] [23:09:20]  Initializing scripting...
-[    ScriptEngine] [  LOG] [23:09:21]  Registered 2647 classes
-[        Platform] [ TRAC] [23:09:21]  Writing type definitions to file: "C:\Users\panda/OpenplanetNext/Openplanet.h"
-[        Platform] [  LOG] [23:09:21]  Writing json to file: "C:\Users\panda/OpenplanetNext/OpenplanetNext.json"
-[        Platform] [  LOG] [23:09:21]  Dumping Openplanet documentation to C:\Users\panda/OpenplanetNext/OpenplanetCore.json
-[        Platform] [  LOG] [23:09:21]  Initializing overlay...
-[         Overlay] [  LOG] [23:09:21]  Loading user style: C:\Program Files\Epic Games\TrackmaniaNext\Openplanet/DefaultStyle.toml
-[        Platform] [  LOG] [23:09:21]  Beginning script engine...
-[    ScriptEngine] [  LOG] [23:09:21]  Adding plugins...
-[    ScriptEngine] [ TRAC] [23:09:21]  Loaded plugin 'Camera' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'EditorDeveloper' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'VehicleState' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded zipped plugin 'Dashboard' (version 1.9.7)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'NadeoServices' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded zipped plugin 'TMRL_SaveGhost' (version 0.2)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'Finetuner' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:22]  MLHook.op/:/Logging.as (29, 1) : INFO : Compiling void RenderLogsWindow()
-[    ScriptEngine] [ WARN] [23:09:22]  MLHook.op/:/Logging.as (38, 40) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded zipped plugin 'MLHook' (version 0.5.2)
-[    ScriptEngine] [ TRAC] [23:09:22]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (279, 9) : INFO : Compiling int PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [23:09:22]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (280, 44) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [23:09:22]  MLFeedRaceData.op/:/Main.as (363, 9) : INFO : Compiling int _PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [23:09:22]  MLFeedRaceData.op/:/Main.as (364, 44) : WARN : Signed/Unsigned mismatch
-[   ScriptRuntime] [ERROR] [23:09:22] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [23:09:22] [MLFeedRaceData]  DEPRECATED: Do not use Meta::PluginCoroutine@! Use awaitable@ instead.
-[   ScriptRuntime] [ERROR] [23:09:22] [MLFeedRaceData]      #0  void Internal::ReportPluginCoroutineDeprecation() (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 26)
-[   ScriptRuntime] [ERROR] [23:09:22] [MLFeedRaceData]      #1  Meta::PluginCoroutine::PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 76)
-[   ScriptRuntime] [ERROR] [23:09:22] [MLFeedRaceData]      #2  Meta::PluginCoroutine@ PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 0)
-[   ScriptRuntime] [ERROR] [23:09:22] [MLFeedRaceData]      #3  void _unnamed_function_() (MLFeedRaceData.op/:/ListUids/ListUids_MLHook.as line 1)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded zipped plugin 'MLFeedRaceData' (version 0.6.2)
-[    ScriptEngine] [ERROR] [23:09:22]  Invalid file hash for "info.toml"
-[    ScriptEngine] [ERROR] [23:09:22]  Plugin is not suitable for the current signature mode.
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'InfiniteEmbedSize' (version 1.0)
-[    ScriptEngine] [ WARN] [23:09:22]  Couldn't find optional plugin dependency "PlayerState" while loading plugin "CheckpointCounter"
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded zipped plugin 'CheckpointCounter' (version 3.1.0)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'UsefulInformation' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'Stats' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'ClassicMenu' (version 1.1)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'Controls' (version 1.0)
-[    ScriptEngine] [ WARN] [23:09:22]  Couldn't find optional plugin dependency "BetterChat" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ WARN] [23:09:22]  Couldn't find optional plugin dependency "ItemExchange" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded zipped plugin 'ManiaExchange' (version 1.3.2)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded zipped plugin 'TMRL_GrabData' (version 0.3)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'PluginManager' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'BigDecor' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded plugin 'Discord' (version 1.0)
-[    ScriptEngine] [  LOG] [23:09:22]  Adding legacy plugins...
-[    ScriptEngine] [ TRAC] [23:09:22]  Loaded legacy plugin 'Plugin_MapAudioFix' (version 1.0)
-[    ScriptEngine] [  LOG] [23:09:22]  Plugins added!
-[        Platform] [  LOG] [23:09:22]  Initialized!
-[   ScriptRuntime] [ERROR] [23:09:23] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [23:09:23] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [23:09:23] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [23:09:23] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [23:09:23] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [  LOG] [23:09:23] [CheckpointCounter]  CheckpointCounter lib is not using PlayerState for checkpoint data
-[   ScriptRuntime] [ERROR] [23:09:23] [ManiaExchange]  DEPRECATED: Do not use Meta::PluginCoroutine@! Use awaitable@ instead.
-[   ScriptRuntime] [ERROR] [23:09:23] [ManiaExchange]      #0  void Internal::ReportPluginCoroutineDeprecation() (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 26)
-[   ScriptRuntime] [ERROR] [23:09:23] [ManiaExchange]      #1  Meta::PluginCoroutine::PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 76)
-[   ScriptRuntime] [ERROR] [23:09:23] [ManiaExchange]      #2  Meta::PluginCoroutine@ PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 0)
-[   ScriptRuntime] [ERROR] [23:09:23] [ManiaExchange]      #3  void Main() (ManiaExchange.op/:/src/Main.as line 242)
-[   ScriptRuntime] [  LOG] [23:09:23] [TMRL_GrabData]  191: Created server socket
-[   ScriptRuntime] [  LOG] [23:09:23] [TMRL_GrabData]  191: Server socket ready
-[   ScriptRuntime] [ TRAC] [23:09:23] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [23:09:23] [Discord]  Initializing Discord...
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Pair
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Clear
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_IsReqActive
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_SliceInfo
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_OrigMapIx
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_UidsResp
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerCP
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerLeft
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceTimes
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerInfo
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_COTDQualiInfo
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_LapsNb
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_Warmup
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceProgression
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_PlayerStatus
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_TeamsFeed_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: TMGame_Record_NewRecord
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData
-[   ScriptRuntime] [ TRAC] [23:09:23] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData_Removed
-[   ScriptRuntime] [ WARN] [23:09:23] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [23:09:23] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [23:09:24] [ManiaExchange]  [INFO] 67 tags loaded
-[   ScriptRuntime] [  LOG] [23:09:25] [ManiaExchange]  [INFO] 12 vehicles loaded
-[   ScriptRuntime] [  LOG] [23:09:25] [Discord]  Discord is ready: gregonthego (ID 591029649195270149)
-[   ScriptRuntime] [  LOG] [23:09:25] [ManiaExchange]  [INFO] 33 map sorting orders loaded
-[    ScriptEngine] [  LOG] [23:09:26]  Stopping script engine
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'Plugin_MapAudioFix'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'Discord'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'BigDecor'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'PluginManager'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'TMRL_GrabData'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'ManiaExchange'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'Controls'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'ClassicMenu'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'Stats'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'UsefulInformation'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'CheckpointCounter'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'InfiniteEmbedSize'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'MLFeedRaceData'
-[   ScriptRuntime] [ TRAC] [23:09:26] [MLFeedRaceData]  _Unload, unloading hooks and removing injected ML
-[   ScriptRuntime] [ TRAC] [23:09:26] [MLFeedRaceData]  UnregisteredMLHook objects (6) for types: MLHook_Event_ListUids_SliceInfo, MLHook_Event_ListUids_Pair, MLHook_Event_ListUids_Clear, MLHook_Event_ListUids_OrigMapIx, MLHook_Event_ListUids_IsReqActive, MLHook_Event_ListUids_UidsResp
-[   ScriptRuntime] [ TRAC] [23:09:26] [MLFeedRaceData]  UnregisteredMLHook objects (9) for types: MLHook_Event_RaceStats_PlayerCP, MLHook_Event_RaceStats_PlayerLeft, MLHook_Event_RaceStats_PlayerRaceTimes, MLHook_Event_RaceStats_PlayerInfo, MLHook_Event_RaceStats_MatchKeyPair, MLHook_Event_RaceStats_COTDQualiInfo, MLHook_Event_RaceStats_LapsNb, MLHook_Event_RaceStats_Warmup, MLHook_Event_RaceStats_PlayerRaceProgression
-[   ScriptRuntime] [ TRAC] [23:09:26] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_MLFeedKOs_PlayerStatus, MLHook_Event_MLFeedKOs_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [23:09:26] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: MLHook_Event_TeamsFeed_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [23:09:26] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: TMGame_Record_NewRecord
-[   ScriptRuntime] [ TRAC] [23:09:26] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_GhostData, MLHook_Event_GhostData_Removed
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'MLHook'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'Finetuner'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'TMRL_SaveGhost'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'NadeoServices'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'Dashboard'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'VehicleState'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'EditorDeveloper'
-[    ScriptEngine] [ TRAC] [23:09:26]  Unloading plugin 'Camera'
-[    ScriptEngine] [  LOG] [23:09:26]  Releasing script context
-[    ScriptEngine] [  LOG] [23:09:26]  Adding plugins...
-[    ScriptEngine] [ TRAC] [23:09:26]  Loaded plugin 'Camera' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:26]  Loaded plugin 'EditorDeveloper' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:26]  Loaded plugin 'VehicleState' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:26]  Loaded zipped plugin 'Dashboard' (version 1.9.7)
-[    ScriptEngine] [ TRAC] [23:09:26]  Loaded plugin 'NadeoServices' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:26]  Loaded zipped plugin 'TMRL_SaveGhost' (version 0.2)
-[    ScriptEngine] [ TRAC] [23:09:26]  Loaded plugin 'Finetuner' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:26]  MLHook.op/:/Logging.as (29, 1) : INFO : Compiling void RenderLogsWindow()
-[    ScriptEngine] [ WARN] [23:09:26]  MLHook.op/:/Logging.as (38, 40) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded zipped plugin 'MLHook' (version 0.5.2)
-[    ScriptEngine] [ TRAC] [23:09:27]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (279, 9) : INFO : Compiling int PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [23:09:27]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (280, 44) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [23:09:27]  MLFeedRaceData.op/:/Main.as (363, 9) : INFO : Compiling int _PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [23:09:27]  MLFeedRaceData.op/:/Main.as (364, 44) : WARN : Signed/Unsigned mismatch
-[   ScriptRuntime] [ERROR] [23:09:27] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [23:09:27] [MLFeedRaceData]  DEPRECATED: Do not use Meta::PluginCoroutine@! Use awaitable@ instead.
-[   ScriptRuntime] [ERROR] [23:09:27] [MLFeedRaceData]      #0  void Internal::ReportPluginCoroutineDeprecation() (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 26)
-[   ScriptRuntime] [ERROR] [23:09:27] [MLFeedRaceData]      #1  Meta::PluginCoroutine::PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 76)
-[   ScriptRuntime] [ERROR] [23:09:27] [MLFeedRaceData]      #2  Meta::PluginCoroutine@ PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 0)
-[   ScriptRuntime] [ERROR] [23:09:27] [MLFeedRaceData]      #3  void _unnamed_function_() (MLFeedRaceData.op/:/ListUids/ListUids_MLHook.as line 1)
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded zipped plugin 'MLFeedRaceData' (version 0.6.2)
-[    ScriptEngine] [ WARN] [23:09:27]  Ignoring exported dependency "MLHook" from "MLFeedRaceData" because it is already a dependency of "GergBot"
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded plugin 'GergBot' (version 0.1.0)
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded plugin 'InfiniteEmbedSize' (version 1.0)
-[    ScriptEngine] [ WARN] [23:09:27]  Couldn't find optional plugin dependency "PlayerState" while loading plugin "CheckpointCounter"
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded zipped plugin 'CheckpointCounter' (version 3.1.0)
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded plugin 'UsefulInformation' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded plugin 'Stats' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded plugin 'ClassicMenu' (version 1.1)
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded plugin 'Controls' (version 1.0)
-[    ScriptEngine] [ WARN] [23:09:27]  Couldn't find optional plugin dependency "BetterChat" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ WARN] [23:09:27]  Couldn't find optional plugin dependency "ItemExchange" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded zipped plugin 'ManiaExchange' (version 1.3.2)
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded zipped plugin 'TMRL_GrabData' (version 0.3)
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded plugin 'PluginManager' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded plugin 'BigDecor' (version 1.0)
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded plugin 'Discord' (version 1.0)
-[    ScriptEngine] [  LOG] [23:09:27]  Adding legacy plugins...
-[    ScriptEngine] [ TRAC] [23:09:27]  Loaded legacy plugin 'Plugin_MapAudioFix' (version 1.0)
-[    ScriptEngine] [  LOG] [23:09:27]  Plugins added!
-[   ScriptRuntime] [ERROR] [23:09:27] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [23:09:27] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [23:09:27] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [23:09:27] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [23:09:27] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [  LOG] [23:09:27] [GergBot]  GregBot loaded successfully!
-[   ScriptRuntime] [  LOG] [23:09:27] [CheckpointCounter]  CheckpointCounter lib is not using PlayerState for checkpoint data
-[   ScriptRuntime] [ERROR] [23:09:27] [ManiaExchange]  DEPRECATED: Do not use Meta::PluginCoroutine@! Use awaitable@ instead.
-[   ScriptRuntime] [ERROR] [23:09:27] [ManiaExchange]      #0  void Internal::ReportPluginCoroutineDeprecation() (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 26)
-[   ScriptRuntime] [ERROR] [23:09:27] [ManiaExchange]      #1  Meta::PluginCoroutine::PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 76)
-[   ScriptRuntime] [ERROR] [23:09:27] [ManiaExchange]      #2  Meta::PluginCoroutine@ PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 0)
-[   ScriptRuntime] [ERROR] [23:09:27] [ManiaExchange]      #3  void Main() (ManiaExchange.op/:/src/Main.as line 242)
-[   ScriptRuntime] [  LOG] [23:09:27] [TMRL_GrabData]  4454: Created server socket
-[   ScriptRuntime] [  LOG] [23:09:27] [TMRL_GrabData]  4454: Server socket ready
-[   ScriptRuntime] [ TRAC] [23:09:27] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [23:09:27] [Discord]  Initializing Discord...
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Pair
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Clear
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_IsReqActive
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_SliceInfo
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_OrigMapIx
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_UidsResp
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerCP
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerLeft
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceTimes
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerInfo
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_COTDQualiInfo
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_LapsNb
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_Warmup
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceProgression
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_PlayerStatus
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_TeamsFeed_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: TMGame_Record_NewRecord
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData
-[   ScriptRuntime] [ TRAC] [23:09:27] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData_Removed
-[   ScriptRuntime] [ WARN] [23:09:27] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [23:09:27] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [23:09:28] [ManiaExchange]  [INFO] 67 tags loaded
-[   ScriptRuntime] [  LOG] [23:09:28] [ManiaExchange]  [INFO] 12 vehicles loaded
-[   ScriptRuntime] [  LOG] [23:09:28] [Discord]  Discord is ready: gregonthego (ID 591029649195270149)
-[   ScriptRuntime] [  LOG] [23:09:29] [ManiaExchange]  [INFO] 33 map sorting orders loaded
-[   ScriptRuntime] [  LOG] [23:09:29] [ManiaExchange]  [INFO] 15 mappack sorting orders loaded
-[   ScriptRuntime] [  LOG] [23:09:30] [ManiaExchange]  [INFO] 13 map types loaded
-[   ScriptRuntime] [  LOG] [23:09:31] [ManiaExchange]  [INFO] 18 seasons loaded
-[   ScriptRuntime] [  LOG] [23:09:31] [ManiaExchange]  [INFO] 0 maps loaded from Play Later list.
-[   ScriptRuntime] [ TRAC] [23:09:31] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [23:09:31] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[   ScriptRuntime] [  LOG] [23:09:31] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [23:09:37] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_PlayMap_Local
-[   ScriptRuntime] [ TRAC] [23:09:39] [MLHook]  MLHook preparing 8 outbound messages to ML
-[   ScriptRuntime] [  LOG] [23:12:47] [GergBot]  Started sending car state.
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Script exception: Null pointer access
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]    C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as (line 64, column 5)
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]      #0  void Update(float dt) (C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as line 64)
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Last script exception repeated 1 times
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Last script exception repeated 2 times
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Last script exception repeated 3 times
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Last script exception repeated 4 times
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Last script exception repeated 5 times
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Last script exception repeated 6 times
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Last script exception repeated 7 times
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Last script exception repeated 8 times
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Last script exception repeated 9 times
-[   ScriptRuntime] [ERROR] [23:18:33] [GergBot]  Last script exception repeated 10 times
-[   ScriptRuntime] [ TRAC] [23:19:02] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_PlayMap_Local to 
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:03] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:04] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:05] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:06] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:07] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:08] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:09] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:10] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:11] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [ TRAC] [23:19:12] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_Campaign_Local
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:12] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:13] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:19:13] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Script exception: Index out of bounds
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]    C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as (line 51, column 5)
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]      #0  void Update(float dt) (C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as line 51)
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 1 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 2 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 3 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 4 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 5 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 6 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 7 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 8 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 9 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 10 times
-[   ScriptRuntime] [ TRAC] [23:19:14] [MLHook]  MLHook preparing 8 outbound messages to ML
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Script exception: Null pointer access
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]    C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as (line 64, column 5)
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]      #0  void Update(float dt) (C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as line 64)
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 1 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 2 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 3 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 4 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 5 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 6 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 7 times
-[   ScriptRuntime] [ERROR] [23:19:14] [GergBot]  Last script exception repeated 8 times
-[   ScriptRuntime] [ERROR] [23:19:15] [GergBot]  Last script exception repeated 9 times
-[   ScriptRuntime] [ERROR] [23:19:15] [GergBot]  Last script exception repeated 10 times
-[   ScriptRuntime] [  LOG] [23:20:53] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [ TRAC] [23:20:53] [MLHook]  MLHook preparing 2 outbound messages to ML
-[   ScriptRuntime] [  LOG] [23:20:53] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:53] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:53] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:53] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [ TRAC] [23:20:53] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_Campaign_Local to 
-[   ScriptRuntime] [  LOG] [23:20:53] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:53] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:53] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:54] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:55] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:56] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:57] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:58] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:20:59] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:00] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:01] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [ TRAC] [23:21:02] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_PlayMap_Local
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [  LOG] [23:21:02] [GergBot]  Current playground is not a valid arena client.
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Script exception: Index out of bounds
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]    C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as (line 51, column 5)
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]      #0  void Update(float dt) (C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as line 51)
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Last script exception repeated 1 times
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Last script exception repeated 2 times
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Last script exception repeated 3 times
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Last script exception repeated 4 times
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Last script exception repeated 5 times
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Last script exception repeated 6 times
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Last script exception repeated 7 times
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Last script exception repeated 8 times
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Last script exception repeated 9 times
-[   ScriptRuntime] [ERROR] [23:21:03] [GergBot]  Last script exception repeated 10 times
-[   ScriptRuntime] [ TRAC] [23:21:03] [MLHook]  MLHook preparing 6 outbound messages to ML
-[   ScriptRuntime] [ERROR] [23:21:07] [GergBot]  Script exception: Null pointer access
-[   ScriptRuntime] [ERROR] [23:21:07] [GergBot]    C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as (line 64, column 5)
-[   ScriptRuntime] [ERROR] [23:21:07] [GergBot]      #0  void Update(float dt) (C:/Users/panda/OpenplanetNext/Plugins/GergBot/main.as line 64)
-[   ScriptRuntime] [ERROR] [23:21:07] [GergBot]  Last script exception repeated 1 times
-[   ScriptRuntime] [  LOG] [23:21:54] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [23:21:59] [GergBot]  Started sending car state.
-[     WebServices] [  LOG] [23:39:20]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [23:39:27] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [23:39:28] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [23:39:28] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [23:39:31] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [00:05:13] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [00:05:13] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [00:09:21]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [00:09:28] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [00:09:29] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [00:09:29] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [00:09:32] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ERROR] [00:12:56] [GergBot]  Last script exception repeated 2 times
-[   ScriptRuntime] [ERROR] [00:12:56] [GergBot]  Last script exception repeated 3 times
-[   ScriptRuntime] [ERROR] [00:12:56] [GergBot]  Last script exception repeated 4 times
-[   ScriptRuntime] [ERROR] [00:12:56] [GergBot]  Last script exception repeated 5 times
-[   ScriptRuntime] [ERROR] [00:12:56] [GergBot]  Last script exception repeated 6 times
-[   ScriptRuntime] [ERROR] [00:12:56] [GergBot]  Last script exception repeated 7 times
-[   ScriptRuntime] [ERROR] [00:12:56] [GergBot]  Last script exception repeated 8 times
-[   ScriptRuntime] [ERROR] [00:12:56] [GergBot]  Last script exception repeated 9 times
-[   ScriptRuntime] [ERROR] [00:12:56] [GergBot]  Last script exception repeated 10 times
-[     WebServices] [  LOG] [00:39:21]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [00:39:29] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [00:39:29] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [00:39:29] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [00:39:32] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [01:00:20] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [01:00:20] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [01:09:22]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [01:09:29] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [01:09:30] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [01:09:30] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [01:09:33] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [01:39:22]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [01:39:30] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [01:39:31] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [01:39:31] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [01:39:33] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [01:55:44] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ WARN] [01:56:09] [NadeoServices]  Token authentication error 10035! Retrying in 1 seconds.
-[   ScriptRuntime] [ TRAC] [01:56:10] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [01:56:11] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [02:09:22]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [02:09:31] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [02:09:31] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [02:09:31] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [02:09:33] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [02:39:23]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [02:39:31] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [02:39:31] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [02:39:31] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [02:39:34] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [02:51:56] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [02:51:56] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [03:09:23]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [03:09:31] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [03:09:32] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [03:09:32] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [03:09:34] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [03:39:24]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [03:39:32] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [03:39:32] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [03:39:32] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [03:39:35] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [03:47:09] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [03:47:10] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [04:09:24]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [04:09:32] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [04:09:33] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ WARN] [04:09:33] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [  LOG] [04:09:35] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [04:39:25]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [04:39:33] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [04:39:33] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [04:39:33] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [04:39:36] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [04:42:29] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [04:42:29] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [05:09:25]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [05:09:33] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [05:09:34] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [05:09:34] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [05:09:36] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [05:38:28] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [05:38:29] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [05:39:25]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [05:39:34] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [05:39:35] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [05:39:35] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [05:39:37] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [06:09:26]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [06:09:35] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [06:09:35] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [06:09:35] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [06:09:37] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [06:34:21] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [06:34:22] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [06:39:26]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [06:39:35] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [06:39:36] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [06:39:36] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [06:39:38] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [07:09:26]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [07:09:36] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [07:09:36] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [07:09:36] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [07:09:38] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [07:30:03] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [07:30:04] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [07:39:27]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [07:39:36] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [07:39:37] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [07:39:37] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [07:39:38] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [08:09:27]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [08:09:37] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [08:09:38] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [08:09:38] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [08:09:39] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [08:25:58] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [08:25:58] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [08:39:28]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [08:39:38] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [08:39:38] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [08:39:38] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [08:39:39] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [09:09:28]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [09:09:38] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [09:09:39] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [09:09:39] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [09:09:40] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [09:21:00] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [09:21:01] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [09:39:29]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [09:39:39] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [09:39:40] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [09:39:40] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [09:39:40] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [10:09:29]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [10:09:40] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [10:09:40] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [10:09:40] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [10:09:41] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [10:16:38] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [10:16:39] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [10:39:30]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [10:39:40] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [10:39:41] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [10:39:41] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [10:39:41] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[     WebServices] [  LOG] [11:09:30]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [11:09:41] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [11:09:41] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [11:09:41] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [11:09:41] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [11:11:59] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [11:12:00] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [11:39:30]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [11:39:41] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [11:39:42] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [11:39:42] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [11:39:42] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [12:07:14] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [12:07:15] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [12:09:31]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [12:09:42] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [12:09:42] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ WARN] [12:09:42] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [12:09:42] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[     WebServices] [  LOG] [12:39:32]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [12:39:42] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ WARN] [12:39:43] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [12:39:43] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [  LOG] [12:39:43] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [13:02:18] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [13:02:19] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [13:09:32]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [13:09:43] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [13:09:43] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ WARN] [13:09:43] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [13:09:43] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[     WebServices] [  LOG] [13:39:32]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [13:39:43] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [13:39:44] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ WARN] [13:39:44] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [13:39:44] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ TRAC] [13:57:50] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [13:57:51] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [14:09:33]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [14:09:44] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [14:09:44] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ WARN] [14:09:45] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [14:09:45] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[     WebServices] [  LOG] [14:39:33]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [14:39:45] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [14:39:45] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ WARN] [14:39:45] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [14:39:45] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ TRAC] [14:53:14] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [14:53:15] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [15:09:34]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [15:09:45] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [15:09:45] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ WARN] [15:09:45] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [15:09:45] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[     WebServices] [  LOG] [15:39:34]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [15:39:45] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [15:39:46] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ WARN] [15:39:46] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [15:39:46] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[   ScriptRuntime] [ TRAC] [15:49:07] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [15:49:08] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[     WebServices] [  LOG] [16:09:34]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [16:09:46] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [16:09:46] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ WARN] [16:09:46] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [16:09:46] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[     WebServices] [  LOG] [16:39:35]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [16:39:46] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [16:39:46] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ WARN] [16:39:47] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
-[   ScriptRuntime] [ WARN] [16:39:47] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
-[        Platform] [  LOG] [16:44:16]  Game is cleanly shutting down
-[        Platform] [  LOG] [16:44:16]  Saving settings
-[           Audio] [  LOG] [16:44:16]  Shutting down audio engine
-[    ScriptEngine] [  LOG] [16:44:16]  Stopping script engine
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'Plugin_MapAudioFix'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'Discord'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'BigDecor'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'PluginManager'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'TMRL_GrabData'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'ManiaExchange'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'Controls'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'ClassicMenu'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'Stats'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'UsefulInformation'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'CheckpointCounter'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'InfiniteEmbedSize'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'GergBot'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'MLFeedRaceData'
-[   ScriptRuntime] [ TRAC] [16:44:16] [MLFeedRaceData]  _Unload, unloading hooks and removing injected ML
-[   ScriptRuntime] [ TRAC] [16:44:16] [MLFeedRaceData]  UnregisteredMLHook objects (6) for types: MLHook_Event_ListUids_SliceInfo, MLHook_Event_ListUids_Pair, MLHook_Event_ListUids_Clear, MLHook_Event_ListUids_OrigMapIx, MLHook_Event_ListUids_IsReqActive, MLHook_Event_ListUids_UidsResp
-[   ScriptRuntime] [ TRAC] [16:44:16] [MLFeedRaceData]  UnregisteredMLHook objects (9) for types: MLHook_Event_RaceStats_PlayerCP, MLHook_Event_RaceStats_PlayerLeft, MLHook_Event_RaceStats_PlayerRaceTimes, MLHook_Event_RaceStats_PlayerInfo, MLHook_Event_RaceStats_MatchKeyPair, MLHook_Event_RaceStats_COTDQualiInfo, MLHook_Event_RaceStats_LapsNb, MLHook_Event_RaceStats_Warmup, MLHook_Event_RaceStats_PlayerRaceProgression
-[   ScriptRuntime] [ TRAC] [16:44:16] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_MLFeedKOs_PlayerStatus, MLHook_Event_MLFeedKOs_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [16:44:16] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: MLHook_Event_TeamsFeed_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [16:44:16] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: TMGame_Record_NewRecord
-[   ScriptRuntime] [ TRAC] [16:44:16] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_GhostData, MLHook_Event_GhostData_Removed
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'MLHook'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'Finetuner'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'TMRL_SaveGhost'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'NadeoServices'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'Dashboard'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'VehicleState'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'EditorDeveloper'
-[    ScriptEngine] [ TRAC] [16:44:16]  Unloading plugin 'Camera'
-[    ScriptEngine] [  LOG] [16:44:16]  Releasing script context
+[        Platform] [  LOG] [23:11:50]  Openplanet for Trackmania Next x64
+[        Platform] [ TRAC] [23:11:50]  (c) Melissa Geels 2016 - 2024
+[        Platform] [ TRAC] [23:11:50]  https://openplanet.dev/
+[        Platform] [  LOG] [23:11:50]  Openplanet starting on 2025-07-14
+[        Platform] [  LOG] [23:11:50]  Engine: 2025-07-04 07:15:08
+[        Platform] [  LOG] [23:11:50]  Openplanet: 1.27.12 (next, Public, 2025-07-01)
+[        Platform] [ TRAC] [23:11:50]  Identifier: 0x000000006867C5CC
+[        Platform] [ TRAC] [23:11:50]  Process ID: 33844
+[        Platform] [  LOG] [23:11:50]  Setting up hook callbacks...
+[        Platform] [  LOG] [23:11:51]  Semi entry initialization...
+[        Platform] [  LOG] [23:11:51]  Update branch: default
+[        Platform] [  LOG] [23:11:51]  Requesting app config with timeout 5000...
+[        Platform] [  LOG] [23:11:52]  Finding game window..
+[        Platform] [ TRAC] [23:11:52]  Window handle: 00030e0c ("Trackmania")
+[        Platform] [  LOG] [23:11:52]  Attempting automatic detection of game version data for game version 0x000000006867C5CC
+[        Platform] [  LOG] [23:11:52]  Autodetecting game version data:
+[        Platform] [  LOG] [23:11:52]  Did not find update to install.
+[        Platform] [  LOG] [23:11:54]  Initializing meta...
+[     WebServices] [  LOG] [23:11:59]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
+[        Platform] [  LOG] [23:12:00]  Loop entry initialization...
+[        Platform] [  LOG] [23:12:00]  Hooking WndProc...
+[        Platform] [ TRAC] [23:12:00]  Initializing sockets...
+[        Platform] [ TRAC] [23:12:00]  Adding user library path...
+[        Platform] [  LOG] [23:12:00]  Initializing audio...
+[           Audio] [  LOG] [23:12:00]  Setting playback device to "Speakers (Realtek High Definition Audio)"
+[        Platform] [  LOG] [23:12:00]  Initializing scripting...
+[    ScriptEngine] [  LOG] [23:12:00]  Registered 2647 classes
+[        Platform] [ TRAC] [23:12:01]  Writing type definitions to file: "C:\Users\panda/OpenplanetNext/Openplanet.h"
+[        Platform] [  LOG] [23:12:01]  Writing json to file: "C:\Users\panda/OpenplanetNext/OpenplanetNext.json"
+[        Platform] [  LOG] [23:12:01]  Dumping Openplanet documentation to C:\Users\panda/OpenplanetNext/OpenplanetCore.json
+[        Platform] [  LOG] [23:12:01]  Initializing overlay...
+[         Overlay] [  LOG] [23:12:01]  Loading user style: C:\Program Files\Epic Games\TrackmaniaNext\Openplanet/DefaultStyle.toml
+[        Platform] [  LOG] [23:12:01]  Beginning script engine...
+[    ScriptEngine] [  LOG] [23:12:01]  Adding plugins...
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded plugin 'Camera' (version 1.0)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded plugin 'EditorDeveloper' (version 1.0)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded plugin 'VehicleState' (version 1.0)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded zipped plugin 'Dashboard' (version 1.9.7)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded plugin 'NadeoServices' (version 1.0)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded zipped plugin 'TMRL_SaveGhost' (version 0.2)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded plugin 'Finetuner' (version 1.0)
+[    ScriptEngine] [ TRAC] [23:12:01]  MLHook.op/:/Logging.as (29, 1) : INFO : Compiling void RenderLogsWindow()
+[    ScriptEngine] [ WARN] [23:12:01]  MLHook.op/:/Logging.as (38, 40) : WARN : Signed/Unsigned mismatch
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded zipped plugin 'MLHook' (version 0.5.2)
+[    ScriptEngine] [ TRAC] [23:12:01]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (279, 9) : INFO : Compiling int PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
+[    ScriptEngine] [ WARN] [23:12:01]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (280, 44) : WARN : Signed/Unsigned mismatch
+[    ScriptEngine] [ TRAC] [23:12:01]  MLFeedRaceData.op/:/Main.as (363, 9) : INFO : Compiling int _PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
+[    ScriptEngine] [ WARN] [23:12:01]  MLFeedRaceData.op/:/Main.as (364, 44) : WARN : Signed/Unsigned mismatch
+[   ScriptRuntime] [ERROR] [23:12:01] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [23:12:01] [MLFeedRaceData]  DEPRECATED: Do not use Meta::PluginCoroutine@! Use awaitable@ instead.
+[   ScriptRuntime] [ERROR] [23:12:01] [MLFeedRaceData]      #0  void Internal::ReportPluginCoroutineDeprecation() (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 26)
+[   ScriptRuntime] [ERROR] [23:12:01] [MLFeedRaceData]      #1  Meta::PluginCoroutine::PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 76)
+[   ScriptRuntime] [ERROR] [23:12:01] [MLFeedRaceData]      #2  Meta::PluginCoroutine@ PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 0)
+[   ScriptRuntime] [ERROR] [23:12:01] [MLFeedRaceData]      #3  void _unnamed_function_() (MLFeedRaceData.op/:/ListUids/ListUids_MLHook.as line 1)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded zipped plugin 'MLFeedRaceData' (version 0.6.2)
+[    ScriptEngine] [ERROR] [23:12:01]  Invalid file hash for "info.toml"
+[    ScriptEngine] [ERROR] [23:12:01]  Plugin is not suitable for the current signature mode.
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded plugin 'InfiniteEmbedSize' (version 1.0)
+[    ScriptEngine] [ WARN] [23:12:01]  Couldn't find optional plugin dependency "PlayerState" while loading plugin "CheckpointCounter"
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded zipped plugin 'CheckpointCounter' (version 3.1.0)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded plugin 'UsefulInformation' (version 1.0)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded plugin 'Stats' (version 1.0)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded plugin 'ClassicMenu' (version 1.1)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded plugin 'Controls' (version 1.0)
+[    ScriptEngine] [ WARN] [23:12:01]  Couldn't find optional plugin dependency "BetterChat" while loading plugin "ManiaExchange"
+[    ScriptEngine] [ WARN] [23:12:01]  Couldn't find optional plugin dependency "ItemExchange" while loading plugin "ManiaExchange"
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded zipped plugin 'ManiaExchange' (version 1.3.2)
+[    ScriptEngine] [ TRAC] [23:12:01]  Loaded zipped plugin 'TMRL_GrabData' (version 0.3)
+[    ScriptEngine] [ TRAC] [23:12:02]  Loaded plugin 'PluginManager' (version 1.0)
+[    ScriptEngine] [ TRAC] [23:12:02]  Loaded plugin 'BigDecor' (version 1.0)
+[    ScriptEngine] [ TRAC] [23:12:02]  Loaded plugin 'Discord' (version 1.0)
+[    ScriptEngine] [  LOG] [23:12:02]  Adding legacy plugins...
+[    ScriptEngine] [ TRAC] [23:12:02]  Loaded legacy plugin 'Plugin_MapAudioFix' (version 1.0)
+[    ScriptEngine] [  LOG] [23:12:02]  Plugins added!
+[        Platform] [  LOG] [23:12:02]  Initialized!
+[   ScriptRuntime] [ERROR] [23:12:02] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [23:12:02] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [23:12:02] [MLHook]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [23:12:02] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [23:12:02] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [  LOG] [23:12:02] [CheckpointCounter]  CheckpointCounter lib is not using PlayerState for checkpoint data
+[   ScriptRuntime] [ERROR] [23:12:02] [ManiaExchange]  DEPRECATED: Do not use Meta::PluginCoroutine@! Use awaitable@ instead.
+[   ScriptRuntime] [ERROR] [23:12:02] [ManiaExchange]      #0  void Internal::ReportPluginCoroutineDeprecation() (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 26)
+[   ScriptRuntime] [ERROR] [23:12:02] [ManiaExchange]      #1  Meta::PluginCoroutine::PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 76)
+[   ScriptRuntime] [ERROR] [23:12:02] [ManiaExchange]      #2  Meta::PluginCoroutine@ PluginCoroutine(awaitable@ awaitable) (C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/Scripts/Compatibility.as line 0)
+[   ScriptRuntime] [ERROR] [23:12:02] [ManiaExchange]      #3  void Main() (ManiaExchange.op/:/src/Main.as line 242)
+[   ScriptRuntime] [  LOG] [23:12:02] [TMRL_GrabData]  335: Created server socket
+[   ScriptRuntime] [  LOG] [23:12:02] [TMRL_GrabData]  335: Server socket ready
+[   ScriptRuntime] [ TRAC] [23:12:02] [PluginManager]  Checking for plugin updates..
+[   ScriptRuntime] [  LOG] [23:12:02] [Discord]  Initializing Discord...
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Pair
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Clear
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_IsReqActive
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_SliceInfo
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_OrigMapIx
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_UidsResp
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerCP
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerLeft
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceTimes
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerInfo
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_COTDQualiInfo
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_LapsNb
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_Warmup
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceProgression
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_PlayerStatus
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_TeamsFeed_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: TMGame_Record_NewRecord
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData
+[   ScriptRuntime] [ TRAC] [23:12:02] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData_Removed
+[   ScriptRuntime] [ WARN] [23:12:02] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
+[   ScriptRuntime] [ WARN] [23:12:02] [PluginManager]  New plugin update available for MLFeed: Race Data: 0.6.2 -> 0.6.3
+[   ScriptRuntime] [ WARN] [23:12:02] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
+[   ScriptRuntime] [  LOG] [23:12:03] [ManiaExchange]  [INFO] 67 tags loaded
+[   ScriptRuntime] [  LOG] [23:12:05] [ManiaExchange]  [INFO] 12 vehicles loaded
+[   ScriptRuntime] [  LOG] [23:12:05] [Discord]  Discord is ready: gregonthego (ID 591029649195270149)
+[   ScriptRuntime] [  LOG] [23:12:05] [ManiaExchange]  [INFO] 33 map sorting orders loaded
+[   ScriptRuntime] [  LOG] [23:12:06] [ManiaExchange]  [INFO] 15 mappack sorting orders loaded
+[   ScriptRuntime] [  LOG] [23:12:06] [ManiaExchange]  [INFO] 13 map types loaded
+[   ScriptRuntime] [  LOG] [23:12:07] [ManiaExchange]  [INFO] 18 seasons loaded
+[   ScriptRuntime] [  LOG] [23:12:07] [ManiaExchange]  [INFO] 0 maps loaded from Play Later list.
+[   ScriptRuntime] [ TRAC] [23:12:07] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
+[   ScriptRuntime] [ TRAC] [23:12:07] [NadeoServices]  Got token for audience "NadeoLiveServices"
+[   ScriptRuntime] [  LOG] [23:12:07] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
+[   ScriptRuntime] [ TRAC] [23:13:00] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_Campaign_Local
+[   ScriptRuntime] [ TRAC] [23:13:05] [MLHook]  MLHook preparing 8 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [23:16:56] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_Campaign_Local to 
+[   ScriptRuntime] [ TRAC] [23:17:02] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_Campaign_Local
+[   ScriptRuntime] [ TRAC] [23:17:05] [MLHook]  MLHook preparing 8 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [23:20:12] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [23:20:12] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_Campaign_Local to 
+[   ScriptRuntime] [ TRAC] [23:20:15] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_Campaign_Local
+[   ScriptRuntime] [ TRAC] [23:20:18] [MLHook]  MLHook preparing 6 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [23:25:51] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_Campaign_Local to 
+[   ScriptRuntime] [ TRAC] [23:25:54] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_Campaign_Local
+[   ScriptRuntime] [ TRAC] [23:25:58] [MLHook]  MLHook preparing 8 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [23:30:21] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_Campaign_Local to 
+[   ScriptRuntime] [ TRAC] [23:30:32] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_Campaign_Local
+[   ScriptRuntime] [ TRAC] [23:30:34] [MLHook]  MLHook preparing 8 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [23:38:08] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [23:38:08] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_Campaign_Local to 
+[   ScriptRuntime] [ TRAC] [23:38:14] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_Campaign_Local
+[   ScriptRuntime] [ TRAC] [23:38:16] [MLHook]  MLHook preparing 6 outbound messages to ML
+[     WebServices] [  LOG] [23:41:59]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
+[   ScriptRuntime] [ TRAC] [23:42:02] [PluginManager]  Checking for plugin updates..
+[   ScriptRuntime] [ WARN] [23:42:03] [PluginManager]  New plugin update available for ManiaExchange: 1.3.2 -> 1.3.3
+[   ScriptRuntime] [ WARN] [23:42:03] [PluginManager]  New plugin update available for MLFeed: Race Data: 0.6.2 -> 0.6.3
+[   ScriptRuntime] [ WARN] [23:42:03] [PluginManager]  New plugin update available for MLHook & Event Inspector: 0.5.2 -> 0.5.4
+[   ScriptRuntime] [  LOG] [23:42:08] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
+[   ScriptRuntime] [ TRAC] [23:42:41] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [23:42:41] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_Campaign_Local to 
+[   ScriptRuntime] [ TRAC] [23:42:46] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_Campaign_Local
+[   ScriptRuntime] [ TRAC] [23:42:49] [MLHook]  MLHook preparing 6 outbound messages to ML
+[        Platform] [  LOG] [23:42:55]  Game is cleanly shutting down
+[        Platform] [  LOG] [23:42:55]  Saving settings
+[           Audio] [  LOG] [23:42:55]  Shutting down audio engine
+[    ScriptEngine] [  LOG] [23:42:55]  Stopping script engine
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'Plugin_MapAudioFix'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'Discord'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'BigDecor'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'PluginManager'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'TMRL_GrabData'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'ManiaExchange'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'Controls'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'ClassicMenu'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'Stats'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'UsefulInformation'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'CheckpointCounter'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'InfiniteEmbedSize'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'MLFeedRaceData'
+[   ScriptRuntime] [ TRAC] [23:42:55] [MLFeedRaceData]  _Unload, unloading hooks and removing injected ML
+[   ScriptRuntime] [ TRAC] [23:42:55] [MLFeedRaceData]  UnregisteredMLHook objects (6) for types: MLHook_Event_ListUids_SliceInfo, MLHook_Event_ListUids_Pair, MLHook_Event_ListUids_Clear, MLHook_Event_ListUids_OrigMapIx, MLHook_Event_ListUids_IsReqActive, MLHook_Event_ListUids_UidsResp
+[   ScriptRuntime] [ TRAC] [23:42:55] [MLFeedRaceData]  UnregisteredMLHook objects (9) for types: MLHook_Event_RaceStats_PlayerCP, MLHook_Event_RaceStats_PlayerLeft, MLHook_Event_RaceStats_PlayerRaceTimes, MLHook_Event_RaceStats_PlayerInfo, MLHook_Event_RaceStats_MatchKeyPair, MLHook_Event_RaceStats_COTDQualiInfo, MLHook_Event_RaceStats_LapsNb, MLHook_Event_RaceStats_Warmup, MLHook_Event_RaceStats_PlayerRaceProgression
+[   ScriptRuntime] [ TRAC] [23:42:55] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_MLFeedKOs_PlayerStatus, MLHook_Event_MLFeedKOs_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [23:42:55] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: MLHook_Event_TeamsFeed_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [23:42:55] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: TMGame_Record_NewRecord
+[   ScriptRuntime] [ TRAC] [23:42:55] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_GhostData, MLHook_Event_GhostData_Removed
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'MLHook'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'Finetuner'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'TMRL_SaveGhost'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'NadeoServices'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'Dashboard'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'VehicleState'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'EditorDeveloper'
+[    ScriptEngine] [ TRAC] [23:42:55]  Unloading plugin 'Camera'
+[    ScriptEngine] [  LOG] [23:42:55]  Releasing script context
