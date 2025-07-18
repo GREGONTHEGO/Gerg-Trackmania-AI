@@ -8,19 +8,19 @@ Additional insights, challenges faced, and example videos can be found in gerg-t
 
 The Primary files are listed below, ordered from most recent to earliest in developement:
 
-1. **lidar-gauss.py**
-The most recent model in the series is built using PyTorch and a Gaussian policy. It outputs three continuous values representing movement decisions and leverages simulated LIDAR and a couple points of telemetry data as inputs. Compared to its predecessor (lidar.py), aside from changing the policy, this model features a larger architecture and updated reward functions.
+1. **[LIDAR with Gaussian Policy](/EXPERIMENTS.md#lidarGauss.py) [(lidarGauss.py)](/Scripts/Python/lidarGauss.py)**
+The most recent model in the series is built using PyTorch and a Gaussian policy. The model in this file takes simulated LIDAR data along with five telemetry inputs and produces three values representing movement decisions. Compared to its predecessor (lidar.py), aside from changing the policy, this model features a larger architecture and updated reward functions.
 
-2. **lidar.py**
-A PyTorch model that uses discrete softmax outputs for the two sets of three continuous values represented by, movement and turning. This served as a rough model for the Gaussian version.
+2. **[LIDAR with Softmax Policy](/EXPERIMENTS.md#lidar.py) [(lidar.py)](/Scripts/Python/lidar.py)**
+A PyTorch model that uses discrete softmax outputs for the two sets of three values represented by, movement and turning. This served as a rough model for the Gaussian version.
 
-3. **cnnTorch.py**
+3. **[CNN with PyTorch](/EXPERIMENTS.md#cnnTorch.py) [(cnnTorch.py)](/Scripts/Python/cnnTorch.py)**
 A PyTorch convolutional nueral network that uses combines grayscale screenshots and telemetry data to predict actions.
 
-4. **cnn.py**
+4. **[CNN with TensorFlow](/EXPERIMENTS.md#cnn.py) [(cnn.py)](/Scripts/Python/cnn.py)**
 A TensorFlow model that uses a ConvLSTM2D (ConvLSTM2D not in pytorch) Although it works it would only run on the CPU because of the CUDA version not being supported by TensorFlow.
 
-5. **Game-State-Only.py**
+5. **[Basic DNN](/EXPERIMENTS.md#gameStateOnly.py) [(gameStateOnly.py)](/Scripts/Python/gameStateOnly.py)**
 A simple deep neural network built with TensorFlow that relies solely on telemetry inputs, without any visual information.
 
 ## Requirements for install
@@ -34,8 +34,6 @@ pip install -r requirements.txt
 
 ## Acknowledgement
 
-The distance estimation equations used are based on Section 13 of Laurens Neinders' bachelor's thesis: 
-https://essay.utwente.nl/96153/1/Neinders_BA_EEMCS.pdf
+The distance estimation equations used are based on [Section 13 of Laurens Neinders' bachelor's thesis](https://essay.utwente.nl/96153/1/Neinders_BA_EEMCS.pdf)
 
-Gaussian policy modeling and architectural inspiration in lidar-gauss.py were influenced by the TMRL project: 
-https://github.com/trackmania-rl/tmrl/tree/master
+Gaussian policy modeling and architectural inspiration in lidar-gauss.py were influenced by the [TMRL project](https://github.com/trackmania-rl/tmrl/tree/master)
