@@ -2,7 +2,8 @@
 
 This document roughly outlines the five major development stages of my reinforcement learning system designed to control a vehicle in Trackmania 2020. Each stages reflects iterative improvements, experiments, and lessons learned across areas including telemetry extraction, model design, reward engineering, and architectural changes.
 
-## Stage 1: Retrieving Game Data and Controlling the Vehicle
+## Game-State-Only.py
+** Stage 1: Retrieving Game Data and Controlling the Vehicle **
 
 The initial goal was to extract real-time game data from Trackmania 2020 and use that data to control the vehicle using Python. This was accomplished through Openplanet, a modding framework that enables custom plugin developement for Trackmania using AngelScript.
 To implement the plugin, I wrote an 'info.toml' and a script located in 'plugins/GergBot/'. This plugin adds a menu item in Openplanet that launches a local socket server. The socket transmits the car's current speed, position, velocity and checkpoint count on each update. However, there were two issues identified early:
@@ -15,24 +16,69 @@ On the python side, I created a function that runs two threads:
 
 During this phase, I also discovered that 'pynput' holds keys down continuously until explicitly released, which caused unwanted keypress spam when switching windows.
 
-# Stage 2: Initial Machine Learning Model Implementation
+** Stage 2: Initial Machine Learning Model Implementation **
 
 https://github.com/user-attachments/assets/5507724a-d6ce-42fa-a510-b82c61f4d2be
 
-During this phase, I restructured my python code. I created a training function, a compute reward function, a policy loss function, and most importantly a genModel function. The genModel function creates a small neural network. it has 8 inputs, based on the values recieved from the angelscript plugin, 2 hidden layers with 512 neurons each, and four outputs, corresponding to the four inputs: forward, backward, left, and right. I also changed how my main calls the functions. I have an inference and a read_game_state function. These two functions are what run in real time to save data on runs for training. The read_game_state listens and parses what comes out of the socket and the inference will save and run that information through the current model. Then after the inference runs and saves enough data, the threads will be closed and training on the data stored during the last epoch will begin. The first successful implementation of the model is in the video shown above. The odd reward calculation was because my python script was not synced with the plugin that I made. This caused some sets of states to not be connected. This led to the vehicle learning that the best way to get rewards was throwing itself over the back of my track so that it would get a large speed.
+This stage focused on building the machine learning infrastructure. I restructured the Python codebase by adding:
 
-# Stage 3: Getting the Initial Model to learn
+- genModel(): A function to generate a neural network with 8 inputs, two hidden layers of 1024 neurons, and 4 outputs (forward, backward, left, and right)
+- compute_reward(): speed based reward
+- policy_loss(): basic TensorFlow policy
+- train(): train a given model on data from inference
+- inference(): updated to call the function in real time and store the information
 
-During this phase, the goal was to teach the model how to drive in a straight line. This proved to be a very difficult task, as the model will learn the best way to get the minimal loss even though that loss is meant to help it. For example, I was giving the model a large negative reward if it was slowing down and it learned to just go backwards and got stuck there. Another thing I noticed is that if I do not scale the rewards then my car will just spin in circles as the position is weighted more than the other metrics. One time, before I gave negative rewards for going sideways, the model would just start turning directly to the left or right and get stuck. After all of the issues that I created, I realized that just giving it rewards for going fast and giving it an overall bigger reward for if the whole run does better that it started going further and further. This is shown in the video that will be linked above.
+The inference function would gather state-action pairs, then train after a batch of runs. The first version succeeded in moving the car; however, due to a lack of sychronization between the plugin and Python threads, state sequences were mismatched. This mismatch has been fixed in more recent versions. (The fix was to only take the most recent state each time the connection recieved 1024 bytes) The model, at one point, mistakenly learned that launching off a ramp (to achieve high speed briefly) was the optimal behavior.
 
-# Stage 4: Adding A Convolutional Neural Network
+
+** Stage 3: Getting the Initial Model to learn **
+
+The objective here was to get the model to learn basic straight-line driving. This turned out to be more difficult than expected due to reward misinterpretation:
+
+- Penalizing deceleration caused the model to reverse and get stuck.
+- Raw inputs with large position values resulted in spinning. (did not initialize the weights systematically)
+- The model occasionally turned sharply and became stuck due to a lack of penalty in the lateral movement.
+
+The reward function was refined to:
+
+- Provide positive reinforcement for speed.
+- Add a large bonus if a full episode performed better than prior ones.
+
+Eventually, the model began to drive further and more consistently. A video demonstration is linked above. The speed value directly from Trackmania was positive when going forward or backward. However, if the velocity, m/s in (x,y,z) is dot product with aim direction (x,y,z) then a positive speed is given when going in the aim direction and negative when going against it. As stated in later sections, the model likes to learn that pressing only forward is the best way to complete these maps and not try to learn how to actually turn.
+
+
+** Stage 4: Adding A Convolutional Neural Network **
 
 [![YouTube Video](https://img.youtube.com/vi/-kLVGGpw-KU/0.jpg)](https://youtube.com/watch?v=-kLVGGpw-KU)
 
-During this phase, I did two main things. The first was finding and adding a way to screen capture quickly to get real time game images and the second was switching from Tensorflow to Pytorch. For this I used DXcam, this allowed me to grab a subsection of the screen which I then cut down even more to be a (200, 100) grey scale image. I essentially had two inputs into the model at this point the image and the telemetry data (speed, position, and CP). TensorFlow has a ConvLSTM2D that is not in PyTorch, as such I tried other options like LSTM and 3D convolutions to try to learn spatial awareness from a set of images. I would input a stack of the last 10 frames into the model (later changed to 5 because of space and irrelevance of the images). I realized that the first five were so far behind that keeping it to the last five frames made more sense. During this time, I realized that using tensorflow to run everything on my CPU was too slow and after spending about 6 hours trying to get any form of tensorflow to run on my GPU I decided to switch to Pytorch. When I first made the switch I did not realize that I had to specify for the install to be the cuda one so overall I only had a minor speedup. I rewrote my code to work with pytorch and reinstalled a pytorch version that worked with the cuda version I had. After I got the code to run on the GPU I saw a speedup of 60 going from taking 5 mins for a run to train to about 5 seconds. This allowed for me to focus more on the model and run more runs faster. The only problem was that I was only saving one run at a time and since the movements are so random it could learn those bad runs and get stuck. So, I implemented two important changes. One, was storing more runs per training cycle, the other change was saving the best run. The best run would be the best so far seen by the system that would be stored and added to the other five for the current run. This allowed for the system to actually learn but I realized that the current holdup was not having enough information to train on as the CNN is only seeing so much minimal variations in the track. 
+This state introduced image-based perception and transitioned the project from TensorFlow to PyTorch for improved performance and GPU compatibility.
+For visual input, the DXCam library was used to capture a grayscale subseciton of the game screen in real time. Images were resized to 200x100 and stacked as sequences of recent frames, providing temporal context. Initially, 10-frame stacks were used, but this was later reduced to 5  frames to optimize relevance and memory usage.
 
-# Stage 5: Lidar and reward struggles
+Due to limitations in TensorFlow's GPU integration on the development hardware and the absence of a PyTorch-native ConvLSTM2D, the project shifted toward alternative solutions such as 3D convolutions and LSTMs followed by 2D convolutions. This should have allowed the model to learn spatiotemporal patterns from the visual inputs. However, the 3D convolutions needed large amounts of compute and the LSTM was not letting the model learn so these were removed for just 2D convolutions.
+Once PyTorch was correctly installed with CUDA support, training speed increased significantly, dropping from ~5 minutes per episode to approximately 5 seconds. This allowed for faster experimentation and tuning as well as faster inference.
+
+To improve learning efficiency:
+- The code base was modified to store multiple runs per training epoch, rather than training on the single best run.
+- A best-run buffer was introduced, saving the highest-performing run observed so far. This "elite" run was combined with newly collected data each epoch to reinforce previously successful strategies.
+
+Despite these upgrades, limitations in training data diversity and screen variations posed challenges for the CNN to generalize across runs.
+
+
+** Stage 5: Lidar and reward struggles **
 
 [![YouTube Video](https://img.youtube.com/vi/FMvDgTzFy70/0.jpg)](https://youtube.com/watch?v=FMvDgTzFy70)
 
-During this stage, I removed the CNN because I do not think that I can train the CNN well on just one computer. Instead I delved into a solution that I had seen completed by others working on similar problems. I first tried to do my own math to find how to calculate the values for all of the lines but after spending a few hours and not getting any good progress I scoured the internet to find a paper that had equations for the exact problem that I was working on. The link will be below. In the pictures above you can see a few variations and a video of what I was working on. Once I had implemented a working visualization I plugged the function into a new model file. I changed the reward function a bit and added rewards for staying away from the edges and negative rewards for getting to close to edges. But as with everything, the model learned that the speed reward outweighed hitting walls and so it would directly crash into them. I might go back and add the cnn in to see if having more inputs helps or if it can learn more. I looked into what TMRL did in all of their demonstrations with using the path of a driven run to do well. I did not want to follow exactly in their footsteps with having the reward function be how well it follows the path. However, I did try and implemented the gaussian distribution and tanh that they were using it determine the action value as well as the switching from having two outputs where one was forward, backward and nothing and the other was left, right and nothing. After switching to be more like theirs I am still struggling with getting the reward function to be correct and not leading me to different not ideal ways.
+Given the resource constraints for training convolutional networks effectively, this phase explored an alternative input representation using simulated LIDAR-style data. This approach draws inspiration from Trackmania reinforcement learning woeks, where rays are cast forward from the vehicle to estimate distances to surrounding walls.
+Initial attempts at hand-crafting ray-tracing calculations were unsuccessful. Progress accelerated after adopting the equations presented in [Laurens Neinders Bachelors' thesis](https://essay.utwente.nl/96153/1/Neinders_BA_EEMCS.pdf), which provided a percise geometric method for LIDAR simulation.
+With a lot of experimentation with different base values, decently accurate distance measurements are now in place. As such, a new model architecture was developed that replaced the image inputs with LIDAR vectors. The reward function was also revised to include:
+- Penalties for proximity to side walls.
+- Positive reinforcement for maintaining central alignment.
+
+Despite this, the model often prioritized speed-based rewards over collision penalties, leading to reckless behavior such as deliberate crashes for short-term gain.
+To try something new, the model architecture was redesigned to incorperate:
+- A Gaussian policy head for continuous action sampling, rather than discrete classification.
+- A unified output structure with three action values, interpreted via tanh activation function (essentially sets the scale to [-1,1]). This replaced the earlier two head system, which independently selected from {forward, backward, none} and {left, right, none}.
+
+These changes were inspired by architectural strategies found in the [TMRL project](https://github.com/trackmania-rl/tmrl/tree/master), though this implementation retains its own approach to reward formulation. While the new design enables more expressive behavior, reward shaping remains a critical issue and continues to be a source of instability in training outcomes.
+
+I have seen that in many of the reward functions they reward for increased distance on the map. However, that requires creating a map and defining more about it than what I wanted the car to know.
