@@ -1,37 +1,41 @@
 # Trackmania Reinforcement Learning Variations
 
-This repository contains a series of experiments and architectures designed to control a car in Trackmania using reinforcement learning and computer vision. The models utilized game telemetry and either pictures of the game or lidar of walls. This information was used to teach the model driving behaviors through chasing better rewards.
+This repository showcases a series of reinforcement learning experiments and model architectures developed to control a car in Trackmania using computer vision and game telemetry. These models leverage either screen captures or simulated LIDAR data, combined with in-game telemetry, to learn driving behaviors through reward-based optimization.
 
 ## Overview of the main model files
-For more information about the files check the comments left in the files or my 
-gerg-thoughts.md which is a small write up of the challenges that I have faced upto this point. Also, gerg-thoughts has some videos of things that I did along the way in it.
+Detailed descriptions and inline documentation are available in each file under /scripts/python/.
+Additional insights, challenges faced, and example videos can be found in gerg-thoughts.md.
+
+The Primary files are listed below, ordered from most recent to earliest in developement:
 
 1. **lidar-gauss.py**
-The most recent addition to the series of tests. This uses three outputs to determine all movements. Uses LIDAR simulation and a gaussian policy head. The main changes in this file compared to the lidar.py is that this one has a larger model and a slightly different reward structure.
+The most recent model in the series is built using PyTorch and a Gaussian policy. It outputs three continuous values representing movement decisions and leverages simulated LIDAR and a couple points of telemetry data as inputs. Compared to its predecessor (lidar.py), aside from changing the policy, this model features a larger architecture and updated reward functions.
 
 2. **lidar.py**
-The predecessor to the gauss file above used softmax and two different outputs of three possibilities to determine movements and turning.
+A PyTorch model that uses discrete softmax outputs for the two sets of three continuous values represented by, movement and turning. This served as a rough model for the Gaussian version.
 
 3. **cnnTorch.py**
-A pyTorch-based convolutional nueral network that uses a series of grayscale screen scrapes and telemetry data to infer the next best move.
+A PyTorch convolutional nueral network that uses combines grayscale screenshots and telemetry data to predict actions.
 
 4. **cnn.py**
-A TensorFlow model that uses an LSTMConvolution (not in pytorch) and was replaced as it took ages to run and the inference time of one frame was abyssmal
+A TensorFlow model that uses a ConvLSTM2D (ConvLSTM2D not in pytorch) Although it works it would only run on the CPU because of the CUDA version not being supported by TensorFlow.
 
 5. **Game-State-Only.py**
-A tensorflow deep neural network that only uses telemetry data for the car to learn anything.
+A simple deep neural network built with TensorFlow that relies solely on telemetry inputs, without any visual information.
 
 ## Requirements for install
 
-Intall dependencies with:
+To install required dependencies:
 
 ```bash
 pip install -r requirements.txt
 
 ```
 
-## Acknoledgement
+## Acknowledgement
 
-I used the equations from section 13 of this paper: https://essay.utwente.nl/96153/1/Neinders_BA_EEMCS.pdf
+The distance estimation equations used are based on Section 13 of Laurens Neinders' bachelor's thesis: 
+https://essay.utwente.nl/96153/1/Neinders_BA_EEMCS.pdf
 
-Also the idea of using gaussian distribution and changing what my outputs were are from: https://github.com/trackmania-rl/tmrl/tree/master
+Gaussian policy modeling and architectural inspiration in lidar-gauss.py were influenced by the TMRL project: 
+https://github.com/trackmania-rl/tmrl/tree/master
