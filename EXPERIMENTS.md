@@ -2,6 +2,14 @@
 
 This document roughly outlines the five major developments of my reinforcement learning system designed to control a vehicle in Trackmania 2020. Each subsection reflects iterative improvements, experiments, and lessons learned across areas including telemetry extraction, model design, reward engineering, and architectural changes.
 
+## Table of Contents
+- [Basic DNN](/EXPERIMENTS.md#basic-dnn--gamestatesonlypy)
+- [CNN with TensorFlow](/EXPERIMENTS.md#cnn-with-tensorflow--cnnpy)
+- [CNN with PyTorch](/EXPERIMENTS.md#cnn-with-pytorch--cnntorchpy)
+- [LIDAR with Softmax Policy](/EXPERIMENTS.md#lidar-with-softmax-policy--lidarpy)
+- [LIDAR with Gaussian Policy](/EXPERIMENTS.md#lidar-with-gaussian-policy--lidargausspy)
+
+
 ## [Basic DNN](/README.md):  [(gameStateOnly.py)](/Scripts/Python/gameStateOnly.py)
 
 A simple deep neural network built with TensorFlow that relies solely on telemetry inputs, without any visual information. It uses values such as speed, position, velocity, and checkpoint count to determine the next action. While limited in perception compared to image-based models, it serves as a useful baseline for understanding the basics of a reinforcement learning model in a game environment.
