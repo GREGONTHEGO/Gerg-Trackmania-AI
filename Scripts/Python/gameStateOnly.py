@@ -7,6 +7,10 @@ import tensorflow as tf
 import numpy as np
 import pickle
 
+"""
+TODO: brief summary of the file
+"""
+
 HOST = '127.0.0.1'
 PORT = 5055
 keyboard = Controller()
