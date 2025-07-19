@@ -1,8 +1,10 @@
 # Project Log: Reinforcement Learning in Trackmania
 
-This document roughly outlines the five major development stages of my reinforcement learning system designed to control a vehicle in Trackmania 2020. Each stages reflects iterative improvements, experiments, and lessons learned across areas including telemetry extraction, model design, reward engineering, and architectural changes.
+This document roughly outlines the five major developments of my reinforcement learning system designed to control a vehicle in Trackmania 2020. Each subsection reflects iterative improvements, experiments, and lessons learned across areas including telemetry extraction, model design, reward engineering, and architectural changes.
 
 ## [Basic DNN](/README.md):  [(gameStateOnly.py)](/Scripts/Python/gameStateOnly.py)
+
+A simple deep neural network built with TensorFlow that relies solely on telemetry inputs, without any visual information. It uses values such as speed, position, velocity, and checkpoint count to determine the next action. While limited in perception compared to image-based models, it serves as a useful baseline for understanding the basics of a reinforcement learning model in a game environment.
 
 **Experiment 1: Retrieving Game Data and Controlling the Vehicle**
 
@@ -49,6 +51,8 @@ Eventually, the model began to drive further and more consistently. A video demo
 
 ## [CNN with TensorFlow](/README.md):  [(cnn.py)](/Scripts/Python/cnn.py)
 
+A TensorFlow model that uses a ConvLSTM2D (ConvLSTM2D not in pytorch). Although it works, it would only run on the CPU because of my CUDA version not being supported by TensorFlow. Several hours were spent trying alternatives to make TensorFlow but those that did work would not be able to connect to the local socket server.
+
 **Experiment 4: Integrating Convolutional Neural Networks (CNNs)**
 
 [![YouTube Video](https://img.youtube.com/vi/-kLVGGpw-KU/0.jpg)](https://youtube.com/watch?v=-kLVGGpw-KU)
@@ -57,6 +61,8 @@ This state introduced image-based perception and transitioned the project from T
 For visual input, the DXCam library was used to capture a grayscale subseciton of the game screen in real time. Images were resized to 200x100 and stacked as sequences of recent frames, providing temporal context. Initially, 10-frame stacks were used, but this was later reduced to 5  frames to optimize relevance and memory usage.
 
 ## [CNN with PyTorch](/README.md):  [(cnnTorch.py)](/Scripts/Python/cnnTorch.py)
+
+A PyTorch convolutional nueral network that combines grayscale screenshots and telemetry data to predict actions. Unlike the TensorFlow model this has no LSTM or 3D CNNs to gather temporal information from the stack of images that it is given. They are given as if they are different layers of the same image.
 
 **Experiment 5: Switching libraries**
 
@@ -71,6 +77,8 @@ Despite these upgrades, limitations in training data diversity and screen variat
 
 ## [LIDAR with Softmax Policy](/README.md):  [(lidar.py)](/Scripts/Python/lidar.py)
 
+A PyTorch experiment that uses discrete softmax outputs for the two sets of three values represented by, movement and turning. This experiment came about when I was looking into alternatives to CNN that should allow for the model to know more about the game without just giving it seemingly random pictures.
+
 **Experiment 6: Transistion to LIDAR-Based Perception and Reward Engineering**
 
 [![YouTube Video](https://img.youtube.com/vi/FMvDgTzFy70/0.jpg)](https://youtube.com/watch?v=FMvDgTzFy70)
@@ -82,6 +90,8 @@ With a lot of experimentation with different base values, decently accurate dist
 - Positive reinforcement for maintaining central alignment.
 
 ## [LIDAR with Gaussian Policy](/README.md):  [(lidarGauss.py)](/Scripts/Python/lidarGauss.py)
+
+The most recent experiment in the series is built using PyTorch and a Gaussian policy. The model in this file takes simulated LIDAR data along with five telemetry inputs and produces three values representing movement decisions. The three outputs are linked to the controls of the game where the first is forward, second is backward, and third goes for turning. Compared to its predecessor (lidar.py), aside from changing the policy, this model features a larger architecture and updated reward functions.
 
 **Experiment 7: Emulate Others**
 
