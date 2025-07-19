@@ -10,16 +10,16 @@ The description title links to EXPERIMENTS.md and the filename links to the file
 The Primary experiments are listed below, ordered from most recent to earliest in developement:
 
 1. **[LIDAR with Gaussian Policy](/EXPERIMENTS.md#lidargausspy):  [(lidarGauss.py)](/Scripts/Python/lidarGauss.py)**
-The most recent model in the series is built using PyTorch and a Gaussian policy. The model in this file takes simulated LIDAR data along with five telemetry inputs and produces three values representing movement decisions. Compared to its predecessor (lidar.py), aside from changing the policy, this model features a larger architecture and updated reward functions.
+The most recent experiment in the series is built using PyTorch and a Gaussian policy. The output of this model is three values that are sent through the tanh function to return a real number on the scale of [-1,1].
 
 2. **[LIDAR with Softmax Policy](/EXPERIMENTS.md#lidarpy):  [(lidar.py)](/Scripts/Python/lidar.py)**
-A PyTorch model that uses discrete softmax outputs for the two sets of three values represented by, movement and turning. This served as a rough model for the Gaussian version.
+A PyTorch model that uses discrete softmax outputs for the two sets of three values represented by, movement and turning.
 
 3. **[CNN with PyTorch](/EXPERIMENTS.md#cnntorchpy):  [(cnnTorch.py)](/Scripts/Python/cnnTorch.py)**
 A PyTorch convolutional nueral network that uses combines grayscale screenshots and telemetry data to predict actions.
 
 4. **[CNN with TensorFlow](/EXPERIMENTS.md#cnnpy):  [(cnn.py)](/Scripts/Python/cnn.py)**
-A TensorFlow model that uses a ConvLSTM2D (ConvLSTM2D not in pytorch) Although it works it would only run on the CPU because of the CUDA version not being supported by TensorFlow.
+A TensorFlow model that uses ConvLSTM2D for the CNN layers.
 
 5. **[Basic DNN](/EXPERIMENTS.md#gamestateonlypy):  [(gameStateOnly.py)](/Scripts/Python/gameStateOnly.py)**
 A simple deep neural network built with TensorFlow that relies solely on telemetry inputs, without any visual information.
