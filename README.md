@@ -4,9 +4,10 @@ This repository showcases a series of reinforcement learning experiments and mod
 
 ## Overview of the main model files
 Detailed descriptions and inline documentation are available in each file under /scripts/python/.
-Additional insights, challenges faced, and example videos can be found in gerg-thoughts.md.
+Additional insights, challenges faced, and example videos can be found in EXPERIMENTS.md.
+The description title links to EXPERIMENTS.md and the filename links to the file.
 
-The Primary files are listed below, ordered from most recent to earliest in developement:
+The Primary experiments are listed below, ordered from most recent to earliest in developement:
 
 1. **[LIDAR with Gaussian Policy](/EXPERIMENTS.md#lidargausspy):  [(lidarGauss.py)](/Scripts/Python/lidarGauss.py)**
 The most recent model in the series is built using PyTorch and a Gaussian policy. The model in this file takes simulated LIDAR data along with five telemetry inputs and produces three values representing movement decisions. Compared to its predecessor (lidar.py), aside from changing the policy, this model features a larger architecture and updated reward functions.
