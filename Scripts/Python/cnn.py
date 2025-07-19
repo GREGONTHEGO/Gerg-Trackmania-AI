@@ -12,6 +12,9 @@ import pickle
 import dxcam, cv2
 from collections import deque
 
+"""
+TODO: brief summary of the file
+"""
 
 k = 15
 frame_buffer = deque(maxlen=k)
