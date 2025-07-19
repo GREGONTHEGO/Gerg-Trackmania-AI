@@ -15,6 +15,10 @@ import torch.optim as optim
 import torch.nn.functional as f
 from torch.utils.data import Dataset, DataLoader
 
+"""
+TODO: brief summary of the file
+"""
+
 BUFFER_SIZE = 5
 CAPTURE_FPS = 60.0
 frame_buffer = deque(maxlen=BUFFER_SIZE)
