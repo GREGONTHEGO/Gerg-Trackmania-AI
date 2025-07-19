@@ -2,7 +2,7 @@
 
 This document roughly outlines the five major development stages of my reinforcement learning system designed to control a vehicle in Trackmania 2020. Each stages reflects iterative improvements, experiments, and lessons learned across areas including telemetry extraction, model design, reward engineering, and architectural changes.
 
-## gameStateOnly.py
+## [Basic DNN](/README.md):  [(gameStateOnly.py)](/Scripts/Python/gameStateOnly.py)
 
 **Experiment 1: Retrieving Game Data and Controlling the Vehicle**
 
@@ -47,7 +47,7 @@ The reward function was refined to:
 
 Eventually, the model began to drive further and more consistently. A video demonstration is linked above. The speed value directly from Trackmania was positive when going forward or backward. However, if the velocity, m/s in (x,y,z) is dot product with aim direction (x,y,z) then a positive speed is given when going in the aim direction and negative when going against it. As stated in later sections, the model likes to learn that pressing only forward is the best way to complete these maps and not try to learn how to actually turn. However, it would always reach the point of only pressing forward and not actually learning when to turn.
 
-## cnn.py
+## [CNN with TensorFlow](/README.md):  [(cnn.py)](/Scripts/Python/cnn.py)
 
 **Experiment 4: Integrating Convolutional Neural Networks (CNNs)**
 
@@ -56,7 +56,7 @@ Eventually, the model began to drive further and more consistently. A video demo
 This state introduced image-based perception and transitioned the project from TensorFlow to PyTorch for improved performance and GPU compatibility.
 For visual input, the DXCam library was used to capture a grayscale subseciton of the game screen in real time. Images were resized to 200x100 and stacked as sequences of recent frames, providing temporal context. Initially, 10-frame stacks were used, but this was later reduced to 5  frames to optimize relevance and memory usage.
 
-## cnnTorch.py
+## [CNN with PyTorch](/README.md):  [(cnnTorch.py)](/Scripts/Python/cnnTorch.py)
 
 **Experiment 5: Switching libraries**
 
@@ -69,7 +69,7 @@ To improve learning efficiency:
 
 Despite these upgrades, limitations in training data diversity and screen variations posed challenges for the CNN to generalize across runs.
 
-## lidar.py
+## [LIDAR with Softmax Policy](/README.md):  [(lidar.py)](/Scripts/Python/lidar.py)
 
 **Experiment 6: Transistion to LIDAR-Based Perception and Reward Engineering**
 
@@ -81,7 +81,7 @@ With a lot of experimentation with different base values, decently accurate dist
 - Penalties for proximity to side walls.
 - Positive reinforcement for maintaining central alignment.
 
-## lidarGauss.py
+## [LIDAR with Gaussian Policy](/README.md):  [(lidarGauss.py)](/Scripts/Python/lidarGauss.py)
 
 **Experiment 7: Emulate Others**
 
