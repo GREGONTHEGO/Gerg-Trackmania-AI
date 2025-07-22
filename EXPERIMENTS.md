@@ -20,11 +20,11 @@ The initial goal was to extract real-time game data from Trackmania (2020) and u
 To implement the plugin, I wrote an 'info.toml' and a script located in 'plugins/GergBot/'. This plugin adds a menu item in Openplanet that launches a local socket server. The socket transmits the car's current speed, position, velocity, and checkpoint count on each update. However, there were two issues identified early:
 1. No frame-rate control: Data was sent as fast as possible, leading to inconsistencies in synchronization and strange reward behaviors.
 
-- *Resolved by having the listener process only the most recent state per message batch.*
+  - *Resolved by having the listener process only the most recent state per message batch.*
 
 2. TOML structuring confusion: The 'meta' and 'script' sections were initially misused, which are crucial for proper plugin registration.
 
-- *Resolved by putting the dependencies in the scripts section and everything else in the meta section*
+  - *Resolved by putting the dependencies in the scripts section and everything else in the meta section*
 
 On the Python side, I created a function that runs two threads:
 1. One that listens to the socket and updates a global 'latest_state' variable
