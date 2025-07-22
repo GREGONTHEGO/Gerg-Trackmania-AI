@@ -40,6 +40,9 @@ The distance estimation equations used are based on [Section 13 of Laurens Neind
 Gaussian policy modeling and architectural inspiration in lidar-gauss.py were influenced by the [TMRL project](https://github.com/trackmania-rl/tmrl/tree/master)
 
 Full Title: Trackmania
+
 Release Year: 2020 (specifically July 1, 2020, for Windows)
+
 Developer: Ubisoft Nadeo
+
 Publisher: Ubisoft
