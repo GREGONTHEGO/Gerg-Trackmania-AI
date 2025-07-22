@@ -16,7 +16,17 @@ import torch.nn.functional as f
 from torch.utils.data import Dataset, DataLoader
 
 """
-TODO: brief summary of the file
+Softmax policy model using simulated LIDAR and telemetry (PyTorch)
+
+This file introduces a model that replaces raw image inputs with 
+simulated LIDAR data, computed via ray casting from screen images. 
+A PyTorch LSTM processes temporal sequences of LIDAR readings 
+alongside telemetry, with softmax outputs for movement and turning. 
+The reward function is carefully shaped with bonuses and penalties 
+based on movement, checkpoint progress, and speed deltas. This 
+architecture emphasizes interpretability and efficiency over visual 
+perception.
+
 """
 
 BUFFER_SIZE = 5

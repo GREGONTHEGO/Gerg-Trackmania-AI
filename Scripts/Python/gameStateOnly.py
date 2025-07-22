@@ -8,7 +8,18 @@ import numpy as np
 import pickle
 
 """
-TODO: brief summary of the file
+Simple DNN using only telemetry data (TensorFlow)
+
+This file implements a deep neural network that 
+uses only telemetry data 
+(speed, position, velocity, and checkpoint count) 
+to infer driving actions in Trackmania. The model 
+is trained using policy gradient methods, with 
+rewards based primarily on speed and checkpoint gain. 
+It includes socket communication with an AngelScript 
+plugin to receive live game data and supports multi-episode 
+training and inference using saved data logs.
+
 """
 
 HOST = '127.0.0.1'

@@ -17,7 +17,15 @@ from torch.utils.data import Dataset, DataLoader
 from torch.distributions import Normal
 
 """
-TODO: brief summary of the file
+Gaussian policy reinforcement learning with LIDAR and telemetry (PyTorch)
+
+This is the most advanced model in the series, using a Gaussian policy 
+head instead of softmax for continuous action sampling. The model processes 
+LIDAR sequences through an LSTM and fuses them with telemetry data via a shared MLP. 
+The three outputs represent continuous actions for forward, brake, and turn. 
+It features a detailed reward function, including clearance-based shaping using 
+ray distances and forward motion bonuses. Training uses entropy-regularized 
+policy gradients and advantage normalization.
 """
 
 BUFFER_SIZE = 5

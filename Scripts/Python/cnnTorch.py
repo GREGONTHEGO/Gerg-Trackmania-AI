@@ -16,7 +16,18 @@ import torch.nn.functional as f
 from torch.utils.data import Dataset, DataLoader
 
 """
-TODO: brief summary of the file
+CNN with stacked grayscale images and telemetry (PyTorch)
+
+This file defines a PyTorch CNN model that processes a 
+stack of 5 grayscale game frames along with current 
+telemetry values to predict movement actions using softmax 
+heads. The model includes a critic for value estimation 
+and is trained using an actor-critic approach. It improves 
+efficiency by running on GPU, allows for checkpoint buffering, 
+and supports entropy regularization. The model structure 
+fuses spatial image features with telemetry via an MLP, and 
+previously explored LSTM/3D convolution options are commented out.
+
 """
 
 BUFFER_SIZE = 5

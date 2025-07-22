@@ -13,7 +13,16 @@ import dxcam, cv2
 from collections import deque
 
 """
-TODO: brief summary of the file
+ConvLSTM2D-based CNN using grayscale frames (TensorFlow)
+
+This experiment builds a CNN model using TensorFlow's 
+ConvLSTM2D layers to process a sequence of grayscale 
+game screenshots. It captures real-time screen input 
+using DXCam, combines it with telemetry data, and 
+predicts forward/backward/turn actions. Training is 
+done using advantage-weighted policy gradients. However, 
+limitations with TensorFlow GPU support led to this 
+approach being phased out in favor of PyTorch.
 """
 
 k = 15
