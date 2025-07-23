@@ -29,7 +29,7 @@ perception.
 
 """
 
-BUFFER_SIZE = 5
+BUFFER_SIZE = 1
 CAPTURE_FPS = 60.0
 frame_buffer = deque(maxlen=BUFFER_SIZE)
 
@@ -205,23 +205,32 @@ def capture_loop():
 class LSTMAgent(nn.Module):
     def __init__(self):
         super(LSTMAgent, self).__init__()
-        self.lstm = nn.LSTM(input_size=19, hidden_size=512, num_layers=2, batch_first=True)
+        self.lidar_norm = nn.LayerNorm(19)
+        self.lidar = nn.Sequential(
+            nn.Linear(19, 512),
+            nn.ReLU(),
+            nn.Linear(512, 512),
+            nn.ReLU(),
+            nn.Linear(512, 256),
+            nn.ReLU()
+        )
+        # self.lstm = nn.LSTM(input_size=19, hidden_size=512, num_layers=2, batch_first=True)
         
         self.fc1 = nn.Linear(512,512)
         self.telem_norm =nn.LayerNorm(5)
         self.telemetry_mlp = nn.Sequential(
-            nn.Linear(5, 256),
+            nn.Linear(5, 512),
             nn.ReLU(),
-            nn.Linear(256, 256),
-            nn.ReLU(),
-            nn.Linear(256, 128),
+            # nn.Linear(256, 256),
+            # nn.ReLU(),
+            nn.Linear(512, 256),
             nn.ReLU()
         )
-
-        self.move = nn.Linear(512 + 128,3)
-        self.turn = nn.Linear(512 + 128,3)
+        self.layer = nn.Linear(256 + 256, 256)
+        self.move = nn.Linear(256,3)
+        self.turn = nn.Linear(256,3)
         self.critic = nn.Sequential( 
-            nn.Linear(512 + 128, 256),
+            nn.Linear(256, 256),
             nn.ReLU(),
             nn.Linear(256, 128),
             nn.ReLU(),
@@ -231,22 +240,25 @@ class LSTMAgent(nn.Module):
 
 
     def forward(self, x, telem):
-        # print(x.shape, telem.shape)
-        B, T, D = x.shape
-        lstm_out , _ = self.lstm(x)
-        x = lstm_out[:, -1, :]  # Take the last output of the LSTM
-        h_last = f.relu(self.fc1(x))
+        print(x.shape, telem.shape)
+        # B, T, D = x.shape
+        x = self.lidar_norm(x)
+        x = self.lidar(x)
+        # lstm_out , _ = self.lstm(x)
+        # x = lstm_out[:, -1, :]  # Take the last output of the LSTM
+        # h_last = f.relu(self.fc1(x))
         telem = self.telem_norm(telem)
         t_feat = self.telemetry_mlp(telem)
-        joint = torch.cat([h_last, t_feat], dim=1)
-        move_logits = self.move(joint)
-        turn_logits = self.turn(joint)
-        critic = self.critic(joint).squeeze(-1)
+        joint = torch.cat([x, t_feat], dim=1)
+        layer = self.layer(joint)
+        move_logits = self.move(layer)
+        turn_logits = self.turn(layer)
+        critic = self.critic(layer).squeeze(-1)
         return move_logits, turn_logits, critic
     
 
 
-    def init_weights(self):
+    def init_weights(self): #update this to be like the linesight
         def init(m):
             if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
                 nn.init.kaiming_normal_(m.weight, nonlinearity='relu')
@@ -352,7 +364,10 @@ def compute_reward(prev_state, current_state, move, tim, alpha=0.1):
     return reward
 
 
-def lidar_clearance_bonus():
+def lidar_clearance_bonus(delta_spd, turn):
+    if delta_spd < 0.0:
+        return -1.0
+    
     center_idk = 9
     bonus = 0.0
     for i in range(len(frame_buffer)):
@@ -368,18 +383,31 @@ def lidar_clearance_bonus():
 
         # smallest side distance
         side_mean = min(side_left, side_right)
-        
-        # reward if the forward distance is greater than log2(32 m)
-        if forward_distance < 5.0:
-            bonus -= 1.0
-        else:
-            bonus += 1.0
 
-        # reward if the forward distance is greater than log2(4 m)
-        if side_mean < 2.0:
-            bonus -= 0.5
+        # to determine how centered the car is
+        small_side = abs(side_left - side_right)
+
+        # reward if the forward distance is greater than log2(8 m)
+        if forward_dist < 3.0:
+            bonus -= 1.0 * (np.log2(3.0) - forward_dist)
         else:
-            bonus += 0.5
+            bonus += 1.0 * (forward_dist - np.log2(3.0))
+
+        # reward if the side distance is greater than 2 ^ 1.5
+        if side_mean < 1.5:
+            bonus -= 5.0 * (np.log2(1.5) - side_mean)
+        else:
+            bonus += 2.0 * (side_mean - np.log2(1.5))
+
+        # penalty for how far from the center the car is
+        bonus -= 5.0 * (small_side)
+
+        # if pressing left and car is closer to left penalize
+        # if pressing right and car is closer to right penalize
+        if turn == 0 and side_right < side_left:
+            bonus -= 3.0 * (side_right - side_left)
+        elif turn == 1 and side_right > side_left:
+            bonus -= 3.0 * (side_right - side_left)
     return bonus
         
 
@@ -509,7 +537,7 @@ def run_episode(model, action_stats, greedy=False):
 
         with state_lock:
             state = latest_state.copy()
-            stacked = np.stack([np.log2(1 + f) for f in frame_buffer], axis=0)
+            stacked = np.log2(frame_buffer[0] + 1)
 
         if state['ts'] == prev_state['ts']:
             time.sleep(1.0/60.0)
@@ -527,7 +555,7 @@ def run_episode(model, action_stats, greedy=False):
 
         # runs the information into the model to get outputs
         with torch.no_grad():
-            move_log, turn_log, _ = model(torch.from_numpy(stacked).float().to(device), torch.tensor(state_vec, dtype=torch.float32).to(device))
+            move_log, turn_log, _ = model(torch.tensor(stacked, dtype=torch.float32).to(device), torch.tensor(state_vec, dtype=torch.float32).to(device))
 
             probs_move = softmax_with_temperature(move_log[0]).cpu().numpy()
             probs_turn = softmax_with_temperature(turn_log[0]).cpu().numpy()
@@ -537,7 +565,7 @@ def run_episode(model, action_stats, greedy=False):
         turn_action = np.random.choice([0, 1, 2], p=probs_turn)
 
         reward = compute_reward(prev_state, state, move_action, cp_time)
-        bonus = lidar_clearance_bonus()
+        bonus = lidar_clearance_bonus(state['speed'] - prev_state['speed'], turn_action)
         reward += bonus
         
         key = (move_action, turn_action)
