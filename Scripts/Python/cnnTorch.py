@@ -59,10 +59,8 @@ stop_capture = threading.Event()
 # speed, position and current cp
 latest_state = {'ts':0,'speed': 0.0, 'x': 0.0, 'y': 0.0, 'z': 0.0, 'cp': 0.0}
 
-# connect to GPU otherwise cpu
-device = torch.device("cuda" if torch.cuda.is_available() else 'cpu')
-# print(device)
 
+device = torch.device("cuda" if torch.cuda.is_available() else 'cpu')
 # information to store the best run and some information about the best run
 best_episode_data = None
 best_cp = -1
@@ -99,9 +97,9 @@ def capture_loop():
 # outputs a critic, move and turn
 # move uses softmax of 3 points to choose forward, backward or nothing
 # turn does the same but for left, right or nothing
-class Conv2DAgent(nn.Module):
+class Conv2DDDQNAgent(nn.Module):
     def __init__(self):
-        super(Conv2DAgent, self).__init__()
+        super(Conv2DDDQNAgent, self).__init__()
         self.conv2d_1 = nn.Conv2d(1, 64, kernel_size=(5,5), padding=2)
         self.bn1 = nn.BatchNorm2d(64)
 
@@ -128,22 +126,23 @@ class Conv2DAgent(nn.Module):
             nn.ReLU()
         )
 
-        self.move = nn.Linear(256 + 64,3)
-        self.turn = nn.Linear(256 + 64,3)
-        self.critic = nn.Sequential( 
-            nn.Linear(256 + 64, 256),
-            nn.ReLU(),
-            nn.Linear(256, 64),
-            nn.ReLU(),
-            nn.Linear(64,1)
-            )
+        # self.move = nn.Linear(256 + 64,3)
+        self.turn = nn.Linear(256 + 64, 9)
+        # self.critic = nn.Sequential( 
+        #     nn.Linear(256 + 64, 256),
+        #     nn.ReLU(),
+        #     nn.Linear(256, 64),
+        #     nn.ReLU(),
+        #     nn.Linear(64,1)
+        #     )
         # self.init_weights()
 
 
 
     def forward(self, x, telem):
+        print(x.shape)
         B, T, C, H, W = x.shape
-        x = x.view(B * T, C, H, W)
+        x = torch.reshape(x,(B * T, C, H, W))
         x = f.relu(self.bn1(self.conv2d_1(x)))
         x = f.relu(self.bn2(self.conv2d_2(x)))
         x = f.relu(self.bn3(self.conv2d_3(x)))
@@ -158,10 +157,11 @@ class Conv2DAgent(nn.Module):
         telem = self.telem_norm(telem)
         t_feat = self.telemetry_mlp(telem)
         joint = torch.cat([h_last, t_feat], dim=1)
-        move_logits = self.move(joint)
+        # move_logits = self.move(joint)
         turn_logits = self.turn(joint)
-        critic = self.critic(joint).squeeze(-1)
-        return move_logits, turn_logits, critic
+        action = f.softmax(turn_logits, dim = 1)
+        # critic = self.critic(joint).squeeze(-1)
+        return action #critic move_logits, 
     
 
 
@@ -175,207 +175,152 @@ class Conv2DAgent(nn.Module):
                 nn.init.constant_(m.weight, 1)
                 nn.init.constant_(m.bias, 0)
         self.apply(init)
-        nn.init.constant_(self.move.weight, 0)
-        nn.init.constant_(self.move.bias, 0)
+        # nn.init.constant_(self.move.weight, 0)
+        # nn.init.constant_(self.move.bias, 0)
         nn.init.constant_(self.turn.weight, 0)
         nn.init.constant_(self.turn.bias, 0)
-        nn.init.kaiming_normal_(self.critic[0].weight)
-        nn.init.constant_(self.critic[0].bias, 0) 
-
-    
-# Trains the softmax policy agent using previously logged data.
-def train_step(model, optimizer, images, tel, move, turn, rewards):
-    model.train()
-    images = images.to(device)
-    move = move.to(device)
-    turn = turn.to(device)
-    tel = tel.to(device)
-    optimizer.zero_grad()
-    move_logits, turn_logits, value = model(images, tel)
-    adv, returns = compute_advantage(rewards, value)
-    returns = returns.to(device)
-    adv = adv.to(device)
-
-    logp_move = f.log_softmax(move_logits, dim=-1)
-    logp_turn = f.log_softmax(turn_logits, dim=-1)
-
-    actor_loss_move = -logp_move.gather(1, move.unsqueeze(1)).squeeze(1) * adv
-    actor_loss_turn = -logp_turn.gather(1, turn.unsqueeze(1)).squeeze(1) * adv
-    actor_loss = (actor_loss_move + actor_loss_turn).mean()
-
-    critic_loss = f.smooth_l1_loss(value, returns)
-
-    entropy_move = -(logp_move * f.softmax(move_logits, dim=-1)).sum(dim=1).mean()
-    entropy_turn = -(logp_turn * f.softmax(turn_logits, dim=-1)).sum(dim=1).mean()
-    entropy = 0.01 * (entropy_move + entropy_turn)
-
-    loss = actor_loss + 0.5 * critic_loss - entropy
-    loss.backward()
-    optimizer.step()
-    return loss.item()
+        # nn.init.kaiming_normal_(self.critic[0].weight)
+        # nn.init.constant_(self.critic[0].bias, 0) 
 
 
+class ReplayBuffer:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.buffer = []
+        self.position = 0
 
-class TrackmaniaDataset(Dataset):
-    def __init__(self, states):
-        self.images = np.concatenate([state['image'] for state in states], axis=0)
-        self.stat = np.stack([state['state'] for state in states], axis=0).astype(np.float32)
-        self.move = np.stack([state['move'] for state in states], axis=0).astype(np.int64)
-        self.turn = np.stack([state['turn'] for state in states], axis=0).astype(np.int64)
-        self.rewards = np.array([state['reward'] for state in states], dtype=np.float32)
-        # print('reward range: ', np.min(self.rewards), np.max(self.rewards))
-        
-    
-    def __len__(self):
-        return len(self.move)
+    def push(self, state, image, action, reward, next_image, next_state, done):
+        if len(self.buffer) < self.capacity:
+            self.buffer.append(None)
+        self.buffer[self.position] = (state, image, action, reward, next_image, next_state, done)
+        self.position = (self.position + 1) % self.capacity
 
-    def __getitem__(self, idx):
-        return(
-            torch.from_numpy(self.images[idx]),
-            self.stat[idx],
-            self.move[idx],
-            self.turn[idx],
-            self.rewards[idx]
+    def sample(self, batch_size):
+        batch = np.random.choice(len(self.buffer), batch_size, replace=False)
+        states, images, actions, rewards, next_images, next_states, dones = [], [], [], [], [], [], []
+        for idx in batch:
+            state, image, action, reward, next_image, next_state, done = self.buffer[idx]
+            states.append(state)
+            images.append(image.squeeze(0))
+            actions.append(action)
+            rewards.append(reward)
+            next_images.append(next_image.squeeze(0))
+            next_states.append(next_state)
+            dones.append(done)
+
+        return (
+            torch.tensor(np.array(states), dtype=torch.float32).squeeze(1).to(device),
+            torch.tensor(np.stack(images), dtype=torch.float32).to(device),
+            torch.tensor(np.array(actions), dtype=torch.int64).to(device),
+            torch.tensor(np.array(rewards), dtype=torch.float32).unsqueeze(1).to(device),
+            torch.tensor(np.stack(next_images), dtype=torch.float32).to(device),
+            torch.tensor(np.array(next_states), dtype=torch.float32).squeeze(1).to(device),
+            torch.tensor(np.array(dones), dtype=torch.float32).unsqueeze(1).to(device)
         )
     
-"""Used to have heading and proximity rewards to guide the car to the next checkpoint if a car
-previously hit that checkpoint by using the position of the car when the cp_count went up
-but this did not account for the car hitting a checkpoint and being close to a wall or if there 
-is a wall between the car and the next checkpoint"""
-# def heading_reward(current_state, prev_state, cp_positions, k_heading=1.0):
-#     dx = current_state['x'] - prev_state['x']
-#     dz = current_state['z'] - prev_state['z']
-#     if dx==0 and dz==0:
-#         return 0.0
-#     actual_heading = math.atan2(dz, dx)
-
-#     next_cp = int(current_state['cp']) + 1
-#     if next_cp in cp_positions:
-#         x_cp, z_cp = cp_positions[next_cp]['x'], cp_positions[next_cp]['z']
-#         desired_heading = math.atan2(z_cp - current_state['z'], x_cp - current_state['x'])
-#     else:
-#         desired_heading = actual_heading
-
-#     err = (actual_heading - desired_heading + math.pi) % (2*math.pi) - math.pi
-#     return  k_heading * (1.0 - abs(err)) / math.pi
-
-
-# def proximity_reward(current_state, prev_state, cp_positions, k_prox=5.0):
-#     next_cp = int(current_state['cp']) + 1
-#     if next_cp not in cp_positions:
-#         return 0.0
+    def __len__(self):
+        return len(self.buffer)
     
-#     cp_x = cp_positions[next_cp]['x']
-#     cp_z = cp_positions[next_cp]['z']
-#     def dist(x, z): return math.sqrt((x - cp_x)**2 + (z - cp_z)**2)
+class DDQNAgent:
+    def __init__(self, state_size, action_size, seed, learning_rate=1e-3, capacity=10000, discount_factor=0.99, tau=1e-3, update_every=4, batch_size=64):
+        self.state_size = state_size
+        self.action_size = action_size
+        self.seed = np.random.seed(seed)
+        self.learning_rate = learning_rate
+        self.discount_factor = discount_factor
+        self.tau = tau
+        self.update_every = update_every
+        self.batch_size = batch_size
+        self.steps = 0
 
-#     prev_dist = dist(prev_state['x'], prev_state['z'])
-#     cur_dist = dist(current_state['x'], current_state['z'])
+        self.qnetwork_local = Conv2DDDQNAgent().to(device)
+        self.qnetwork_local.init_weights()
+        self.qnetwork_target = Conv2DDDQNAgent().to(device)
+        self.qnetwork_target.init_weights()
+        self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=learning_rate)
 
-#     delta = prev_dist - cur_dist
+        self.replay_buffer = ReplayBuffer(capacity)
+        self.update_target_network()
 
-#     return k_prox * delta
+    def step(self, state, image, action, reward, next_image, next_state, done):
+        self.replay_buffer.push(state, image, action, reward, next_image, next_state, done)
 
+        self.steps += 1
+        if self.steps % self.update_every == 0 and len(self.replay_buffer) >= self.batch_size:
+            experiences = self.replay_buffer.sample(self.batch_size)
+            self.learn(experiences)
 
-# Calculates scalar reward with comments explaining what each one should do.
-def compute_reward(prev_state, current_state, move, tim, alpha=1.0):
-    speed = current_state['speed']
-    prev_speed = prev_state['speed']
-    # cp_diff = (current_state['cp'] - prev_state['cp'])
-    # cp_reward = gamma * 10.0 * max(cp_diff, 0)
+    def act(self,image, state, eps=0.05):
+        imag = torch.from_numpy(image).float().to(device)
+        state = torch.from_numpy(state).float().to(device) #check if state is in this format
+        self.qnetwork_local.eval()
+        with torch.no_grad():
+            action_values = self.qnetwork_local(imag,state)
+        self.qnetwork_local.train()
 
-    # if the current speed is positive give a small reward scaled by that speed
-    reward = alpha * max(0.0, speed)
+        if np.random.random() > eps:
+            return np.argmax(action_values.cpu().data.numpy())
+        else:
+            return np.random.choice(np.arange(self.action_size))
+        
+    def learn(self, experiences):
+        states, images, actions, rewards, next_images, next_states, dones = experiences
+
+        Q_targets_next = self.qnetwork_target(next_images, next_states).detach().max(1)[0].unsqueeze(1)
+
+        Q_targets = rewards + self.discount_factor * (Q_targets_next * (1 - dones))
+
+        Q_expected = self.qnetwork_local(images, states).gather(1, actions.view(-1, 1))
+
+        loss = f.mse_loss(Q_expected, Q_targets)
+        self.optimizer.zero_grad()
+        loss.backward()
+        self.optimizer.step()
+
+        self.soft_update(self.qnetwork_local, self.qnetwork_target)
+
+    def update_target_network(self):
+        for target_param, local_param in zip(self.qnetwork_target.parameters(), self.qnetwork_local.parameters()):
+            target_param.data.copy_(self.tau * local_param.data + (1 - self.tau) * target_param.data)
+
+    def soft_update(self, local_model, target_model):
+        for target_param, local_param in zip(target_model.parameters(), local_model.parameters()):
+            target_param.data.copy_(self.tau * local_param.data + (1 - self.tau) * target_param.data)
+
+    
+
+def compute_reward(prev_state, current_state, alpha=1.0): # move
+    speed = current_state['speed'] # in m/s
+    prev_speed = prev_state['speed'] # in m/s
+    # initiates reward
+    reward = 0.0
+
+    # if the current speed is positive give a big reward scaled by that speed
+    if speed > 0.5:
+        reward += alpha * speed
 
     # penalize if the vehicle is not moving
-    if move == 2 and abs(current_state['x'] - prev_state['x']) < 0.1 and abs(current_state['z'] - prev_state['z']) < 0.1:
-        reward -= 5.0
+    # if move[0] < 0 and move[1] < 0 and abs(current_state['x'] - prev_state['x']) < 0.03 and abs(current_state['z'] - prev_state['z']) < 0.03:
+    #     reward -= 3.0
 
-    # penalize if the car is breaking and going backwards
-    if move == 1 and speed < 0.0:
-        reward -= 5.0
-
-    # give reward for driving fast at the start
-    if prev_state['cp'] == 0.0 and speed > 5.0:
-        reward += 5.0
+    # # penalize if the car is breaking at low speed
+    # if move[1] > 0 and speed < 5.0:
+    #     reward -= 10.0 * (5.0 - speed)
 
     # penalize slow driving as the cp state rarely changes
-    if current_state['cp'] == prev_state['cp'] and speed < 1.0:
-        reward -= 2.0
+    if current_state['cp'] == prev_state['cp'] and speed < 5.0:
+        reward -= 1.0 * (5.0 - speed)
 
-    """originally had a bonus for passing a checkpoint but I realized that this would give the reward
-    to only one move which would be problematic if it was braking when it crossed the checkpoint"""
-    # if current_state['cp'] > prev_state['cp']:
-    #     cp_time_delta = time.time() - tim
-    #     reward += 100.0 / cp_time_delta
-
-    # if sharply decelerating and speed is positive give penalty (supposed to be for hitting wall head on)
+    # if the acceleration is positive and speed is positive give reward
     delta_spd = speed - prev_speed
-    if (delta_spd) < -5.0 and speed > 0.0:
-        reward -= 10.0 * abs(delta_spd)
-    
+    if delta_spd > 0.05 and speed > 1.0:
+        reward += 1.0 * abs(delta_spd)
+
+    # if decelerating and speed is positive give penalty
+    if (delta_spd) < -0.05 and speed > 0.0:
+        reward -= 1.0 * abs(delta_spd)
+
     return reward
-
-
-
-
-def compute_advantage(rewards, values, gamma=0.99):
-    returns = np.zeros_like(rewards, dtype=np.float32)
-    running_add = 0.0
-    for t in reversed(range(len(rewards))):
-        running_add = running_add * gamma + rewards[t]
-        returns[t] = running_add
-    returns = torch.tensor(returns).to(device)
-    advantages = returns - values.detach()
-    adv_mean = advantages.mean()
-    adv_std = advantages.std()
-    advantages = (advantages - adv_mean) / (adv_std + 1e-8)
-    returns = (returns - returns.mean()) / (returns.std() + 1e-8)
-    advantages = torch.clamp(advantages, -10.0, 10.0)
-
-    return advantages, returns
-
-
-
-# trains the model either from prior runs or from its own runs
-def train(model, optimizer, init=False):
-    BATCH_SIZE = 12
-    def train_batch(dataset):
-        model.train()
-        loaders = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True, drop_last=True, num_workers=0)
-        total_loss = 0.0
-        for images,tel, move,  turn,  rewards in loaders:
-            loss = train_step(model, optimizer, images, tel, move, turn, rewards)
-            total_loss += loss
-
-    # I had a recording function so that I could do some initial training on some of my runs
-    # but I have dropped that since as I want the model to be able to learn how to drive from nothing
-    if init:
-        for _ in range(10):
-            for i in ['turn.pkl']: #,'straight.pkl', 'long.pkl''curve.pkl' , 'circle.pkl'
-                #print(i)
-                with open(f'0{i}', 'rb') as f:
-                    statesInEpoch = pickle.load(f)
-                dataset = TrackmaniaDataset(statesInEpoch)
-                train_batch(dataset)
-    else:
-        for ep in range(1):
-            #print(ep)
-            with open(f'{ep}statesInEpoch.pkl', 'rb') as f:
-                statesInEpoch = pickle.load(f)
-            if not statesInEpoch:
-                print(f'warning: Episode {ep} has no data, skipping')
-                continue
-            if len(statesInEpoch) == 0:
-                print('no data')
-                continue
-            dataset = TrackmaniaDataset(statesInEpoch)
-            train_batch(dataset)
-        
-    # model.save('model_weights.keras', save_format='keras')
-    torch.save(model.state_dict(), 'model_cp.pt')
-    return model
-
 
 
 # reads the game state from the angelscript plugin that I made for trackmania
@@ -419,10 +364,6 @@ def read_game_state():
 
 
 
-def softmax_with_temperature(logits, temperature=1.0):
-    scaled_logits = logits / temperature
-    return torch.softmax(scaled_logits, dim=0)
-
 
 # this is the function that actually plays the game and records the states and all for training
 def run_episode(model, action_stats, greedy=False):
@@ -439,7 +380,10 @@ def run_episode(model, action_stats, greedy=False):
 
     with state_lock:
         prev_state = latest_state.copy()
-
+    prev_action = 8
+    prev_stacked = np.stack([f[0] for f in frame_buffer], axis=0)
+    prev_stacked = np.expand_dims(prev_stacked, 1)
+    prev_stacked = np.expand_dims(prev_stacked, 0)
     # to cut the system short if it doesn't make it to a new cp
     cp_time = time.time()
 
@@ -452,6 +396,7 @@ def run_episode(model, action_stats, greedy=False):
     # if crossed the finish line end
     end_count = 0
 
+    score = 0
     while (time.time() - start_time) < 240 and (time.time() - cp_time) < 30 and stuck_count < 60 and end_count < 15:
         # waits for the map to actually start before giving or storing commands
         if time.time() - start_time < 2:
@@ -468,8 +413,9 @@ def run_episode(model, action_stats, greedy=False):
             continue
         else:
             end_count = 0
-
+        
         state_vec = np.array([[state['speed'], state['x'], state['y'], state['z'], state['cp']]])
+        prev_state_vec = np.array([[prev_state['speed'], prev_state['x'], prev_state['y'], prev_state['z'], prev_state['cp']]])
         stacked = np.expand_dims(stacked, 1)
         stacked = np.expand_dims(stacked, 0)
 
@@ -479,85 +425,104 @@ def run_episode(model, action_stats, greedy=False):
             stuck_count = 0
 
         # runs the information into the model to get outputs
-        with torch.no_grad():
-            move_log, turn_log, _ = model(torch.from_numpy(stacked).to(device), torch.tensor(state_vec, dtype=torch.float32).to(device))
-            probs_move = softmax_with_temperature(move_log[0]).cpu().numpy()
-            probs_turn = softmax_with_temperature(turn_log[0]).cpu().numpy()
+        # with torch.no_grad():
+        #     action = model(torch.from_numpy(stacked).to(device), torch.tensor(state_vec, dtype=torch.float32).to(device))
+        action = model.act(stacked, state_vec)
+        reward = compute_reward(prev_state, state, cp_time)
 
-        """Was to add randomness into the runs but I just went to doing only random, as
-        I figured it would learn more from having more different inputs"""
-        # epsilon = 0.05
-        # rand = np.random.choice([0,1], p=[epsilon, 1-epsilon])
+        model.step(prev_state_vec, stacked, prev_action, reward, prev_stacked, state_vec, 0)
 
-        # if rand == 1:
-        # if i == 1:
-        #     move_action = np.argmax(probs_move)
-        #     turn_action = np.argmax(probs_turn)
-        # else:
-        move_action = np.random.choice([0, 1, 2], p=probs_move)
-        turn_action = np.random.choice([0, 1, 2], p=probs_turn)
-
-
-        reward = compute_reward(prev_state, state, move_action, cp_time)
+        
         if stuck_count > 30:
             reward -= 5.0
 
-        key = (move_action, turn_action)
-        action_stats[key]['count'] += 1
-        action_stats[key]['reward'] += reward
-        prev_state = state.copy()
-        transition = {
-            'state': state_vec[0],
-            'image': stacked,
-            'move': move_action,
-            'turn': turn_action,
-            'reward': reward,
-            'cp': state['cp']
-        }
+        score += reward
 
-        transitions_since_last_cp.append(transition)
+        prev_state = state.copy()
+        prev_action = action.copy()
+        prev_stacked = stacked.copy()
+        # transition = {
+        #     'state': state_vec[0],
+        #     'image': stacked,
+        #     'move': action,
+        #     'reward': reward,
+        #     'cp': state['cp']
+        # }
+
+        # transitions_since_last_cp.append(transition)
 
         # if a new cp is reached give a reward to the states that made it get to the new cp divided by how many states
-        if state['cp'] > cp_num:
-            cp_reward = min(100.0 / len(transitions_since_last_cp), 5.0)
-            for t in transitions_since_last_cp:
-                t['reward'] += cp_reward
-            episode_data.extend(transitions_since_last_cp)
-            transitions_since_last_cp = []
-            cp_num = state['cp']
-            cp_time = time.time()
+        # if state['cp'] > cp_num:
+        #     cp_reward = min(100.0 / len(transitions_since_last_cp), 5.0)
+        #     for t in transitions_since_last_cp:
+        #         t['reward'] += cp_reward
+        #     episode_data.extend(transitions_since_last_cp)
+        #     transitions_since_last_cp = []
+        #     cp_num = state['cp']
+        #     cp_time = time.time()
 
         # completes the action determined above
-        if move_action == 0:
+        
+        if action == 0:
             keyboard.press('w')
-        else:
-            keyboard.release('w')
-        if move_action == 1:
-            keyboard.press('s')
-        else:
-            keyboard.release('s')
-        if turn_action == 0:
-            keyboard.press('a')
-        else:
             keyboard.release('a')
-        if turn_action == 1:
-            keyboard.press('d')
-        else:
+            keyboard.release('s')
             keyboard.release('d')
+        elif action == 1:
+            keyboard.press('w')
+            keyboard.press('a')
+            keyboard.release('s')
+            keyboard.release('d')
+        elif action == 2:
+            keyboard.press('w')
+            keyboard.release('a')
+            keyboard.release('s')
+            keyboard.press('d')
+        elif action == 3:
+            keyboard.release('w')
+            keyboard.release('a')
+            keyboard.press('s')
+            keyboard.release('d')
+        elif action == 4:
+            keyboard.release('w')
+            keyboard.press('a')
+            keyboard.press('s')
+            keyboard.release('d')
+        elif action == 5:
+            keyboard.release('w')
+            keyboard.release('a')
+            keyboard.press('s')
+            keyboard.press('d')
+        elif action == 6:
+            keyboard.release('w')
+            keyboard.release('a')
+            keyboard.release('s')
+            keyboard.release('d')
+        elif action == 7:
+            keyboard.release('w')
+            keyboard.press('a')
+            keyboard.release('s')
+            keyboard.release('d')
+        elif action == 8:
+            keyboard.release('w')
+            keyboard.release('a')
+            keyboard.release('s')
+            keyboard.press('d')
+
         
         time.sleep(1.0/60.0)
 
     # if there are actions since the last cp was reached add them to the end of the data
-    if transitions_since_last_cp:
-        episode_data.extend(transitions_since_last_cp)
+    # if transitions_since_last_cp:
+    #     episode_data.extend(transitions_since_last_cp)
 
     # if running into a wall at the beginning of the map ignore the run
-    if stuck_count >= 60 and cp_num == 0:
-        episode_data = []
+    # if stuck_count >= 60 and cp_num == 0:
+    #     episode_data = []
 
-    if end_count >= 15:
-        for reward in episode_data:
-            reward['reward'] += 1000.0 / len(episode_data) if episode_data else 1.0
+    # if end_count >= 15:
+    #     for reward in episode_data:
+    #         reward['reward'] += 1000.0 / len(episode_data) if episode_data else 1.0
 
     # make sure that every button is released and restart the run
     keyboard.release('w')
@@ -569,8 +534,8 @@ def run_episode(model, action_stats, greedy=False):
     keyboard.press(Key.enter)
     keyboard.release(Key.enter)
 
-    total_reward = sum(t['reward'] for t in episode_data)/ len(episode_data) if episode_data else 1.0
-    return episode_data, cp_num, total_reward
+    # total_reward = sum(t['reward'] for t in episode_data)/ len(episode_data) if episode_data else 1.0
+    return episode_data, cp_num,# total_reward
 
 # if there is a new best episode then update all of the global best episode info
 def update_best_episode(episode_data, cp_num, cur_reward):
@@ -583,31 +548,30 @@ def update_best_episode(episode_data, cp_num, cur_reward):
 
 # compute five runs and then send that to a pkl file for the training to run out of
 def inference(model,action_stats): 
-    collected_data = []
-    for i in range(5):
-        data, cp, reward = run_episode(model, action_stats, greedy=False)
-        if not data:
-            print(f"Episode {i} ended in wall, skipping")
-            continue
-        collected_data.extend(data)
-        update_best_episode(data, cp, reward)
-        print(f"Episode {i} ended with CP {cp}, Reward {reward:.2f}")
+    # collected_data = []
+    for i in range(1):
+        data, cp = run_episode(model, action_stats, greedy=False)
+    #     if not data:
+    #         print(f"Episode {i} ended in wall, skipping")
+    #         continue
+    #     collected_data.extend(data)
+    #     update_best_episode(data, cp, reward)
+    #     print(f"Episode {i} ended with CP {cp}, Reward {reward:.2f}")
 
-    if best_episode_data is not None:
-        collected_data.extend(best_episode_data)
+    # if best_episode_data is not None:
+    #     collected_data.extend(best_episode_data)
 
-    if collected_data:
-        with open(f'{0}statesInEpoch.pkl', 'wb') as f:
-            pickle.dump(collected_data, f)
-        print(f"Episode {0} data saved with {len(collected_data)} transitions.")
+    # if collected_data:
+    #     with open(f'{0}statesInEpoch.pkl', 'wb') as f:
+    #         pickle.dump(collected_data, f)
+    #     print(f"Episode {0} data saved with {len(collected_data)} transitions.")
 
         
 def main():
     init_camera()
    
-    model = Conv2DAgent().to(device)
-    model.init_weights()
-    optimizer = optim.Adam([{'params':model.move.parameters()},{'params':model.turn.parameters()}, {'params':model.critic.parameters(), 'lr': 5e-6}], lr=5e-5)
+    model = DDQNAgent(5, 9, 5)
+    # optimizer = optim.Adam([{'params':model.move.parameters()},{'params':model.turn.parameters()}, {'params':model.critic.parameters(), 'lr': 5e-6}], lr=5e-5)
 
     read = Thread(target=read_game_state)
     read.start()
@@ -632,7 +596,7 @@ def main():
             print(f"Action ({move}, {turn}): Count = {stats['count']}, Total Reward = {stats['reward']/stats['count']:.2f}")
 
         shutdown_event.clear()
-        model = train(model, optimizer).to(device)
+        # model = train(model, optimizer).to(device)
 
     end_event.set()
     stop_capture.set()
