@@ -1,0 +1,6 @@
+numpy
+opencv-python
+torch
+pynput
+dxcam; sys_platform == 'win32'
+mss; sys_platform != 'win32'

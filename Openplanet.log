@@ -1,301 +1,165 @@
-[        Platform] [  LOG] [17:12:44]  Openplanet for Trackmania Next x64
-[        Platform] [ TRAC] [17:12:44]  (c) Melissa Geels 2016 - 2024
-[        Platform] [ TRAC] [17:12:44]  https://openplanet.dev/
-[        Platform] [  LOG] [17:12:44]  Openplanet starting on 2025-09-20
-[        Platform] [  LOG] [17:12:44]  Engine: 2025-07-04 07:15:08
-[        Platform] [  LOG] [17:12:44]  Openplanet: 1.28.0 (next, Public, 2025-08-16)
-[        Platform] [ TRAC] [17:12:44]  Identifier: 0x000000006867C5CC
-[        Platform] [ TRAC] [17:12:44]  Process ID: 58912
-[        Platform] [  LOG] [17:12:44]  Setting up hook callbacks...
-[        Platform] [  LOG] [17:12:46]  Semi entry initialization...
-[        Platform] [  LOG] [17:12:46]  Update branch: default
-[        Platform] [  LOG] [17:12:46]  Requesting app config with timeout 5000...
-[        Platform] [  LOG] [17:12:47]  Finding game window..
-[        Platform] [ TRAC] [17:12:47]  Window handle: 0136149e ("Trackmania")
-[        Platform] [  LOG] [17:12:47]  Initializing meta...
-[        Platform] [  LOG] [17:12:47]  Did not find update to install.
-[     WebServices] [  LOG] [17:12:54]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[        Platform] [  LOG] [17:12:54]  Loop entry initialization...
-[        Platform] [  LOG] [17:12:54]  Hooking WndProc...
-[        Platform] [ TRAC] [17:12:54]  Initializing sockets...
-[        Platform] [ TRAC] [17:12:54]  Adding user library path...
-[        Platform] [  LOG] [17:12:54]  Initializing audio...
-[           Audio] [  LOG] [17:12:54]  Setting playback device to "Speakers (High Definition Audio Device)"
-[        Platform] [  LOG] [17:12:54]  Initializing scripting...
-[    ScriptEngine] [  LOG] [17:12:55]  Registered 2647 classes
-[        Platform] [ TRAC] [17:12:55]  Writing type definitions to file: "C:/Users/panda/OpenplanetNext/Openplanet.h"
-[        Platform] [  LOG] [17:12:55]  Writing json to file: "C:/Users/panda/OpenplanetNext/OpenplanetNext.json"
-[        Platform] [  LOG] [17:12:55]  Dumping Openplanet documentation to C:/Users/panda/OpenplanetNext/OpenplanetCore.json
-[        Platform] [  LOG] [17:12:56]  Initializing overlay...
-[         Overlay] [  LOG] [17:12:56]  Loading user style: C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/DefaultStyle.toml
-[        Platform] [  LOG] [17:12:56]  Beginning script engine...
-[    ScriptEngine] [  LOG] [17:12:56]  Adding plugins...
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded plugin 'Camera' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded plugin 'EditorDeveloper' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded plugin 'VehicleState' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded zipped plugin 'Dashboard' (version 1.9.7)
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded plugin 'NadeoServices' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded zipped plugin 'TMRL_SaveGhost' (version 0.2)
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded plugin 'Finetuner' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:12:56]  MLHook.op/:/Logging.as (29, 1) : INFO : Compiling void RenderLogsWindow()
-[    ScriptEngine] [ WARN] [17:12:56]  MLHook.op/:/Logging.as (38, 40) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded zipped plugin 'MLHook' (version 0.5.4)
-[    ScriptEngine] [ TRAC] [17:12:56]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (279, 9) : INFO : Compiling int PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [17:12:56]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (280, 44) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [17:12:56]  MLFeedRaceData.op/:/Main.as (363, 9) : INFO : Compiling int _PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [17:12:56]  MLFeedRaceData.op/:/Main.as (364, 44) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded zipped plugin 'MLFeedRaceData' (version 0.6.3)
-[    ScriptEngine] [ERROR] [17:12:56]  Invalid file hash for "info.toml"
-[    ScriptEngine] [ERROR] [17:12:56]  Plugin is not suitable for the current signature mode.
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded plugin 'InfiniteEmbedSize' (version 1.0)
-[    ScriptEngine] [ WARN] [17:12:56]  Couldn't find optional plugin dependency "PlayerState" while loading plugin "CheckpointCounter"
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded zipped plugin 'CheckpointCounter' (version 3.1.0)
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded plugin 'UsefulInformation' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded plugin 'Stats' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded plugin 'ClassicMenu' (version 1.1)
-[    ScriptEngine] [ TRAC] [17:12:56]  Loaded plugin 'Controls' (version 1.0)
-[    ScriptEngine] [ WARN] [17:12:57]  Couldn't find optional plugin dependency "BetterChat" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ WARN] [17:12:57]  Couldn't find optional plugin dependency "ItemExchange" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ TRAC] [17:12:57]  Loaded zipped plugin 'ManiaExchange' (version 1.3.3)
-[    ScriptEngine] [ TRAC] [17:12:57]  Loaded zipped plugin 'TMRL_GrabData' (version 0.3)
-[    ScriptEngine] [ TRAC] [17:12:57]  Loaded plugin 'PluginManager' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:12:57]  Loaded plugin 'BigDecor' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:12:57]  Loaded plugin 'Discord' (version 1.0)
-[    ScriptEngine] [  LOG] [17:12:57]  Adding legacy plugins...
-[    ScriptEngine] [ TRAC] [17:12:57]  Loaded legacy plugin 'Plugin_MapAudioFix' (version 1.0)
-[    ScriptEngine] [  LOG] [17:12:57]  Plugins added!
-[        Platform] [  LOG] [17:12:57]  Initialized!
-[   ScriptRuntime] [ERROR] [17:12:57] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [17:12:57] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [  LOG] [17:12:57] [CheckpointCounter]  CheckpointCounter lib is not using PlayerState for checkpoint data
-[   ScriptRuntime] [ERROR] [17:12:57] [TMRL_GrabData]  Script exception: Unable to open TCP socket for listening: Failed to bind socket
-[   ScriptRuntime] [ERROR] [17:12:57] [TMRL_GrabData]    TMRL_GrabData.op/:/main.as (line 29, column 3)
-[   ScriptRuntime] [ERROR] [17:12:57] [TMRL_GrabData]      #0  void Main() (TMRL_GrabData.op/:/main.as line 29)
-[   ScriptRuntime] [ TRAC] [17:12:57] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [17:12:57] [Discord]  Initializing Discord...
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Pair
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Clear
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_IsReqActive
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_SliceInfo
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_OrigMapIx
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_UidsResp
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerCP
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerLeft
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceTimes
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerInfo
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_COTDQualiInfo
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_LapsNb
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_Warmup
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceProgression
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_PlayerStatus
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_TeamsFeed_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: TMGame_Record_NewRecord
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData
-[   ScriptRuntime] [ TRAC] [17:12:57] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData_Removed
-[   ScriptRuntime] [ WARN] [17:12:57] [ManiaExchange]  DEPRECATED: UI::LoadFont() with range and fallback options is deprecated! Use the simpler overload instead.
-[   ScriptRuntime] [ TRAC] [17:12:57] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [17:12:58] [ManiaExchange]  [INFO] 67 tags loaded
-[   ScriptRuntime] [  LOG] [17:12:58] [Discord]  Discord is ready: gregonthego (ID 591029649195270149)
-[   ScriptRuntime] [ERROR] [17:12:59] [ManiaExchange]  [ERROR] Error while loading vehicles: Json value is not a string!
-[   ScriptRuntime] [ERROR] [17:12:59] [ManiaExchange]  [ERROR] TrackmaniaExchange API is not responding, it must be down.
-[   ScriptRuntime] [  LOG] [17:12:59] [ManiaExchange]  [INFO] 0 maps loaded from Play Later list.
-[   ScriptRuntime] [ TRAC] [17:12:59] [NadeoServices]  Waiting for existing token request to finish
-[   ScriptRuntime] [ TRAC] [17:13:00] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [17:13:00] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[   ScriptRuntime] [  LOG] [17:13:00] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[    ScriptEngine] [  LOG] [17:13:42]  Stopping script engine
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'Plugin_MapAudioFix'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'Discord'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'BigDecor'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'PluginManager'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'TMRL_GrabData'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'ManiaExchange'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'Controls'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'ClassicMenu'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'Stats'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'UsefulInformation'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'CheckpointCounter'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'InfiniteEmbedSize'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'MLFeedRaceData'
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  _Unload, unloading hooks and removing injected ML
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  UnregisteredMLHook objects (6) for types: MLHook_Event_ListUids_SliceInfo, MLHook_Event_ListUids_Pair, MLHook_Event_ListUids_Clear, MLHook_Event_ListUids_OrigMapIx, MLHook_Event_ListUids_IsReqActive, MLHook_Event_ListUids_UidsResp
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  UnregisteredMLHook objects (9) for types: MLHook_Event_RaceStats_PlayerCP, MLHook_Event_RaceStats_PlayerLeft, MLHook_Event_RaceStats_PlayerRaceTimes, MLHook_Event_RaceStats_PlayerInfo, MLHook_Event_RaceStats_MatchKeyPair, MLHook_Event_RaceStats_COTDQualiInfo, MLHook_Event_RaceStats_LapsNb, MLHook_Event_RaceStats_Warmup, MLHook_Event_RaceStats_PlayerRaceProgression
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_MLFeedKOs_PlayerStatus, MLHook_Event_MLFeedKOs_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: MLHook_Event_TeamsFeed_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: TMGame_Record_NewRecord
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_GhostData, MLHook_Event_GhostData_Removed
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'MLHook'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'Finetuner'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'TMRL_SaveGhost'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'NadeoServices'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'Dashboard'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'VehicleState'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'EditorDeveloper'
-[    ScriptEngine] [ TRAC] [17:13:42]  Unloading plugin 'Camera'
-[    ScriptEngine] [  LOG] [17:13:42]  Releasing script context
-[    ScriptEngine] [  LOG] [17:13:42]  Adding plugins...
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'Camera' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'EditorDeveloper' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'VehicleState' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded zipped plugin 'Dashboard' (version 1.9.7)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'NadeoServices' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded zipped plugin 'TMRL_SaveGhost' (version 0.2)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'Finetuner' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  MLHook.op/:/Logging.as (29, 1) : INFO : Compiling void RenderLogsWindow()
-[    ScriptEngine] [ WARN] [17:13:42]  MLHook.op/:/Logging.as (38, 40) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded zipped plugin 'MLHook' (version 0.5.4)
-[    ScriptEngine] [ TRAC] [17:13:42]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (279, 9) : INFO : Compiling int PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [17:13:42]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (280, 44) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [17:13:42]  MLFeedRaceData.op/:/Main.as (363, 9) : INFO : Compiling int _PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
-[    ScriptEngine] [ WARN] [17:13:42]  MLFeedRaceData.op/:/Main.as (364, 44) : WARN : Signed/Unsigned mismatch
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded zipped plugin 'MLFeedRaceData' (version 0.6.3)
-[    ScriptEngine] [ WARN] [17:13:42]  Ignoring exported dependency "MLHook" from "MLFeedRaceData" because it is already a dependency of "GergBot"
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'GergBot' (version 0.1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'InfiniteEmbedSize' (version 1.0)
-[    ScriptEngine] [ WARN] [17:13:42]  Couldn't find optional plugin dependency "PlayerState" while loading plugin "CheckpointCounter"
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded zipped plugin 'CheckpointCounter' (version 3.1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'UsefulInformation' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'Stats' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'ClassicMenu' (version 1.1)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'Controls' (version 1.0)
-[    ScriptEngine] [ WARN] [17:13:42]  Couldn't find optional plugin dependency "BetterChat" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ WARN] [17:13:42]  Couldn't find optional plugin dependency "ItemExchange" while loading plugin "ManiaExchange"
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded zipped plugin 'ManiaExchange' (version 1.3.3)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded zipped plugin 'TMRL_GrabData' (version 0.3)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'PluginManager' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'BigDecor' (version 1.0)
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded plugin 'Discord' (version 1.0)
-[    ScriptEngine] [  LOG] [17:13:42]  Adding legacy plugins...
-[    ScriptEngine] [ TRAC] [17:13:42]  Loaded legacy plugin 'Plugin_MapAudioFix' (version 1.0)
-[    ScriptEngine] [  LOG] [17:13:42]  Plugins added!
-[   ScriptRuntime] [ERROR] [17:13:42] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [ERROR] [17:13:42] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
-[   ScriptRuntime] [  LOG] [17:13:42] [GergBot]  GregBot loaded successfully!
-[   ScriptRuntime] [  LOG] [17:13:42] [CheckpointCounter]  CheckpointCounter lib is not using PlayerState for checkpoint data
-[   ScriptRuntime] [ERROR] [17:13:42] [TMRL_GrabData]  Script exception: Unable to open TCP socket for listening: Failed to bind socket
-[   ScriptRuntime] [ERROR] [17:13:42] [TMRL_GrabData]    TMRL_GrabData.op/:/main.as (line 29, column 3)
-[   ScriptRuntime] [ERROR] [17:13:42] [TMRL_GrabData]      #0  void Main() (TMRL_GrabData.op/:/main.as line 29)
-[   ScriptRuntime] [ TRAC] [17:13:42] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [  LOG] [17:13:42] [Discord]  Initializing Discord...
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Pair
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Clear
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_IsReqActive
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_SliceInfo
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_OrigMapIx
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_UidsResp
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerCP
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerLeft
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceTimes
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerInfo
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_COTDQualiInfo
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_LapsNb
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_Warmup
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceProgression
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_PlayerStatus
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_TeamsFeed_MatchKeyPair
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: TMGame_Record_NewRecord
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData
-[   ScriptRuntime] [ TRAC] [17:13:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData_Removed
-[   ScriptRuntime] [ WARN] [17:13:42] [ManiaExchange]  DEPRECATED: UI::LoadFont() with range and fallback options is deprecated! Use the simpler overload instead.
-[   ScriptRuntime] [ TRAC] [17:13:43] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [17:13:43] [ManiaExchange]  [INFO] 67 tags loaded
-[   ScriptRuntime] [  LOG] [17:13:43] [Discord]  Discord is ready: gregonthego (ID 591029649195270149)
-[   ScriptRuntime] [ERROR] [17:13:43] [ManiaExchange]  [ERROR] Error while loading vehicles: Json value is not a string!
-[   ScriptRuntime] [ERROR] [17:13:43] [ManiaExchange]  [ERROR] TrackmaniaExchange API is not responding, it must be down.
-[   ScriptRuntime] [  LOG] [17:13:43] [ManiaExchange]  [INFO] 0 maps loaded from Play Later list.
-[   ScriptRuntime] [ TRAC] [17:13:43] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [17:13:44] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[   ScriptRuntime] [  LOG] [17:13:44] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [ TRAC] [17:14:11] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_PlayMap_Local
-[   ScriptRuntime] [ TRAC] [17:14:13] [MLHook]  MLHook preparing 8 outbound messages to ML
-[   ScriptRuntime] [  LOG] [17:14:17] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:17:25] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:17:32] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:19:30] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:19:36] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:20:54] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:20:57] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:22:51] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:22:54] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:24:31] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:24:33] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:28:15] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:28:22] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:29:47] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:29:50] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:31:41] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:31:43] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:33:56] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:33:59] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:35:17] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:35:20] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:37:57] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:37:59] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:40:03] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:40:09] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:42:38] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:42:39] [GergBot]  Started sending car state.
-[     WebServices] [  LOG] [17:42:54]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [17:43:43] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [17:43:43] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [17:43:44] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [  LOG] [17:43:58] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:44:01] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:45:19] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:45:22] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:46:19] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:46:22] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:47:49] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:47:52] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:49:12] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:49:15] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:49:38] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:49:40] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:51:40] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:51:44] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:53:40] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:53:43] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:55:06] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:55:09] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:55:39] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:55:41] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [17:56:52] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [17:56:56] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:00:09] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:00:12] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:01:18] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:01:21] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:06:13] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:06:15] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:07:51] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:07:53] [GergBot]  Started sending car state.
-[   ScriptRuntime] [ TRAC] [18:09:43] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
-[   ScriptRuntime] [ TRAC] [18:09:43] [NadeoServices]  Got token for audience "NadeoLiveServices"
-[   ScriptRuntime] [  LOG] [18:11:04] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:11:26] [GergBot]  Started sending car state.
-[     WebServices] [  LOG] [18:12:54]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [18:13:43] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [18:13:44] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [18:13:44] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [  LOG] [18:30:45] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:30:48] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:32:20] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:32:22] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:33:39] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:33:41] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:34:57] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:34:59] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:36:15] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:36:17] [GergBot]  Started sending car state.
-[   ScriptRuntime] [  LOG] [18:37:33] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:37:35] [GergBot]  Started sending car state.
-[     WebServices] [  LOG] [18:42:55]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
-[   ScriptRuntime] [ TRAC] [18:43:44] [PluginManager]  Checking for plugin updates..
-[   ScriptRuntime] [ TRAC] [18:43:44] [PluginManager]  No plugin updates found!
-[   ScriptRuntime] [  LOG] [18:43:45] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
-[   ScriptRuntime] [  LOG] [18:48:10] [GergBot]  Stopped sending car state.
-[   ScriptRuntime] [  LOG] [18:48:13] [GergBot]  Started sending car state.
+[        Platform] [  LOG] [12:23:30]  Openplanet for Trackmania Next x64
+[        Platform] [ TRAC] [12:23:30]  (c) Melissa Geels 2016 - 2024
+[        Platform] [ TRAC] [12:23:30]  https://openplanet.dev/
+[        Platform] [  LOG] [12:23:30]  Openplanet starting on 2026-01-07
+[        Platform] [  LOG] [12:23:30]  Engine: 2025-07-04 07:15:08
+[        Platform] [  LOG] [12:23:30]  Openplanet: 1.28.0 (next, Public, 2025-08-16)
+[        Platform] [ TRAC] [12:23:30]  Identifier: 0x000000006867C5CC
+[        Platform] [ TRAC] [12:23:30]  Process ID: 58568
+[        Platform] [  LOG] [12:23:30]  Setting up hook callbacks...
+[        Platform] [  LOG] [12:23:32]  Semi entry initialization...
+[        Platform] [  LOG] [12:23:32]  Update branch: default
+[        Platform] [  LOG] [12:23:32]  Requesting app config with timeout 5000...
+[        Platform] [  LOG] [12:23:33]  Finding game window..
+[        Platform] [ TRAC] [12:23:33]  Window handle: 00d10dca ("Trackmania")
+[        Platform] [  LOG] [12:23:33]  Initializing meta...
+[        Platform] [  LOG] [12:23:33]  Did not find update to install.
+[     WebServices] [  LOG] [12:23:38]  NadeoServices account ID: d2f141a7-b434-47ea-b2c3-2f0ff3ca4e53
+[        Platform] [  LOG] [12:23:39]  Loop entry initialization...
+[        Platform] [  LOG] [12:23:39]  Hooking WndProc...
+[        Platform] [ TRAC] [12:23:39]  Initializing sockets...
+[        Platform] [ TRAC] [12:23:39]  Adding user library path...
+[        Platform] [  LOG] [12:23:39]  Initializing audio...
+[           Audio] [  LOG] [12:23:39]  Setting playback device to "Speakers (High Definition Audio Device)"
+[        Platform] [  LOG] [12:23:39]  Initializing scripting...
+[    ScriptEngine] [  LOG] [12:23:40]  Registered 2647 classes
+[        Platform] [ TRAC] [12:23:40]  Writing type definitions to file: "C:/Users/panda/OpenplanetNext/Openplanet.h"
+[        Platform] [  LOG] [12:23:40]  Writing json to file: "C:/Users/panda/OpenplanetNext/OpenplanetNext.json"
+[        Platform] [  LOG] [12:23:40]  Dumping Openplanet documentation to C:/Users/panda/OpenplanetNext/OpenplanetCore.json
+[        Platform] [  LOG] [12:23:40]  Initializing overlay...
+[         Overlay] [  LOG] [12:23:40]  Loading user style: C:/Program Files/Epic Games/TrackmaniaNext/Openplanet/DefaultStyle.toml
+[        Platform] [  LOG] [12:23:40]  Beginning script engine...
+[    ScriptEngine] [  LOG] [12:23:40]  Adding plugins...
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded plugin 'Camera' (version 1.0)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded plugin 'EditorDeveloper' (version 1.0)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded plugin 'VehicleState' (version 1.0)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded zipped plugin 'Dashboard' (version 1.9.7)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded plugin 'NadeoServices' (version 1.0)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded zipped plugin 'TMRL_SaveGhost' (version 0.2)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded plugin 'Finetuner' (version 1.0)
+[    ScriptEngine] [ TRAC] [12:23:41]  MLHook.op/:/Logging.as (29, 1) : INFO : Compiling void RenderLogsWindow()
+[    ScriptEngine] [ WARN] [12:23:41]  MLHook.op/:/Logging.as (38, 40) : WARN : Signed/Unsigned mismatch
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded zipped plugin 'MLHook' (version 0.5.4)
+[    ScriptEngine] [ TRAC] [12:23:41]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (279, 9) : INFO : Compiling int PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
+[    ScriptEngine] [ WARN] [12:23:41]  MLFeedRaceData.op/:/MLFeed_ExportShared.as (280, 44) : WARN : Signed/Unsigned mismatch
+[    ScriptEngine] [ TRAC] [12:23:41]  MLFeedRaceData.op/:/Main.as (363, 9) : INFO : Compiling int _PlayerCpInfo::get_RoyalTA_SegmentFinishedAt(int) const
+[    ScriptEngine] [ WARN] [12:23:41]  MLFeedRaceData.op/:/Main.as (364, 44) : WARN : Signed/Unsigned mismatch
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded zipped plugin 'MLFeedRaceData' (version 0.6.3)
+[    ScriptEngine] [ERROR] [12:23:41]  Invalid file hash for "info.toml"
+[    ScriptEngine] [ERROR] [12:23:41]  Plugin is not suitable for the current signature mode.
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded plugin 'InfiniteEmbedSize' (version 1.0)
+[    ScriptEngine] [ WARN] [12:23:41]  Couldn't find optional plugin dependency "PlayerState" while loading plugin "CheckpointCounter"
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded zipped plugin 'CheckpointCounter' (version 3.1.0)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded plugin 'UsefulInformation' (version 1.0)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded plugin 'Stats' (version 1.0)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded plugin 'ClassicMenu' (version 1.1)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded plugin 'Controls' (version 1.0)
+[    ScriptEngine] [ WARN] [12:23:41]  Couldn't find optional plugin dependency "BetterChat" while loading plugin "ManiaExchange"
+[    ScriptEngine] [ WARN] [12:23:41]  Couldn't find optional plugin dependency "ItemExchange" while loading plugin "ManiaExchange"
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded zipped plugin 'ManiaExchange' (version 1.3.3)
+[    ScriptEngine] [ TRAC] [12:23:41]  Loaded zipped plugin 'TMRL_GrabData' (version 0.3)
+[    ScriptEngine] [ TRAC] [12:23:42]  Loaded plugin 'PluginManager' (version 1.0)
+[    ScriptEngine] [ TRAC] [12:23:42]  Loaded plugin 'BigDecor' (version 1.0)
+[    ScriptEngine] [ TRAC] [12:23:42]  Loaded plugin 'Discord' (version 1.0)
+[    ScriptEngine] [  LOG] [12:23:42]  Adding legacy plugins...
+[    ScriptEngine] [ TRAC] [12:23:42]  Loaded legacy plugin 'Plugin_MapAudioFix' (version 1.0)
+[    ScriptEngine] [  LOG] [12:23:42]  Plugins added!
+[        Platform] [  LOG] [12:23:42]  Initialized!
+[   ScriptRuntime] [ERROR] [12:23:42] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [ERROR] [12:23:42] [MLFeedRaceData]  DEPRECATED: awaitable.WithRunContext() is no longer valid. Use Meta::StartWithRunContext instead.
+[   ScriptRuntime] [  LOG] [12:23:42] [CheckpointCounter]  CheckpointCounter lib is not using PlayerState for checkpoint data
+[   ScriptRuntime] [  LOG] [12:23:42] [TMRL_GrabData]  33: Created server socket
+[   ScriptRuntime] [  LOG] [12:23:42] [TMRL_GrabData]  33: Server socket ready
+[   ScriptRuntime] [ TRAC] [12:23:42] [PluginManager]  Checking for plugin updates..
+[   ScriptRuntime] [  LOG] [12:23:42] [Discord]  Initializing Discord...
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Pair
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_Clear
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_IsReqActive
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_SliceInfo
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_OrigMapIx
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_ListUids_UidsResp
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerCP
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerLeft
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceTimes
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerInfo
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_COTDQualiInfo
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_LapsNb
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_Warmup
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_RaceStats_PlayerRaceProgression
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_PlayerStatus
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_MLFeedKOs_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_TeamsFeed_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: TMGame_Record_NewRecord
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData
+[   ScriptRuntime] [ TRAC] [12:23:42] [MLFeedRaceData]  registered MLHook event for type: MLHook_Event_GhostData_Removed
+[   ScriptRuntime] [ WARN] [12:23:42] [ManiaExchange]  DEPRECATED: UI::LoadFont() with range and fallback options is deprecated! Use the simpler overload instead.
+[   ScriptRuntime] [ TRAC] [12:23:42] [PluginManager]  No plugin updates found!
+[   ScriptRuntime] [  LOG] [12:23:43] [ManiaExchange]  [INFO] 68 tags loaded
+[   ScriptRuntime] [  LOG] [12:23:46] [ManiaExchange]  [INFO] 12 vehicles loaded
+[   ScriptRuntime] [  LOG] [12:23:46] [Discord]  Discord is ready: gregonthego (ID 591029649195270149)
+[   ScriptRuntime] [  LOG] [12:23:46] [ManiaExchange]  [INFO] 33 map sorting orders loaded
+[   ScriptRuntime] [  LOG] [12:23:47] [ManiaExchange]  [INFO] 15 mappack sorting orders loaded
+[   ScriptRuntime] [  LOG] [12:23:48] [ManiaExchange]  [INFO] 13 map types loaded
+[   ScriptRuntime] [  LOG] [12:23:48] [ManiaExchange]  [INFO] 18 seasons loaded
+[   ScriptRuntime] [  LOG] [12:23:48] [ManiaExchange]  [INFO] 0 maps loaded from Play Later list.
+[   ScriptRuntime] [ TRAC] [12:23:48] [NadeoServices]  Requesting token for audience "NadeoLiveServices"
+[   ScriptRuntime] [ TRAC] [12:23:48] [NadeoServices]  Got token for audience "NadeoLiveServices"
+[   ScriptRuntime] [  LOG] [12:23:48] [ManiaExchange]  [INFO] NadeoServices - Loading Favorite tracks...
+[   ScriptRuntime] [ TRAC] [12:25:25] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_Campaign_Local
+[   ScriptRuntime] [ TRAC] [12:25:28] [MLHook]  MLHook preparing 8 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:26:39] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:26:40] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:28:05] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_Campaign_Local to 
+[   ScriptRuntime] [ TRAC] [12:28:10] [MLFeedRaceData]  MLFeedKOs: GM change from:  to TM_Campaign_Local
+[   ScriptRuntime] [ TRAC] [12:28:12] [MLHook]  MLHook preparing 8 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:29:49] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:29:50] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:32:18] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:32:20] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ WARN] [12:36:37] [MLFeedRaceData]  Player left that wasn't in the player list: 0vFBp7Q0R-qywy8P88pOUw
+[   ScriptRuntime] [ TRAC] [12:36:37] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:36:38] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:38:45] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:38:46] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:40:50] [MLHook]  MLHook preparing 2 outbound messages to ML
+[   ScriptRuntime] [ TRAC] [12:40:50] [MLFeedRaceData]  MLFeedKOs: GM change from: TM_Campaign_Local to 
+[        Platform] [  LOG] [12:40:59]  Game is cleanly shutting down
+[        Platform] [  LOG] [12:40:59]  Saving settings
+[           Audio] [  LOG] [12:40:59]  Shutting down audio engine
+[    ScriptEngine] [  LOG] [12:40:59]  Stopping script engine
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'Plugin_MapAudioFix'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'Discord'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'BigDecor'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'PluginManager'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'TMRL_GrabData'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'ManiaExchange'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'Controls'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'ClassicMenu'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'Stats'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'UsefulInformation'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'CheckpointCounter'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'InfiniteEmbedSize'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'MLFeedRaceData'
+[   ScriptRuntime] [ TRAC] [12:40:59] [MLFeedRaceData]  _Unload, unloading hooks and removing injected ML
+[   ScriptRuntime] [ TRAC] [12:40:59] [MLFeedRaceData]  UnregisteredMLHook objects (6) for types: MLHook_Event_ListUids_SliceInfo, MLHook_Event_ListUids_Pair, MLHook_Event_ListUids_Clear, MLHook_Event_ListUids_OrigMapIx, MLHook_Event_ListUids_IsReqActive, MLHook_Event_ListUids_UidsResp
+[   ScriptRuntime] [ TRAC] [12:40:59] [MLFeedRaceData]  UnregisteredMLHook objects (9) for types: MLHook_Event_RaceStats_PlayerCP, MLHook_Event_RaceStats_PlayerLeft, MLHook_Event_RaceStats_PlayerRaceTimes, MLHook_Event_RaceStats_PlayerInfo, MLHook_Event_RaceStats_MatchKeyPair, MLHook_Event_RaceStats_COTDQualiInfo, MLHook_Event_RaceStats_LapsNb, MLHook_Event_RaceStats_Warmup, MLHook_Event_RaceStats_PlayerRaceProgression
+[   ScriptRuntime] [ TRAC] [12:40:59] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_MLFeedKOs_PlayerStatus, MLHook_Event_MLFeedKOs_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [12:40:59] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: MLHook_Event_TeamsFeed_MatchKeyPair
+[   ScriptRuntime] [ TRAC] [12:40:59] [MLFeedRaceData]  UnregisteredMLHook objects (1) for types: TMGame_Record_NewRecord
+[   ScriptRuntime] [ TRAC] [12:40:59] [MLFeedRaceData]  UnregisteredMLHook objects (2) for types: MLHook_Event_GhostData, MLHook_Event_GhostData_Removed
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'MLHook'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'Finetuner'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'TMRL_SaveGhost'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'NadeoServices'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'Dashboard'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'VehicleState'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'EditorDeveloper'
+[    ScriptEngine] [ TRAC] [12:40:59]  Unloading plugin 'Camera'
+[    ScriptEngine] [  LOG] [12:40:59]  Releasing script context
+[        Platform] [  LOG] [12:41:02]  Saving settings
+[           Audio] [  LOG] [12:41:02]  Shutting down audio engine
+[    ScriptEngine] [  LOG] [12:41:02]  Stopping script engine
+[    ScriptEngine] [  LOG] [12:41:02]  Releasing script context
+[        Platform] [  LOG] [12:41:02]  Terminating Openplanet..
+[           Audio] [  LOG] [12:41:02]  Shutting down audio engine

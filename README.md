@@ -9,20 +9,23 @@ Each of the below experiment entries links to the relevant section within EXPERI
 
 The Primary experiments are listed below, ordered from most recent to earliest in development:
 
-1. **[LIDAR with Gaussian Policy](/EXPERIMENTS.md#lidar-with-gaussian-policy--lidargausspy):  [(lidarGauss.py)](/Scripts/Python/lidarGauss.py)**
-The most recent experiment in the series uses “LIDAR” with Gaussian policy and is built using PyTorch and a Gaussian policy. The output of this model is three values that are sent through the tanh function to return a real number on the scale of [-1,1].
+1. **[Ghost Trajectory Agent](/EXPERIMENTS.md#ghost-trajectory-agent): [(RL_Ghost_PPO_Agent.py)](/Scripts/Python/RL_Ghost_PPO_Agent.py)**
+   A PyTorch-based agent that utilizes a "Ghost" reward system. It records the path of the best previous run and shapes the reward function to incentivize the agent to follow this optimal trajectory (minimizing cross-track error) while maintaining high speed.
 
-2. **[LIDAR with Softmax Policy](/EXPERIMENTS.md#lidar-with-softmax-policy--lidarpy):  [(lidar.py)](/Scripts/Python/lidar.py)**
-An experiment using “LIDAR” with a PyTorch model that uses discrete softmax outputs for the two sets of three values represented by movement and turning.
+2. **[LIDAR with Gaussian Policy](/EXPERIMENTS.md#lidar-with-gaussian-policy): [(RL_LIDAR_Gaussian_Agent.py)](/Scripts/Python/RL_LIDAR_Gaussian_Agent.py)**
+   The most recent experiment in the series uses “LIDAR” with Gaussian policy and is built using PyTorch and a Gaussian policy. The output of this model is three values that are sent through the tanh function to return a real number on the scale of [-1,1].
 
-3. **[CNN with PyTorch](/EXPERIMENTS.md#cnn-with-pytorch--cnntorchpy):  [(cnnTorch.py)](/Scripts/Python/cnnTorch.py)**
-A PyTorch convolutional neural network that combines grayscale screenshots and telemetry data to predict actions.
+3. **[LIDAR with Softmax Policy](/EXPERIMENTS.md#lidar-with-softmax-policy): [(RL_LIDAR_Softmax_Agent.py)](/Scripts/Python/RL_LIDAR_Softmax_Agent.py)**
+   An experiment using “LIDAR” with a PyTorch model that uses discrete softmax outputs for the two sets of three values represented by movement and turning.
 
-4. **[CNN with TensorFlow](/EXPERIMENTS.md#cnn-with-tensorflow--cnnpy):  [(cnn.py)](/Scripts/Python/cnn.py)**
-A TensorFlow model that uses 2D Convolutional Long Short Term Memory (ConvLSTM2D) for the CNN layers.
+4. **[CNN with PyTorch](/EXPERIMENTS.md#cnn-with-pytorch): [(RL_CNN_DDQN_Agent.py)](/Scripts/Python/RL_CNN_DDQN_Agent.py)**
+   A PyTorch convolutional neural network that combines grayscale screenshots and telemetry data to predict actions.
 
-5. **[Basic DNN](/EXPERIMENTS.md#basic-dnn--gamestatesonlypy):  [(gameStateOnly.py)](/Scripts/Python/gameStateOnly.py)**
-A simple deep neural network built with TensorFlow that relies solely on telemetry inputs, without any visual information.
+5. **[CNN with TensorFlow](/EXPERIMENTS.md#cnn-with-tensorflow): [(RL_CNN_ConvLSTM_TensorFlow.py)](/Scripts/Python/RL_CNN_ConvLSTM_TensorFlow.py)**
+   A TensorFlow model that uses 2D Convolutional Long Short Term Memory (ConvLSTM2D) for the CNN layers.
+
+6. **[Basic DNN](/EXPERIMENTS.md#basic-dnn): [(RL_DNN_Telemetry_Only.py)](/Scripts/Python/RL_DNN_Telemetry_Only.py)**
+   A simple deep neural network built with TensorFlow that relies solely on telemetry inputs, without any visual information.
 
 ## Requirements for installation
 
