@@ -40,25 +40,11 @@ void Update(float dt) {
     }
 
     auto raceData = MLFeed::GetRaceData_V4();
-    //auto cpCount = MLFeed::HookRaceStatsEventsBase();
-    //print(raceData.CPsToFinish);
-    // const string localName = raceData.SortedPlayers_Race[0];
-    // if (localName == "") {
-    //     print("Local player name is empty.");
-    //     return;
-    // }
-
     auto LeadinRace = cast<MLFeed::PlayerCpInfo_V4>(raceData.SortedPlayers_Race[0]);
     if (LeadinRace is null) {
         print("LeadinRace is null for local player.");
         return;
     }
-    //auto playerInfo = raceData.GetPlayer_V4(localName);
-    // if (playerInfo is null) {
-    //     print("Player info for local player is null.");
-    //     return;
-    // }
-
 
     auto player = cast<CSmPlayer>(playground.GameTerminals[0].GUIPlayer);
     auto controlled = cast<CSmScriptPlayer>(player.ScriptAPI);
@@ -79,27 +65,9 @@ void Update(float dt) {
             return;
         }
     }
-    //socket.SetNoDelay(true);
-    // PlayerState::sTMData@ TMData = PlayerState::GetRaceData();
-    // print(TMData.dEventInfo.CheckpointChange);
-    // print(PlayerState::GetRaceData().dPlayerInfo.NumberOfCheckpointsPassed);
-    // print(player.CurrentLaunchedRespawnLandmarkIndex);
-    // print(LeadinRace.cpCount);
-    // print(controlled.AccelCoef);
-    // print(controlled.DisplaySpeed);
-    // print(controlled.Distance);
-    // print(controlled.AimDirection);
-    //print(LeadinRace.CpTimes);
     float forwardVel = Math::Dot(controlled.Velocity, controlled.AimDirection);
-    //print(forwardVel);
-    // print(controlled.Speed);
     uint64 ts = Time::Now;
-    string msg = ts + ',' + forwardVel + ',' + controlled.Position.x + ',' + controlled.Position.y + ',' + controlled.Position.z + ',' + LeadinRace.cpCount + "\n";
-    // string msg = "TS=" + ts + "\n";
-    // msg += "Speed=" + controlled.Speed + "\n";
-    // msg += "Position=" + "x:" + controlled.Position.x + " y:" + controlled.Position.y + " z:" + controlled.Position.z + "\n";
-    // msg += "Velocity=" + "x:" + controlled.Velocity.x + " y:" + controlled.Velocity.y + " z:" + controlled.Velocity.z + "\n";
-    // msg += "Checkpoint=" + LeadinRace.cpCount  + "\n";
+    string msg = ts + ',' + forwardVel + ',' + controlled.Position.x + ',' + controlled.Position.y + ',' + controlled.Position.z + ',' + LeadinRace.cpCount + ',' + controlled.EngineCurGear + ',' + controlled.EngineRpm + ',' + LeadinRace.cpTimes.Length + "\n";
 
     socket.WriteRaw(msg);   
 }

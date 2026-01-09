@@ -1,5 +1,5 @@
 // Maniaplanet engine classes documentation for 2025-07-04 07:15:08
-// Generated with Openplanet 1.27.12 (next, Public, 2025-07-01)
+// Generated with Openplanet 1.28.0 (next, Public, 2025-08-16)
 // https://openplanet.dev/
 
 using namespace MwFoundations;
