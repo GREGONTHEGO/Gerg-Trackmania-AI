@@ -23,6 +23,8 @@ Simultaneously, the Python client was set up to send control commands (throttle,
 
 **Experiment 2: Simple Reward**
 
+https://github.com/user-attachments/assets/5507724a-d6ce-42fa-a510-b82c61f4d2be
+
 With the communication pipeline established, I implemented a basic Deep Neural Network (DNN) using TensorFlow. The input layer took the telemetry data, and the output layer provided action probabilities.
 
 The first reward function was straightforward:
@@ -45,6 +47,8 @@ This iteration improved performance significantly. The agent began to associate 
 A TensorFlow model that uses 2D Convolutional Long Short Term Memory (ConvLSTM2D) for the CNN layers.
 
 **Experiment 4: Vision**
+
+[![YouTube Video](https://img.youtube.com/vi/-kLVGGpw-KU/0.jpg)](https://youtube.com/watch?v=-kLVGGpw-KU)
 
 Transitioning from telemetry-only to visual input, I integrated a Convolutional Neural Network (CNN). Using DXCam, I captured the game window in real-time, converted the frames to grayscale, and resized them to reduce computational load.
 
@@ -69,6 +73,8 @@ I also optimized the screen capture pipeline, ensuring that frame buffering and 
 An experiment using “LIDAR” with a PyTorch model that uses discrete softmax outputs for the two sets of three values represented by movement and turning.
 
 **Experiment 6: LIDAR**
+
+[![YouTube Video](https://img.youtube.com/vi/FMvDgTzFy70/0.jpg)](https://youtube.com/watch?v=FMvDgTzFy70)
 
 Processing full images is computationally expensive and can include noise (like track decorations or lighting changes) that is irrelevant to driving physics. To simplify the input while retaining spatial awareness, I implemented a simulated LIDAR system.
 
