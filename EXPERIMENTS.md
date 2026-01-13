@@ -1,6 +1,6 @@
 # Project Log: Reinforcement Learning in Trackmania
 
-This document outlines the five major stages of developing my reinforcement learning system which is designed to control a vehicle in Trackmania (2020). Each subsection reflects iterative improvements, experiments, and lessons learned across areas including telemetry extraction, model design, reward engineering, and architectural changes.
+This document outlines the major stages of developing my reinforcement learning system which is designed to control a vehicle in Trackmania (2020). Each subsection reflects iterative improvements, experiments, and lessons learned across areas including telemetry extraction, model design, reward engineering, and architectural changes.
 
 ## Table of Contents
 - [Basic DNN](/EXPERIMENTS.md#basic-dnn--gamestatesonlypy)
@@ -8,6 +8,7 @@ This document outlines the five major stages of developing my reinforcement lear
 - [CNN with PyTorch](/EXPERIMENTS.md#cnn-with-pytorch--cnntorchpy)
 - [LIDAR with Softmax Policy](/EXPERIMENTS.md#lidar-with-softmax-policy--lidarpy)
 - [LIDAR with Gaussian Policy](/EXPERIMENTS.md#lidar-with-gaussian-policy--lidargausspy)
+- [Ghost Trajectory Agent](/EXPERIMENTS.md#ghost-trajectory-agent)
 
 
 ## [Basic DNN](/README.md):  [(gameStateOnly.py)](/Scripts/Python/gameStateOnly.py)
@@ -16,95 +17,71 @@ A simple deep neural network built with TensorFlow that relies solely on telemet
 
 **Experiment 1: Retrieving Game Data and Controlling the Vehicle**
 
-The initial goal was to extract real-time game data from Trackmania (2020) and use that data to control the vehicle using Python. This was accomplished through Openplanet, a modding framework that enables custom plugin development for Trackmania using AngelScript.
-To implement the plugin, I wrote an 'info.toml' and a script located in 'plugins/GergBot/'. This plugin adds a menu item in Openplanet that launches a local socket server. The socket transmits the car's current speed, position, velocity, and checkpoint count on each update. However, there were two issues identified early:
-1. No frame-rate control: Data was sent as fast as possible, leading to inconsistencies in synchronization and strange reward behaviors.
+The initial goal was to extract real-time game data from Trackmania (2020) and use that data to control the vehicle using Python. This was accomplished through OpenPlanet, a scripting platform for Trackmania. By writing a plugin in AngelScript, I was able to access internal game state variables (speed, position, RPM, gear, etc.) and stream them via a TCP socket to a Python client.
 
-  - *Resolved by having the listener process only the most recent state per message batch.*
+Simultaneously, the Python client was set up to send control commands (throttle, brake, steering) back to the game. I used the pynput library to simulate keyboard presses, mapping the model’s decisions to 'W', 'A', 'S', 'D' keys. A critical challenge here was latency; ensuring that the data extraction, model inference, and key-press execution happened fast enough to drive the car effectively at high speeds.
 
-2. TOML structuring confusion: The 'meta' and 'script' sections were initially misused, which are crucial for proper plugin registration.
+**Experiment 2: Simple Reward**
 
-  - *Resolved by putting the dependencies in the scripts section and everything else in the meta section*
+With the communication pipeline established, I implemented a basic Deep Neural Network (DNN) using TensorFlow. The input layer took the telemetry data, and the output layer provided action probabilities.
 
-On the Python side, I created a function that runs two threads:
-1. One that listens to the socket and updates a global 'latest_state' variable
-2. The other makes movement decisions, such as if speed is below 50 m/s, it presses the gas; otherwise, it lets off.
+The first reward function was straightforward:
+- **Reward = Speed × 1.0**
 
-During this phase, it was also discovered that 'pynput' holds keys down continuously until they are explicitly released, which causes unwanted keypress spam when switching windows.
+The hypothesis was that rewarding speed would naturally encourage the car to move forward and avoid crashing (which reduces speed to zero). While the car did learn to hold the accelerator, it struggled with corners, often crashing into walls because it didn't understand the concept of steering to maintain speed over time. It simply maximized instantaneous speed.
 
-**Experiment 2: Building the first Neural Network**
+**Experiment 3: Complex Reward**
 
-https://github.com/user-attachments/assets/5507724a-d6ce-42fa-a510-b82c61f4d2be
+To address the shortcomings of the simple reward, I designed a more sophisticated reward function. This version incorporated:
+- **Checkpoint Reward:** A large bonus (+100) for passing a checkpoint.
+- **Velocity Vector Analysis:** Rewarding velocity specifically in the direction of the track (using position deltas) rather than just raw scalar speed.
+- **Penalties:** Negative rewards for wall collisions or dropping below a certain speed threshold.
 
-This stage focused on building the machine learning infrastructure. I restructured the Python codebase by adding:
+This iteration improved performance significantly. The agent began to associate "progress" (checkpoints) with high rewards. However, tuning the balance between the speed reward and the checkpoint bonus proved difficult. If the checkpoint bonus was too high, the agent would sometimes drive erratically just to hit the checkpoint, ignoring the optimal racing line.
 
-- genModel(): A function to generate a neural network with 8 inputs, two hidden layers of 1024 neurons, and 4 outputs (forward, backward, left, and right)
-- compute_reward(): speed-based reward
-- policy_loss(): basic TensorFlow policy
-- train(): train a given model on data from inference
-- inference(): updated to call the function in real time and store the information
-
-The inference function would gather state-action pairs, then train after a batch of runs. The first version succeeded in moving the car; however, due to a lack of synchronization between the plugin and Python threads, state sequences were mismatched. This mismatch has been fixed in more recent versions. (The fix was to take the most recent state each time the connection received 1024 bytes) The model, at one point, mistakenly learned that launching off a ramp (to achieve high speed briefly) was the optimal behavior.
-
-**Experiment 3: Teaching the Model to Drive Straight**
-
-The objective here was to get the model to learn basic straight-line driving. This turned out to be more difficult than expected due to reward misinterpretation:
-
-- Penalizing deceleration caused the model to reverse and get stuck.
-- Raw inputs with large position values resulted in spinning. (did not initialize the weights systematically)
-- The model occasionally turned sharply and became stuck due to a lack of penalty in the lateral movement.
-
-The reward function was refined to:
-
-- Provide positive reinforcement for speed.
-- Add a large bonus if a full episode performed better than prior ones.
-
-Eventually, the model began to drive further and more consistently. A video demonstration is linked above. The speed value directly from Trackmania was positive when going forward or backward. However, when the velocity vector (in m/s) is projected onto the aim direction using a dot product, positive values represent forward movement, while negative values indicate reverse movement. Although the model successfully learned to apply forward motion consistently, it often failed to learn turning behaviors. The model converged toward always accelerating as the most reliable way to earn positive rewards, neglecting the importance of steering for faster map completion.
 
 ## [CNN with TensorFlow](/README.md):  [(cnn.py)](/Scripts/Python/cnn.py)
 
-This experiment used a TensorFlow model that uses a ConvLSTM2D (ConvLSTM2D not in PyTorch). Although the model functions as intended, it was constrained to run on the CPU due to an incompatibility between the installed CUDA version and TensorFlow. Multiple attempts were made to enable GPU acceleration, but working configurations could not connect reliably to the local socket server.
+A TensorFlow model that uses 2D Convolutional Long Short Term Memory (ConvLSTM2D) for the CNN layers.
 
-**Experiment 4: Integrating Convolutional Neural Networks (CNNs)**
+**Experiment 4: Vision**
 
-[![YouTube Video](https://img.youtube.com/vi/-kLVGGpw-KU/0.jpg)](https://youtube.com/watch?v=-kLVGGpw-KU)
+Transitioning from telemetry-only to visual input, I integrated a Convolutional Neural Network (CNN). Using DXCam, I captured the game window in real-time, converted the frames to grayscale, and resized them to reduce computational load.
 
-This next stage introduced image-based perception and transitioned the project from TensorFlow to PyTorch for improved performance and GPU compatibility.
-For visual input, the DXCam library was used to capture a grayscale subsection of the game screen in real time. Images were resized to 200x100 and stacked as sequences of recent frames, providing temporal context. Initially, 10-frame stacks were used, but this was later reduced to 5  frames to optimize relevance and memory usage.
+The architecture used `ConvLSTM2D` layers to process a stack of frames. The idea was that a single frame gives position, but a stack of frames gives the model a sense of motion and acceleration (temporal dynamics).
+
+*Challenge:* The primary bottleneck became the training loop speed. Capturing images, processing them with TensorFlow on the CPU (or inefficient GPU transfer), and running backpropagation resulted in a low frame rate for the agent. This latency made it impossible for the agent to react to sudden turns or obstacles in real-time.
+
 
 ## [CNN with PyTorch](/README.md):  [(cnnTorch.py)](/Scripts/Python/cnnTorch.py)
 
-This experiment used a PyTorch convolutional neural network that combined grayscale screenshots and telemetry data to predict actions. Unlike the TensorFlow model, this version does not include Convolutional LSTM or 3D convolutions to process temporal information. Instead, image sequences are treated as additional channels in a single stacked input.
+A PyTorch convolutional neural network that combines grayscale screenshots and telemetry data to predict actions.
 
-**Experiment 5: Switching libraries**
+**Experiment 5: PyTorch**
 
-Due to limitations in TensorFlow's GPU integration and the lack of a native ConvLSTM2D in PyTorch, the project explored alternative solutions such as 3D convolutions and LSTMs followed by 2D convolution layers. These approaches were intended to enable the model to learn spatiotemporal features from visual input. However, 3D convolutions proved too computationally expensive, and the LSTM-based models failed to train effectively. As a result, the model was simplified to use only 2D convolutions.
+Due to the performance issues with TensorFlow in this specific real-time setup, I migrated the project to PyTorch. PyTorch’s dynamic computation graph and efficient tensor operations allowed for faster inference and training loops.
 
-After properly installing PyTorch with CUDA support, training performance increased significantly, reducing training times from around 5 minutes per episode to 5 seconds. This allowed for faster experimentation and tuning as well as faster inference.
+I also optimized the screen capture pipeline, ensuring that frame buffering and tensor conversion happened asynchronously where possible. This reduction in latency allowed the CNN agent to actually "see" a corner approaching and react in time. The model architecture remained a CNN processing stacked frames, but the improved throughput allowed for more complex experimentation with hyperparameters.
 
-To improve learning efficiency:
-- The code base was modified to store multiple runs per training epoch, rather than training on the single best run.
-- A best-run buffer was introduced, saving the highest-performing run observed so far. This "elite" run was combined with newly collected data from each epoch to reinforce previously successful strategies.
-
-Despite these upgrades, limitations in training data diversity and screen variations posed challenges for the CNN to generalize across runs. The training images were captured from similar camera positions and mostly from early map segments, resulting in highly repetitive visual inputs. Without enough variation in training the CNN would not be very helpful in determining driving behavior.
 
 ## [LIDAR with Softmax Policy](/README.md):  [(lidar.py)](/Scripts/Python/lidar.py)
 
-A PyTorch experiment that uses discrete softmax outputs for the two sets of three values represented by movement and turning. This approach emerged from the need for a more structured input format that could provide consistent, meaningful data compared to image-based models.
+An experiment using “LIDAR” with a PyTorch model that uses discrete softmax outputs for the two sets of three values represented by movement and turning.
 
-**Experiment 6: Transition to LIDAR-Based Perception and Reward Engineering**
+**Experiment 6: LIDAR**
 
-[![YouTube Video](https://img.youtube.com/vi/FMvDgTzFy70/0.jpg)](https://youtube.com/watch?v=FMvDgTzFy70)
+Processing full images is computationally expensive and can include noise (like track decorations or lighting changes) that is irrelevant to driving physics. To simplify the input while retaining spatial awareness, I implemented a simulated LIDAR system.
 
-Given the resource constraints for training convolutional networks effectively, this phase explored an alternative input representation using simulated LIDAR-style data. This approach draws inspiration from Trackmania reinforcement learning projects, where rays are cast from the vehicle to estimate distances to nearby walls.
-Initial attempts at hand-crafting ray-tracing calculations were unsuccessful. Progress accelerated after adopting the equations presented in [Laurens Neinders ' Bachelor's thesis](https://essay.utwente.nl/96153/1/Neinders_BA_EEMCS.pdf), which provided a precise geometric method for LIDAR simulation.
-After extensive tuning, the system produces reasonably accurate distance measurements. As such, a new model architecture was developed that replaced the image inputs with LIDAR vectors. The reward function was also revised to include:
-- Penalties for proximity to side walls.
-- Positive reinforcement for maintaining balanced positioning between borders.
+*Implementation:*
+- I wrote a script to cast rays from the car’s position in the captured image.
+- By detecting the contrast between the track (usually grey/black) and the walls/grass, the system calculated the distance to the nearest obstacle along several angles.
+
+This "LIDAR" data [d1, d2, d3...] was fed into the network instead of the raw pixel data. This drastically reduced the input dimension, leading to faster training. The model used a Softmax policy to classify actions into discrete categories (e.g., Turn Left, Straight, Turn Right). The agent became much better at wall avoidance, as the "distance to wall" was now a direct numerical input feature rather than a feature that had to be learned from pixels.
+
 
 ## [LIDAR with Gaussian Policy](/README.md):  [(lidarGauss.py)](/Scripts/Python/lidarGauss.py)
 
-The most recent experiment in the series is built using PyTorch and a Gaussian policy. The model in this file takes simulated LIDAR data along with five telemetry inputs and produces three values representing movement decisions. These outputs are mapped to game controls: forward, backward, and turning. Compared to its predecessor (lidar.py), aside from changing the policy, this model features a larger architecture and updated reward functions.
+The most recent experiment in the series uses “LIDAR” with Gaussian policy and is built using PyTorch and a Gaussian policy. The output of this model is three values that are sent through the tanh function to return a real number on the scale of [-1,1]. The model produces three values representing movement decisions. These outputs are mapped to game controls: forward, backward, and turning. Compared to its predecessor (lidar.py), aside from changing the policy, this model features a larger architecture and updated reward functions.
 
 **Experiment 7: Emulate Others**
 
@@ -118,3 +95,27 @@ These changes were inspired by architectural strategies found in the [TMRL proje
 Some approaches rely on rewarding increased distance traveled along a predefined map path. However, this project intentionally avoids that method in order to prevent the model from overfitting to the predefined map path.
 
 
+## [Ghost Trajectory Agent](/README.md): [(RL_Ghost_PPO_Agent.py)](/Scripts/Python/RL_Ghost_PPO_Agent.py)
+
+**(Formerly `cnnTorch.py`)**
+
+This experiment represents a shift from purely abstract reward shaping (speed/distance) to a demonstration-guided approach, reverting to a CNN architecture (rather than LIDAR) to capture the visual cues of the ghost car.
+
+**Experiment 8: Follow the Ghost**
+
+Previous models struggled to find the optimal racing line solely through exploration; they would often learn to drive safely but slowly, or fast but erratically. To solve this, I implemented a "Ghost" system, similar to the ghost cars found in racing games.
+
+* **Mechanism:** The agent records the trajectory (positions and timestamps) of its best successful run. This becomes the "Ghost Path".
+* **Reward Function:** Instead of just rewarding speed, the reward now includes a **Cross Track Error** penalty. We calculate the distance between the car's current position and the nearest point on the Ghost Path.
+    * **High Reward:** High speed AND low distance to the Ghost Path.
+    * **Penalty:** Deviating too far from the optimal line.
+
+This allows the agent to iteratively improve. It starts by following a crude successful run (forced forward bias). Once it accidentally finds a faster line or hits a further checkpoint, that new run becomes the new Ghost, and the agent is then trained to replicate that superior behavior.
+
+**Run Comparison:**
+
+<img width="1200" height="1200" alt="best_path_plot" src="https://github.com/user-attachments/assets/3e230d46-90cc-46fe-aaff-31e89dd5715f" />
+*Run _0: The agent survives by essentially dragging itself along the wall. This is indicated by the very smooth, unnatural line. While this minimizes crash penalties, it shows the model is optimizing for survival mechanics rather than proper driving physics.*
+
+<img width="1200" height="1200" alt="best_path_plot_1" src="https://github.com/user-attachments/assets/c34c42b5-6240-4744-8084-242e21ccd9c6" />
+*Run _1: The best overall run. This represents a significant improvement over the previous run; rather than simply sliding against the wall, the agent actively bounces off the walls and steers to maintain momentum. The jagged line indicates the agent is making active steering decisions to correct its path, demonstrating a better understanding of vehicle control.*
