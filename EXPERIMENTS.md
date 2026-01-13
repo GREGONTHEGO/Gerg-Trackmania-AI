@@ -120,10 +120,10 @@ This allows the agent to iteratively improve. It starts by following a crude suc
 
 **Run Comparison:**
 
-<img width="300" height="300" alt="best_path_plot" src="https://github.com/user-attachments/assets/3e230d46-90cc-46fe-aaff-31e89dd5715f" />
+<img width="450" height="450" alt="best_path_plot" src="https://github.com/user-attachments/assets/3e230d46-90cc-46fe-aaff-31e89dd5715f" />
 
 *Run _0: The agent survives by essentially dragging itself along the wall. This is indicated by the very smooth, unnatural line. While this minimizes crash penalties, it shows the model is optimizing for survival mechanics rather than proper driving physics.*
 
-<img width="300" height="300" alt="best_path_plot_1" src="https://github.com/user-attachments/assets/c34c42b5-6240-4744-8084-242e21ccd9c6" />
+<img width="450" height="450" alt="best_path_plot_1" src="https://github.com/user-attachments/assets/c34c42b5-6240-4744-8084-242e21ccd9c6" />
 
 *Run _1: The best overall run. This represents a significant improvement over the previous run; rather than simply sliding against the wall, the agent actively bounces off the walls and steers to maintain momentum. The jagged line indicates the agent is making active steering decisions to correct its path, demonstrating a better understanding of vehicle control.*
